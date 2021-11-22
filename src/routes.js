@@ -17,12 +17,11 @@
 */
 import Index from "views/Index.js";
 import Profile from "views/examples/Profile.js";
-import Maps from "views/examples/Maps.js";
 import Lottery from "views/examples/Lottery.js";
 import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
-import Icons from "views/examples/Icons.js";
 import TableTest from "views/examples/TableTest";
+import WinnerList from "views/examples/WinnerList";
 
 var routes = [
   {
@@ -51,6 +50,13 @@ var routes = [
     name: "Lottery",
     icon: "ni ni-money-coins",
     component: Lottery,
+    layout: "/admin",
+  },
+  {
+    path: "/winnerList",
+    name: "winnerList",
+    icon: "ni ni-money-coins",
+    component: WinnerList,
     layout: "/admin",
   },
   

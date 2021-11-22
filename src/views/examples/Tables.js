@@ -65,51 +65,23 @@ const Tables = () => {
   // }
 
   const [Arry, setArry] = useState([])
-  const [csvItems, setcsvItems] = useState([{
-    address: "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
-    email: "hani@gmail.com",
-    point: 2
-  },
+  const [csvItems, setcsvItems] = useState([""])
 
-  {
-    address: "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
-    email: "hani@gmail.com",
-    point: 2
-  },
-  {
-    address: "0x6b829251366c43BB3621BE6eeFC41CdbD514380c",
-    email: "mohammad@gmail.com",
-    point: 3
-  },
-  {
-    address: "0x6b829251366c43BB3621BE6eeFC41CdbD514380c",
-    email: "mohammad@gmail.com",
-    point: 3
-  },
-  {
-    address: "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
-    email: "hani@gmail.com",
-    point: 2
-  },
-  {
-    address: "0x6b829251366c43BB3621BE6eeFC41CdbD514380c",
-    email: "mohammad@gmail.com",
-    point: 3
-  },
-  ])
-
-  // useEffect(() => {
-  //   if (txChange && nftChange && balanceChange) {
-  //     const tdData = document.querySelectorAll("td")
-  //     const tdDataArr = Array.from(tdData)
-  //     tdDataArr.map(function (e) {
-  //       console.log(e.innerHTML)
-  //       setArry(prevState => [...prevState, e.innerHTML])
-  //     })
-  //   }
-  //   else console.log(1)
-  // }, []);
-  // console.log(Arry)
+  useEffect(() => {
+    fetch('http://localhost:8000/api/csv/' ,{
+      method:'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + sessionStorage.getItem('token')
+      },
+    })
+      .then(res=> res.json())
+      .then(data=> {
+        setcsvItems(data)
+        console.log(csvItems)
+        console.log(data)
+      })
+  }, []);
 
   return (
     <>

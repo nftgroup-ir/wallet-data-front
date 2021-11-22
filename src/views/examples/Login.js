@@ -44,85 +44,47 @@ const Login = () => {
 
 
   const onSubmit = e => {
-    history.push('/admin/addCSV')
+    // history.push("/admin/Lottery")
     e.preventDefault();
     const user = {
       email: userName,
       password: password
     };
 
-    // fetch('', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(user)
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     if (data.key) {
-    //       Window.sessionStorage.clear();
-    //       Window.sessionStorage.setItem('token', data.key)
-    //       history.push('/admin/addCSV')
-    //     } else {
-    //       setUserName('')
-    //       setPassword('')
-    //       Window.sessionStorage.clear()
-    //     }
-    //   })
-    //   .catch(err => {
-    //     setUserName('')
-    //     setPassword('')
-    //     Window.sessionStorage.clear()
-    //     // document.getElementById('Error').innerHTML = 'ارتباط با سرور برقرار نشد'
-    //   })
+    fetch('http://127.0.0.1:8000/api/v1/users/auth/login/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        if (data.key) {
+          sessionStorage.clear();
+          sessionStorage.setItem('token', data.key)
+          history.push('/admin/addCSV')
+        } else {
+          setUserName('')
+          setPassword('')
+          sessionStorage.clear()
+        }
+      })
+      .catch(err => {
+        setUserName('')
+        setPassword('')
+        // Window.sessionStorage.clear()
+        document.getElementById('an').innerHTML = 'ارتباط با سرور برقرار نشد'
+
+      })
 
   }
   return (
     <>
       <Col lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
-          {/* <CardHeader className="bg-transparent pb-5">
-            <div className="text-muted text-center mt-2 mb-3">
-              <small>Sign in with</small>
-            </div>
-            <div className="btn-wrapper text-center">
-              <Button
-                className="btn-neutral btn-icon"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="btn-inner--icon">
-                  <img
-                    alt="..."
-                    src={
-                      require("../../assets/img/icons/common/github.svg")
-                        .default
-                    }
-                  />
-                </span>
-                <span className="btn-inner--text">Github</span>
-              </Button>
-              <Button
-                className="btn-neutral btn-icon"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="btn-inner--icon">
-                  <img
-                    alt="..."
-                    src={
-                      require("../../assets/img/icons/common/google.svg")
-                        .default
-                    }
-                  />
-                </span>
-                <span className="btn-inner--text">Google</span>
-              </Button>
-            </div>
-          </CardHeader> */}
+          
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
               <small>Sign in</small>
@@ -138,7 +100,10 @@ const Login = () => {
                   <Input
                     placeholder="Email"
                     type="email"
+                    required
                     autoComplete="new-email"
+                    value={userName}
+                    onChange = {e => setUserName(e.target.value)}
                   />
                 </InputGroup>
               </FormGroup>
@@ -153,8 +118,12 @@ const Login = () => {
                     placeholder="Password"
                     type="password"
                     autoComplete="new-password"
+                    value={password}
+                    required
+                    onChange={e=>setPassword(e.target.value)}
                   />
                 </InputGroup>
+                <p id="an"></p>
               </FormGroup>
               {/* <div className="custom-control custom-control-alternative custom-checkbox">
                 <input

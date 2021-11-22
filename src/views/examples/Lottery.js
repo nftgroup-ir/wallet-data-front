@@ -38,11 +38,33 @@ import { useRef, useState } from "react";
 
 const Lottery = () => {
   const form = useRef()
+  const [firstname , setFirstname] = useState("")
+  const [lastname , setLastname] = useState("")
+  const [email , setEmail] = useState("")
+  const [walletaddress , setWalletaddress] = useState("")
 
   const submitNewWinner = e => {
     e.preventDefault()
-    console.log(form.current.querySelectorAll('input'))
-    const newPet = new FormData(form.current.Input)
+    const winner={
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      walletaddress: walletaddress
+    }
+    console.log(winner)
+    fetch('http://127.0.0.1:8000/api/csv/lottery/', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + sessionStorage.getItem('token')
+      },
+      body: JSON.stringify(winner)
+      
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+      })
   }
 
   return (
@@ -76,16 +98,19 @@ const Lottery = () => {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              name='Name'
+                              name='firstname'
                               id="input-Firstname"
                               required
                               placeholder="First Name"
                               type="text"
+                              value={firstname}
+                              required
+                              onChange={e => setFirstname(e.target.value)}
                             />
                           </FormGroup>
                         </Col>
                         <Col lg="6">
-                        <FormGroup>
+                          <FormGroup>
                             <label
                               className="form-control-label"
                               htmlFor="input-Lastname"
@@ -94,18 +119,21 @@ const Lottery = () => {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              name='Name'
+                              name='lastname'
                               id="input-Lastname"
                               required
                               placeholder="Last Name"
                               type="text"
+                              value={lastname}
+                              required
+                              onChange={e => setLastname(e.target.value)}
                             />
                           </FormGroup>
                         </Col>
                       </Row>
                       <Row>
                         <Col lg="6">
-                        <FormGroup>
+                          <FormGroup>
                             <label
                               className="form-control-label"
                               htmlFor="input-Email"
@@ -114,16 +142,19 @@ const Lottery = () => {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              name='Name'
+                              name='email'
                               id="input-Email"
                               required
                               placeholder="Email"
                               type="email"
+                              value={email}
+                              required
+                              onChange={e => setEmail(e.target.value)}
                             />
                           </FormGroup>
                         </Col>
                         <Col lg="6">
-                        <FormGroup>
+                          <FormGroup>
                             <label
                               className="form-control-label"
                               htmlFor="input-WalletAddress"
@@ -132,16 +163,19 @@ const Lottery = () => {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              name='Name'
+                              name='walletaddress'
                               id="input-WalletAddress"
                               required
                               placeholder="Wallet Address"
                               type="text"
+                              value={walletaddress}
+                              required
+                              onChange={e => setWalletaddress(e.target.value)}
                             />
                           </FormGroup>
                         </Col>
                       </Row>
-                      
+
                     </div>
                     <hr className="my-4" />
                     <div className="pl-lg-4">

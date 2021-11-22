@@ -18,7 +18,7 @@ function BalanceData(props) {
     }, [])
     return (
         <>
-            {balanceData1}
+            {balanceData1 / 1000000000000000000}
         </>
     )
 }

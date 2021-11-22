@@ -1,4 +1,4 @@
-import React, { forwardRef , useEffect , useState } from 'react'
+import React, { forwardRef } from 'react'
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
@@ -38,26 +38,7 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-function TableTest() {
-
-  const [csvItems, setcsvItems] = useState([""])
-
-  useEffect(() => {
-    fetch('http://localhost:8000/api/csv/' ,{
-      method:'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Token ' + sessionStorage.getItem('token')
-      },
-    })
-      .then(res=> res.json())
-      .then(data=> {
-        setcsvItems(data)
-        console.log(csvItems)
-        console.log(data)
-      })
-  }, []);
-
+function WinnerList() {
     return (
 
         <div className="align-items-center">
@@ -141,4 +122,4 @@ function TableTest() {
     )
 }
 
-export default TableTest
+export default WinnerList
