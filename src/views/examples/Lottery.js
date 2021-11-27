@@ -52,7 +52,7 @@ const Lottery = () => {
       walletaddress: walletaddress
     }
     console.log(winner)
-    fetch('http://127.0.0.1:8000/api/csv/lottery/', {
+    fetch('http://65.108.59.117:7001/api/csv/lottery/', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

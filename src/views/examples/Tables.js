@@ -68,7 +68,7 @@ const Tables = () => {
   const [csvItems, setcsvItems] = useState([""])
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/csv/' ,{
+    fetch('http://65.108.59.117:7001/api/csv/' ,{
       method:'GET',
       headers: {
         'Content-Type': 'application/json',
