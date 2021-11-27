@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Tables from 'views/examples/Tables';
 
 
 export default function CsvReader() {
@@ -25,7 +26,7 @@ export default function CsvReader() {
 
     function sendToServer(array) {
         array = array.filter(chekEmpty)
-        fetch('http://localhost:8000/api/csv/', {
+        fetch('http://65.108.59.117:7001/api/csv/', {
             method: 'POST',
             body: JSON.stringify(array),
             headers: {
@@ -98,7 +99,7 @@ export default function CsvReader() {
             </button>
             <br />
             <br />
-            {csvArray.length > 0 ?
+            {/* {csvArray.length > 0 ?
                 <>
                     <table>
                         <thead>
@@ -119,7 +120,11 @@ export default function CsvReader() {
                         </tbody>
                     </table>
                     <h3>{JSON.stringify(data)}</h3>
-                </> : null}
+                </> : null} */}
+                {
+                    csvArray.length > 0 ? 
+                    <Tables props={csvArray} /> : null
+                }
         </form>
     );
 

@@ -44,7 +44,7 @@ import NftData from "./NftData";
 import BalanceData from "./BalanceData";
 
 
-const Tables = () => {
+const Tables = (props) => {
   // const [txChange, setTxChange] = useState(false)
   // const [nftChange, setNftChange] = useState(false)
   // const [balanceChange, setBalanceChange] = useState(false)
@@ -68,20 +68,28 @@ const Tables = () => {
   const [csvItems, setcsvItems] = useState([""])
 
   useEffect(() => {
-    fetch('http://65.108.59.117:7001/api/csv/' ,{
-      method:'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Token ' + sessionStorage.getItem('token')
-      },
-    })
-      .then(res=> res.json())
-      .then(data=> {
-        setcsvItems(data)
-        console.log(csvItems)
-        console.log(data)
-      })
-  }, []);
+    function setdata(e) {
+      setcsvItems(e)
+      console.log(csvItems)
+    }
+    setdata(props.props)
+  }, [])
+
+  // useEffect(() => {
+  //   fetch('http://65.108.59.117:7001/api/csv/' ,{
+  //     method:'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Token ' + sessionStorage.getItem('token')
+  //     },
+  //   })
+  //     .then(res=> res.json())
+  //     .then(data=> {
+  //       setcsvItems(data)
+  //       console.log(csvItems)
+  //       console.log(data)
+  //     })
+  // }, []);
 
   return (
     <>
