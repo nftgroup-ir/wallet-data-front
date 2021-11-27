@@ -24,9 +24,9 @@ export default function CsvReader() {
         }
     }
 
-    function sendToServer(array) {
+    async function sendToServer(array) {
         array = array.filter(chekEmpty)
-        fetch('http://65.108.59.117:7001/api/csv/', {
+        await fetch('http://65.108.59.117:7001/api/csv/', {
             method: 'POST',
             body: JSON.stringify(array),
             headers: {
@@ -38,7 +38,8 @@ export default function CsvReader() {
             })
             .then(data => {
                 if (data) {
-                    console.log('kardam')
+                    console.log(data)
+                    setCsvArray(data)
                 } else {
                     alert('nashod')
                 }
@@ -59,7 +60,6 @@ export default function CsvReader() {
             return eachObject;
         })
         sendToServer(newArray)
-        setCsvArray(newArray)
     }
 
     const submit = () => {
@@ -122,7 +122,7 @@ export default function CsvReader() {
                     <h3>{JSON.stringify(data)}</h3>
                 </> : null} */}
                 {
-                    csvArray.length > 0 ? 
+                    csvArray.length > 10 ? 
                     <Tables props={csvArray} /> : null
                 }
         </form>

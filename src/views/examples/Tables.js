@@ -70,7 +70,6 @@ const Tables = (props) => {
   useEffect(() => {
     function setdata(e) {
       setcsvItems(e)
-      console.log(csvItems)
     }
     setdata(props.props)
   }, [])
@@ -118,26 +117,25 @@ const Tables = (props) => {
                 </thead>
                 <tbody>
                   {
-
                     csvItems.map(e => (
                       <tr>
                         <td scope="row">
                           {e.address}
                         </td>
                         <td>'
-                          {e.email}
+                          {e.name}
                         </td>
                         <td>
                           {e.point}
                         </td>
                         <td>
-                          <TxData props={e.address}  />
+                          <TxData props={e.address} id={e.id} />
                         </td>
                         <td>
-                          <NftData props={e.address} />
+                          <NftData props={e.address} id={e.id} />
                         </td>
                         <td>
-                          <BalanceData props={e.address} />
+                          <BalanceData props={e.address} id={e.id} />
                         </td>
                       </tr>
 
