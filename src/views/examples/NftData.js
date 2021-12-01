@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 
 function NftData(props) {
 
-    const [nftData1, setNftData] = useState('')
+    const [nftData1, setNftData] = useState([])
     const [idData, setidData] = useState(null)
     const Moralis = require('moralis');
     const serverUrl = "https://9famhvj4zx53.usemoralis.com:2053/server";
@@ -12,7 +12,7 @@ function NftData(props) {
     useEffect(() => {
         async function ggg(e , id) {
             const nftData = await Moralis.Web3API.account.getNFTs({ address: e })
-            setNftData(nftData.result.length)
+            setNftData(nftData.result)
             setidData(id)
         }
         ggg(props.props, props.id)
@@ -38,7 +38,7 @@ function NftData(props) {
 
     return (
         <>
-            {nftData1}
+            {nftData1.length}
         </>
     )
 }

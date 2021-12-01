@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 
 function TxData(props) {
-    const [txData1, setTxData] = useState('')
+    const [txData1, setTxData] = useState([])
     const [idData, setidData] = useState(null)
     const Moralis = require('moralis');
     const serverUrl = "https://9famhvj4zx53.usemoralis.com:2053/server";
@@ -11,7 +11,8 @@ function TxData(props) {
     useEffect(() => {
         async function ggg(e, id) {
             const txData = await Moralis.Web3API.account.getTransactions({ address: e })
-            setTxData(txData.result.length)
+            console.log(TxData)
+            setTxData(txData.result)
             setidData(id)
 
         }
@@ -37,7 +38,7 @@ function TxData(props) {
     }, [idData])
 return (
     <>
-        {txData1}
+        {txData1.length}
     </>
 )
 }

@@ -75,8 +75,8 @@ function TableTest() {
           { title: 'Name', field: 'address' },
           { title: 'Address', field: 'email' },
           { title: 'Point', field: 'points' },
-          { title: 'Transactions', field: 'transactions', type: 'numeric' },
-          { title: 'NFT', field: 'NFT', type: 'numeric' },
+          { title: 'Transactions', field: 'transaction.length', type: 'numeric' },
+          { title: 'NFT', field: 'nft.length', type: 'numeric' },
           { title: 'Balance', field: 'balancedata[0].balance', type: 'numeric' },
         ]}
         // data={[{
