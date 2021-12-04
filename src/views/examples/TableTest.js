@@ -42,60 +42,61 @@ import '@inovua/reactdatagrid-community/index.css'
 // };
 
 
-
-
-function getData() {
-  return fetch('http://65.108.59.117:7001/api/csv/', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Token ' + sessionStorage.getItem('token')
-    },
-  })
-    .then(res => {return res.json()})
-}
-
 function TableTest() {
   const [csvItems, setcsvItems] = useState([])
-
   const columns = [
     { name: 'address', header: 'address', minWidth: 50, defaultFlex: 2 },
     { name: 'id', header: 'transaction', minWidth: 50, defaultFlex: 2, type: 'number' },
+    { name: 'button', header: 'button', minWidth: 50, defaultFlex: 2 },
     // { name: 'id', header: 'nft', minWidth: 50, defaultFlex: 2 },
     // { name: 'id', header: 'balancedata', maxWidth: 1000, defaultFlex: 1 }
   ]
-  const filterValue = [
+  const defaultFilterValue = [
     { name: 'address', operator: 'contains', type: 'string', value: '' },
     { name: 'id', operator: 'gte', type: 'number', value: '' },
     // { name: 'id', operator: 'contains', type: 'string', value: '' },
     // { name: 'id', operator: 'contains', type: 'string', value: 0 },
   ]
-
-  const gridStyle = { minHeight: 550 }
-  const dataSource = useCallback(getData, [])
-  console.log(dataSource)
+  
+  // function getData({ skip, limit, sortInfo, groupBy, filterValue }) {
+  //   return fetch('http://65.108.59.117:7001/api/csv/' + '?skip='+skip+'&limit='+limit+(groupBy && groupBy.length?'&groupBy='+groupBy:'')+'&sortInfo='+JSON.stringify(sortInfo) + '&filterBy='+JSON.stringify(filterValue), {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Token ' + sessionStorage.getItem('token')
+  //     },
+  //   })
+  //     .then(res => {return res.json()})
+  // }
   
 
-  // useEffect(() => {
-  //   async function getData() {
-  //     await fetch('http://65.108.59.117:7001/api/csv/', {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': 'Token ' + sessionStorage.getItem('token')
-  //       },
-  //     })
-  //       .then(res => res.json())
-  //       .then(data => {
-  //         setcsvItems(data)
-  //         console.log(data)
-  //       })
-  //   }
-  //   getData()
+  
+  
 
-  // }, []);
+  const gridStyle = { minHeight: 550 }
+  //  useCallback(getData, [])
+  
 
+  useEffect(() => {
+    async function getData() {
+      await fetch('http://65.108.59.117:7001/api/csv/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Token ' + sessionStorage.getItem('token')
+        },
+      })
+        .then(res => res.json())
+        .then(data => {
+          setcsvItems(data)
+          console.log(data)
+        })
+    }
+    getData()
 
+  }, []);
+
+  const dataSource = csvItems
   
 
 
@@ -147,7 +148,7 @@ function TableTest() {
         columns={columns}
         dataSource={dataSource}
         pagination
-        defaultFilterValue={filterValue}
+        defaultFilterValue={defaultFilterValue}
         style={gridStyle}
       />
     </div>
