@@ -24,13 +24,13 @@ import TableTest from "views/examples/TableTest";
 import WinnerList from "views/examples/WinnerList";
 
 var routes = [
-  {
-    path: "/CSV",
-    name: "CSV",
-    icon: "ni ni-bullet-list-67",
-    component: Tables,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/CSV",
+  //   name: "CSV",
+  //   icon: "ni ni-bullet-list-67",
+  //   component: Tables,
+  //   layout: "/admin",
+  // },
   {
     path: "/addCSV",
     name: "Add",

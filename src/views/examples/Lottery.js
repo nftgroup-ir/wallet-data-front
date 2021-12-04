@@ -64,6 +64,7 @@ const Lottery = () => {
       .then(res => res.json())
       .then(data => {
         console.log(data)
+        document.getElementById('success').innerHTML="saved successfully!"
       })
   }
 
@@ -189,12 +190,14 @@ const Lottery = () => {
                               placeholder="submit"
                               type="submit"
                             />
+                            <p id="success" style={{ textAlign: "center" }}></p>
                           </FormGroup>
                         </Col>
                       </Row>
                     </div>
                   </Form>
                 </div>
+                
               </CardBody>
             </Card>
           </Col>

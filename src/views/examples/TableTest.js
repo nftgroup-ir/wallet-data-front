@@ -1,74 +1,109 @@
-import React, { forwardRef, useEffect, useState } from 'react'
-import AddBox from '@material-ui/icons/AddBox';
-import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import Check from '@material-ui/icons/Check';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
-import Clear from '@material-ui/icons/Clear';
-import DeleteOutline from '@material-ui/icons/DeleteOutline';
-import Edit from '@material-ui/icons/Edit';
-import FilterList from '@material-ui/icons/FilterList';
-import FirstPage from '@material-ui/icons/FirstPage';
-import LastPage from '@material-ui/icons/LastPage';
-import Remove from '@material-ui/icons/Remove';
-import SaveAlt from '@material-ui/icons/SaveAlt';
-import Search from '@material-ui/icons/Search';
-import ViewColumn from '@material-ui/icons/ViewColumn';
-import MaterialTable from 'material-table'
+import React, { forwardRef, useEffect, useState , useCallback } from 'react'
+// import AddBox from '@material-ui/icons/AddBox';
+// import ArrowDownward from '@material-ui/icons/ArrowDownward';
+// import Check from '@material-ui/icons/Check';
+// import ChevronLeft from '@material-ui/icons/ChevronLeft';
+// import ChevronRight from '@material-ui/icons/ChevronRight';
+// import Clear from '@material-ui/icons/Clear';
+// import DeleteOutline from '@material-ui/icons/DeleteOutline';
+// import Edit from '@material-ui/icons/Edit';
+// import FilterList from '@material-ui/icons/FilterList';
+// import FirstPage from '@material-ui/icons/FirstPage';
+// import LastPage from '@material-ui/icons/LastPage';
+// import Remove from '@material-ui/icons/Remove';
+// import SaveAlt from '@material-ui/icons/SaveAlt';
+// import Search from '@material-ui/icons/Search';
+// import ViewColumn from '@material-ui/icons/ViewColumn';
+// import MaterialTable from 'material-table'
 import Header from 'components/Headers/Header';
+import ReactDataGrid from '@inovua/reactdatagrid-community'
+import '@inovua/reactdatagrid-community/index.css'
 
 
-const tableIcons = {
-  Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
-  Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-  Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-  Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-  DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-  Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-  Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-  Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
-  FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-  LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-  NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-  PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
-  ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-  Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-  SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
-  ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-  ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
-};
+
+// const tableIcons = {
+//   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+//   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+//   Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+//   Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+//   DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+//   Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+//   Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+//   Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+//   FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+//   LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+//   NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+//   PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+//   ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+//   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+//   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+//   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+//   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+// };
+
+
+
+
+function getData() {
+  return fetch('http://65.108.59.117:7001/api/csv/', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Token ' + sessionStorage.getItem('token')
+    },
+  })
+    .then(res => {return res.json()})
+}
 
 function TableTest() {
-
   const [csvItems, setcsvItems] = useState([])
 
-  useEffect(() => {
-    async function getData() {
-      await fetch('http://65.108.59.117:7001/api/csv/', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token ' + sessionStorage.getItem('token')
-        },
-      })
-        .then(res => res.json())
-        .then(data => {
-          setcsvItems(data.reverse())
-          console.log(data)
-        })
-    }
-    getData()
-    
-  }, []);
-  console.log(csvItems)
-  const dataTaken = csvItems
-  console.log(dataTaken)
+  const columns = [
+    { name: 'address', header: 'address', minWidth: 50, defaultFlex: 2 },
+    { name: 'id', header: 'transaction', minWidth: 50, defaultFlex: 2, type: 'number' },
+    // { name: 'id', header: 'nft', minWidth: 50, defaultFlex: 2 },
+    // { name: 'id', header: 'balancedata', maxWidth: 1000, defaultFlex: 1 }
+  ]
+  const filterValue = [
+    { name: 'address', operator: 'contains', type: 'string', value: '' },
+    { name: 'id', operator: 'gte', type: 'number', value: '' },
+    // { name: 'id', operator: 'contains', type: 'string', value: '' },
+    // { name: 'id', operator: 'contains', type: 'string', value: 0 },
+  ]
+
+  const gridStyle = { minHeight: 550 }
+  const dataSource = useCallback(getData, [])
+  console.log(dataSource)
+  
+
+  // useEffect(() => {
+  //   async function getData() {
+  //     await fetch('http://65.108.59.117:7001/api/csv/', {
+  //       method: 'GET',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': 'Token ' + sessionStorage.getItem('token')
+  //       },
+  //     })
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         setcsvItems(data)
+  //         console.log(data)
+  //       })
+  //   }
+  //   getData()
+
+  // }, []);
+
+
+  
+
 
   return (
 
     <div className="align-items-center">
       <Header />
-      <MaterialTable
+      {/* <MaterialTable
         style={{ maxWidth: '90%', display: 'block', margin: '-50px auto 0px auto' }}
         title="Basic Export Preview"
         columns={[
@@ -106,6 +141,14 @@ function TableTest() {
 
         icons={tableIcons}
 
+      /> */}
+      <ReactDataGrid
+        idProperty="id"
+        columns={columns}
+        dataSource={dataSource}
+        pagination
+        defaultFilterValue={filterValue}
+        style={gridStyle}
       />
     </div>
   )
