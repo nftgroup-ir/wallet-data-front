@@ -47,7 +47,6 @@ function TableTest() {
   const columns = [
     { name: 'address', header: 'address', minWidth: 50, defaultFlex: 2 },
     { name: 'id', header: 'transaction', minWidth: 50, defaultFlex: 2, type: 'number' },
-    { name: 'button', header: 'button', minWidth: 50, defaultFlex: 2 },
     // { name: 'id', header: 'nft', minWidth: 50, defaultFlex: 2 },
     // { name: 'id', header: 'balancedata', maxWidth: 1000, defaultFlex: 1 }
   ]

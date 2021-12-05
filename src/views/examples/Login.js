@@ -31,20 +31,26 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import React, { useState, useEffect} from 'react'
-import { useHistory  } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import { useHistory } from "react-router-dom";
 
 
 
 const Login = () => {
+
+  const errStyle = {
+    textAlign: "center",
+    marginTop: "10px",
+
+  }
 
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const history = useHistory()
 
 
+
   const onSubmit = e => {
-    // history.push("/admin/Lottery")
     e.preventDefault();
     const user = {
       email: userName,
@@ -58,33 +64,41 @@ const Login = () => {
       },
       body: JSON.stringify(user)
     })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        if (data.key) {
+      
+      .then((response) => {
+        if(response.status == 400) {
+          document.getElementById('errorrr').innerHTML = "check your username or password!"
+        }else if (response.status == 500 ){
+          document.getElementById('errorrr').innerHTML = "something went wrong!"
+        }
+        return response.json()
+      })
+
+      .then((result) => {
+        if (result.key) {
           sessionStorage.clear();
-          sessionStorage.setItem('token', data.key)
+          sessionStorage.setItem('token', result.key)
           history.push('/admin/addCSV')
         } else {
-          setUserName('')
-          setPassword('')
-          sessionStorage.clear()
+          console.log(result)
         }
       })
-      .catch(err => {
+      .catch(error => {
         setUserName('')
         setPassword('')
+        console.log(error + "111")
         // Window.sessionStorage.clear()
-        document.getElementById('an').innerHTML = 'ارتباط با سرور برقرار نشد'
+        document.getElementById('errorrr').innerHTML = '!!!'
 
       })
+
+
 
   }
   return (
     <>
       <Col lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
-          
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
               <small>Sign in</small>
@@ -101,9 +115,10 @@ const Login = () => {
                     placeholder="Email"
                     type="email"
                     required
+                    onClick={e => document.getElementById("errorrr").innerHTML = ""}
                     autoComplete="new-email"
                     value={userName}
-                    onChange = {e => setUserName(e.target.value)}
+                    onChange={e => setUserName(e.target.value)}
                   />
                 </InputGroup>
               </FormGroup>
@@ -120,10 +135,11 @@ const Login = () => {
                     autoComplete="new-password"
                     value={password}
                     required
-                    onChange={e=>setPassword(e.target.value)}
+                    onClick={e => document.getElementById("errorrr").innerHTML = ""}
+                    onChange={e => setPassword(e.target.value)}
                   />
                 </InputGroup>
-                <p id="an"></p>
+                <p id="errorrr" style={errStyle}></p>
               </FormGroup>
               {/* <div className="custom-control custom-control-alternative custom-checkbox">
                 <input
