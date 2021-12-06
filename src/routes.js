@@ -22,6 +22,7 @@ import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import TableTest from "views/examples/TableTest";
 import WinnerList from "views/examples/WinnerList";
+import AllTransactions from "views/examples/AllTransactions";
 
 var routes = [
   // {
@@ -40,7 +41,7 @@ var routes = [
   },
   {
     path: "/TableTest",
-    name: "Table",
+    name: "Wallets",
     icon: "ni ni-archive-2",
     component: TableTest,
     layout: "/admin",
@@ -54,9 +55,16 @@ var routes = [
   },
   {
     path: "/winnerList",
-    name: "winnerList",
+    name: "WinnerList",
     icon: "ni ni-money-coins",
     component: WinnerList,
+    layout: "/admin",
+  },
+  {
+    path: "/transactions",
+    name: "Transactions",
+    icon: "ni ni-money-coins",
+    component: AllTransactions,
     layout: "/admin",
   },
   

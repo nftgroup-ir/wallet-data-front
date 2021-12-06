@@ -45,16 +45,16 @@ import '@inovua/reactdatagrid-community/index.css'
 function TableTest() {
   const [csvItems, setcsvItems] = useState([])
   const columns = [
-    { name: 'address', header: 'address', minWidth: 50, defaultFlex: 2 },
-    { name: 'id', header: 'transaction', minWidth: 50, defaultFlex: 2, type: 'number' },
-    // { name: 'id', header: 'nft', minWidth: 50, defaultFlex: 2 },
-    // { name: 'id', header: 'balancedata', maxWidth: 1000, defaultFlex: 1 }
+    { name: 'address', header: 'Address', minWidth: 50, defaultFlex: 2 },
+    { name: 'transactions', header: 'Transactions', minWidth: 50, defaultFlex: 2, type: 'number' },
+    { name: 'id', header: 'NFT', minWidth: 50, defaultFlex: 2 , type: 'number'},
+    { name: 'balancedata', header: 'Balance' , minWidth: 50, defaultFlex: 2 , type: 'number' }
   ]
   const defaultFilterValue = [
     { name: 'address', operator: 'contains', type: 'string', value: '' },
-    { name: 'id', operator: 'gte', type: 'number', value: '' },
-    // { name: 'id', operator: 'contains', type: 'string', value: '' },
-    // { name: 'id', operator: 'contains', type: 'string', value: 0 },
+    { name: 'transactions', operator: 'gte', type: 'number', value: '' },
+    { name: 'id', operator: 'gte', type: 'number', value: ''  },
+    { name: 'balancedata', operator: 'gte', type: 'number', value: '' },
   ]
   
   // function getData({ skip, limit, sortInfo, groupBy, filterValue }) {
