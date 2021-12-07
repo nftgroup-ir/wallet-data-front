@@ -121,10 +121,10 @@ export default function CsvReader() {
                     </table>
                     <h3>{JSON.stringify(data)}</h3>
                 </> : null} */}
-                {
+                {/* {
                     csvArray.length > 10 ? 
                     <Tables props={csvArray} /> : null
-                }
+                } */}
         </form>
     );
 
