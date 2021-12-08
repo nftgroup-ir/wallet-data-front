@@ -56,27 +56,40 @@ import BalanceData from "./BalanceData";
 
 
 const Tables = (props) => {
-  // const [txChange, setTxChange] = useState(false)
-  // const [nftChange, setNftChange] = useState(false)
-  // const [balanceChange, setBalanceChange] = useState(false)
   const Moralis = require('moralis');
-  // const serverUrl = "https://9famhvj4zx53.usemoralis.com:2053/server";
-  // const appId = "XzBZFifAz87yqWb45REaWnxoLK3aBVZlVr2AX2Ee";
-  // Moralis.start({ serverUrl, appId });
-
-
-  // const txChangeHandler = (e) => {
-  //   setTxChange(e)
-  // }
-  // const nftChangeHandler = (e) => {
-  //   setNftChange(e)
-  // }
-  // const balanceChangeHandler = (e) => {
-  //   setBalanceChange(e)
-  // }
-
   const [Arry, setArry] = useState([])
   const [csvItems, setcsvItems] = useState([""])
+
+  const Filters = useRef()
+
+  async function setFilters(e) {
+    e.preventDefault()
+    const xYz = await Array.from(Filters.current.querySelectorAll('input'))
+    const mmmm = xYz.map(e=>e.value)
+    console.log(mmmm)
+    var filterObject = {
+      addressSort:mmmm[0],
+      addressBaseSort: "",
+      emailSort: mmmm[1],
+      emailBaseSort: "",
+      pointSort: mmmm[2],
+      pointBaseSort: "",
+      txSort: mmmm[3] ,
+      txBaseSort: "",
+      nftSort: mmmm[4] ,
+      nftBaseSort: "",
+      balanceSort: mmmm[5],
+      balanceBaseSort: "",
+    }
+    fetch(`http://65.108.59.117:7001/api/csv?addressSort=${filterObject.addressSort}&addressBaseSort=${filterObject.addressBaseSort}&emailSort=${filterObject.emailSort}&emailBaseSort=${filterObject.emailBaseSort}&pointSort=${filterObject.pointSort}&pointBaseSort=${filterObject.pointBaseSort}&txSort=${filterObject.txSort}&txBaseSort=${filterObject.txBaseSort}&nftSort=${filterObject.nftSort}&nftBaseSort=${filterObject.nftBaseSort}&balanceSort=${filterObject.balanceSort}&balanceBaseSort=${filterObject.balanceBaseSort}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+  }
 
   useEffect(() => {
     function setdata(e) {
@@ -87,21 +100,6 @@ const Tables = (props) => {
   const endRangeeeee = 200
   const startRangeeeee = 1
 
-  // useEffect(() => {
-  //   fetch('http://65.108.59.117:7001/api/csv/' ,{
-  //     method:'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Token ' + sessionStorage.getItem('token')
-  //     },
-  //   })
-  //     .then(res=> res.json())
-  //     .then(data=> {
-  //       setcsvItems(data)
-  //       console.log(csvItems)
-  //       console.log(data)
-  //     })
-  // }, []);
 
   return (
     <>
@@ -121,7 +119,7 @@ const Tables = (props) => {
                     <Button
                       color="primary"
                       href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={setFilters}
                       size="sm"
                     >
                       Set filters
@@ -375,10 +373,10 @@ const Tables = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr ref={Filters}>
                     <td>
                       <InputGroup>
-                        <Input placeholder="username" bsSize="lg" />
+                        <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             {/* <i className="ni ni-lock-circle-open" /> */}
@@ -442,7 +440,7 @@ const Tables = (props) => {
                     </td>
                     <td>
                       <InputGroup>
-                        <Input placeholder="username" bsSize="lg" />
+                        <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             {/* <i className="ni ni-lock-circle-open" /> */}
@@ -506,7 +504,7 @@ const Tables = (props) => {
                     </td>
                     <td>
                       <InputGroup>
-                        <Input placeholder="username" bsSize="lg" />
+                        <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             {/* <i className="ni ni-lock-circle-open" /> */}
@@ -570,7 +568,71 @@ const Tables = (props) => {
                     </td>
                     <td>
                       <InputGroup>
-                        <Input placeholder="username" bsSize="lg" />
+                        <Input bsSize="sm" />
+                        <InputGroupAddon addonType="prepend" >
+                          <InputGroupText>
+                            {/* <i className="ni ni-lock-circle-open" /> */}
+                            <UncontrolledDropdown split>
+                              <DropdownToggle
+                                className="btn-icon-only text-light"
+                                href="#pablo"
+                                role="button"
+                                size="sm"
+                                color=""
+                                onClick={e => e.preventDefault()}
+                              >
+                                <i className="fas fa-ellipsis-v" />
+                              </DropdownToggle>
+                              <DropdownMenu className="dropdown-menu-arrow" left>
+                                <DropdownItem header>
+                                  Filter by
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Equals
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Greater then And Equals
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Greater then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then and Equals
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Dismiss Filter
+                                </DropdownItem>
+                              </DropdownMenu>
+                            </UncontrolledDropdown>
+                          </InputGroupText>
+                        </InputGroupAddon>
+
+                      </InputGroup>
+                    </td>
+                    <td>
+                      <InputGroup>
+                        <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             {/* <i className="ni ni-lock-circle-open" /> */}
@@ -634,71 +696,7 @@ const Tables = (props) => {
                     </td>
                     <td>
                       <InputGroup>
-                        <Input placeholder="username" bsSize="lg" />
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText >
-                            {/* <i className="ni ni-lock-circle-open" /> */}
-                            <UncontrolledDropdown split>
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
-                                <DropdownItem header>
-                                  Filter by
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Greater then And Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Greater then
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Smaller then and Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Smaller then
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Dismiss Filter
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon>
-
-                      </InputGroup>
-                    </td>
-                    <td>
-                      <InputGroup>
-                        <Input placeholder="username" bsSize="lg" />
+                        <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             {/* <i className="ni ni-lock-circle-open" /> */}
@@ -766,7 +764,6 @@ const Tables = (props) => {
                       <tr>
                         <td scope="row">
                           {e.address}
-                          {console.log(e.address)}
                         </td>
                         <td>
                           {e.name}
@@ -800,9 +797,8 @@ const Tables = (props) => {
                     >
                       Items per page:
                     </Label>
-                    <Col sm="1">
-
-                      <Input id="perPage" type="select">
+                    <Col sm="2">
+                      <Input id="perPage" type="select" className="custom-select" >
                         <option>20</option>
                         <option>50</option>
                         <option>100</option>
@@ -813,18 +809,19 @@ const Tables = (props) => {
                     <Label
                       for="pageNumber"
                       sm={6}
+                      className="form-control-label"
                     >
                       Page:
                     </Label>
-                    <Col sm="1">
-                      <Input id="pageNumber" type="select">
+                    <Col sm="2">
+                      <Input id="pageNumber" type="select" className="custom-select">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
                       </Input>
                     </Col>
                   </FormGroup>
-                  <Col sm="1">
+                  <Col sm="1" >
                     <p>{`${startRangeeeee} - ${endRangeeeee}`}</p>
                   </Col>
                 </Row>
