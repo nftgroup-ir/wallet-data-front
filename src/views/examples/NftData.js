@@ -11,12 +11,13 @@ function NftData(props) {
 
     useEffect(() => {
         async function ggg(e , id) {
+            console.log(e)
             const nftData = await Moralis.Web3API.account.getNFTs({ address: e })
             setNftData(nftData.result)
             setidData(id)
         }
         ggg(props.props, props.id)
-    }, [])
+    }, [props.props])
 
     useEffect(() => {
         if(idData!==null){

@@ -17,7 +17,7 @@ function TxData(props) {
 
         }
         ggg(props.props, props.id)
-        }, [])
+        }, [props.props])
 
     useEffect(() => {
         const TXDataSend = {
