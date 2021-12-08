@@ -27,8 +27,8 @@ import AllTransactions from "views/examples/AllTransactions";
 
 var routes = [
   {
-    path: "/CSV",
-    name: "CSV",
+    path: "/walletdata",
+    name: "Wallet Data",
     icon: "ni ni-bullet-list-67",
     component: WalletData,
     layout: "/admin",

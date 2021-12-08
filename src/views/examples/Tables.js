@@ -23,6 +23,7 @@ import {
   InputGroupText,
   InputGroupAddon,
   CardFooter,
+  Label,
   DropdownMenu,
   Dropdown,
   DropdownItem,
@@ -43,6 +44,7 @@ import {
   Container,
   Row,
   UncontrolledTooltip,
+  FormGroup,
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
@@ -82,6 +84,8 @@ const Tables = (props) => {
     }
     setdata(props.props)
   }, [])
+  const endRangeeeee = 200
+  const startRangeeeee = 1
 
   // useEffect(() => {
   //   fetch('http://65.108.59.117:7001/api/csv/' ,{
@@ -114,6 +118,14 @@ const Tables = (props) => {
                     <h3 className="text-black mb-0">Wallets</h3>
                   </Col>
                   <Col className="text-right" xs="4">
+                    <Button
+                      color="primary"
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                      size="sm"
+                    >
+                      Set filters
+                    </Button>
                     <Button
                       color="primary"
                       href="#pablo"
@@ -383,25 +395,43 @@ const Tables = (props) => {
                               </DropdownToggle>
                               <DropdownMenu className="dropdown-menu-arrow" left>
                                 <DropdownItem header>
-                                  Sort
+                                  Filter by
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Ascending
+                                  Equals
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Descending
+                                  Greater then And Equals
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Unsort
+                                  Greater then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then and Equals
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Dismiss Filter
                                 </DropdownItem>
                               </DropdownMenu>
                             </UncontrolledDropdown>
@@ -429,25 +459,43 @@ const Tables = (props) => {
                               </DropdownToggle>
                               <DropdownMenu className="dropdown-menu-arrow" left>
                                 <DropdownItem header>
-                                  Sort
+                                  Filter by
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Ascending
+                                  Equals
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Descending
+                                  Greater then And Equals
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Unsort
+                                  Greater then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then and Equals
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Dismiss Filter
                                 </DropdownItem>
                               </DropdownMenu>
                             </UncontrolledDropdown>
@@ -475,25 +523,43 @@ const Tables = (props) => {
                               </DropdownToggle>
                               <DropdownMenu className="dropdown-menu-arrow" left>
                                 <DropdownItem header>
-                                  Sort
+                                  Filter by
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Ascending
+                                  Equals
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Descending
+                                  Greater then And Equals
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Unsort
+                                  Greater then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then and Equals
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Dismiss Filter
                                 </DropdownItem>
                               </DropdownMenu>
                             </UncontrolledDropdown>
@@ -521,25 +587,43 @@ const Tables = (props) => {
                               </DropdownToggle>
                               <DropdownMenu className="dropdown-menu-arrow" left>
                                 <DropdownItem header>
-                                  Sort
+                                  Filter by
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Ascending
+                                  Equals
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Descending
+                                  Greater then And Equals
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Unsort
+                                  Greater then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then and Equals
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Dismiss Filter
                                 </DropdownItem>
                               </DropdownMenu>
                             </UncontrolledDropdown>
@@ -567,25 +651,43 @@ const Tables = (props) => {
                               </DropdownToggle>
                               <DropdownMenu className="dropdown-menu-arrow" left>
                                 <DropdownItem header>
-                                  Sort
+                                  Filter by
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Ascending
+                                  Equals
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Descending
+                                  Greater then And Equals
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Unsort
+                                  Greater then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then and Equals
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Dismiss Filter
                                 </DropdownItem>
                               </DropdownMenu>
                             </UncontrolledDropdown>
@@ -613,25 +715,43 @@ const Tables = (props) => {
                               </DropdownToggle>
                               <DropdownMenu className="dropdown-menu-arrow" left>
                                 <DropdownItem header>
-                                  Sort
+                                  Filter by
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Ascending
+                                  Equals
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Descending
+                                  Greater then And Equals
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
-                                  Unsort
+                                  Greater then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then and Equals
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Smaller then
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={e => e.preventDefault()}
+                                >
+                                  Dismiss Filter
                                 </DropdownItem>
                               </DropdownMenu>
                             </UncontrolledDropdown>
@@ -671,6 +791,44 @@ const Tables = (props) => {
 
                 </tbody>
               </Table>
+              <CardFooter>
+                <Row>
+                  <FormGroup row>
+                    <Label
+                      for="perPage"
+                      sm={8}
+                    >
+                      Items per page:
+                    </Label>
+                    <Col sm="1">
+
+                      <Input id="perPage" type="select">
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                      </Input>
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label
+                      for="pageNumber"
+                      sm={6}
+                    >
+                      Page:
+                    </Label>
+                    <Col sm="1">
+                      <Input id="pageNumber" type="select">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                      </Input>
+                    </Col>
+                  </FormGroup>
+                  <Col sm="1">
+                    <p>{`${startRangeeeee} - ${endRangeeeee}`}</p>
+                  </Col>
+                </Row>
+              </CardFooter>
             </Card>
           </div>
         </Row>
