@@ -22,16 +22,17 @@ import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import TableTest from "views/examples/TableTest";
 import WinnerList from "views/examples/WinnerList";
+import WalletData from "views/examples/WalletData"
 import AllTransactions from "views/examples/AllTransactions";
 
 var routes = [
-  // {
-  //   path: "/CSV",
-  //   name: "CSV",
-  //   icon: "ni ni-bullet-list-67",
-  //   component: Tables,
-  //   layout: "/admin",
-  // },
+  {
+    path: "/CSV",
+    name: "CSV",
+    icon: "ni ni-bullet-list-67",
+    component: WalletData,
+    layout: "/admin",
+  },
   {
     path: "/addCSV",
     name: "Add",
