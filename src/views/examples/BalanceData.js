@@ -17,7 +17,7 @@ function BalanceData(props) {
         }
         ggg(props.props, props.id)
 
-    }, [props.props])
+    }, [])
 
     useEffect(() => {
         const balanceDataSend = {

@@ -23,7 +23,6 @@ import Tables from "views/examples/Tables.js";
 import TableTest from "views/examples/TableTest";
 import WinnerList from "views/examples/WinnerList";
 import AllTransactions from "views/examples/AllTransactions";
-import WalletData from "views/examples/WalletData";
 
 var routes = [
   // {
@@ -68,19 +67,7 @@ var routes = [
     component: AllTransactions,
     layout: "/admin",
   },
-  {
-    path: "/walletData",
-    name: "Wallet Data",
-    icon: "ni ni-money-coins",
-    component: WalletData,
-    layout: "/admin",
-  },
-  // {
-  //   path: "/test",
-  //   name: "test",
-  //   icon: "ni ni-money-coins",
-  //   component: Login,
-  //   layout: "/admin",
-  // },
+  
+  
 ];
 export default routes;

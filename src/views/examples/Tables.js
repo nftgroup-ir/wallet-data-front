@@ -20,22 +20,13 @@ import {
   Badge,
   Card,
   CardHeader,
-  InputGroupText,
-  InputGroupAddon,
   CardFooter,
   DropdownMenu,
-  Dropdown,
   DropdownItem,
   UncontrolledDropdown,
-  Input,
-  InputGroup,
   DropdownToggle,
   Media,
   Pagination,
-  Col,
-  Button,
-  Nav,
-  Option,
   PaginationItem,
   PaginationLink,
   Progress,
@@ -51,7 +42,6 @@ import { useMoralis } from "react-moralis";
 import TxData from "./TxData";
 import NftData from "./NftData";
 import BalanceData from "./BalanceData";
-import { end } from "stdout-stream";
 
 
 const Tables = (props) => {
@@ -84,9 +74,6 @@ const Tables = (props) => {
     setdata(props.props)
   }, [])
 
-  const startRangeeeee = 1
-  const endRangeeeee = 700
-
   // useEffect(() => {
   //   fetch('http://65.108.59.117:7001/api/csv/' ,{
   //     method:'GET',
@@ -113,546 +100,29 @@ const Tables = (props) => {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <Row className="align-items-center">
-                  <Col xs="8">
-                    <h3 className="text-black mb-0">Wallets</h3>
-                  </Col>
-                  <Col className="text-right" xs="4">
-                    <Button
-                      color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
-                    >
-                      Export CSV
-                    </Button>
-                    {/* <Nav navbar>{createLinks(ArticlesRoutes)}</Nav> */}
-                  </Col>
-                </Row>
+                <h3 className="mb-0">your data</h3>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">
-                      Address
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left>
-                          <DropdownItem header>
-                            Sort
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Ascending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Descending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Unsort
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </th>
-                    <th scope="col">
-                      Email
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left>
-                          <DropdownItem header>
-                            Sort
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Ascending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Descending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Unsort
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </th>
-                    <th scope="col">
-                      Point
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left >
-                          <DropdownItem header>
-                            Sort
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Ascending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Descending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Unsort
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </th>
-                    <th scope="col">
-                      Transactions
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left>
-                          <DropdownItem header>
-                            Sort
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Ascending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Descending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Unsort
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </th>
-                    <th scope="col">
-                      NFT
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left>
-                          <DropdownItem header>
-                            Sort
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Ascending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Descending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Unsort
-                          </DropdownItem>
-
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </th>
-                    <th scope="col">
-                      Balance
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left>
-                          <DropdownItem header>
-                            Sort
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Ascending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Descending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Unsort
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </th>
+                    <th scope="col">name</th>
+                    <th scope="col">address</th>
+                    <th scope="col">point</th>
+                    <th scope="col">tx</th>
+                    <th scope="col">NFT</th>
+                    <th scope="col">balance</th>
 
 
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <InputGroup>
-                        <Input placeholder="username" bsSize="lg" />
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText >
-                            {/* <i className="ni ni-lock-circle-open" /> */}
-                            <UncontrolledDropdown split>
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
-                                <DropdownItem header>
-                                  Sort
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Ascending
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Descending
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Unsort
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon>
-
-                      </InputGroup>
-                    </td>
-                    <td>
-                      <InputGroup>
-                        <Input placeholder="username" bsSize="lg" />
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText >
-                            {/* <i className="ni ni-lock-circle-open" /> */}
-                            <UncontrolledDropdown split>
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
-                                <DropdownItem header>
-                                  Sort
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Ascending
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Descending
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Unsort
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon>
-
-                      </InputGroup>
-                    </td>
-                    <td>
-                      <InputGroup>
-                        <Input placeholder="username" bsSize="lg" />
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText >
-                            {/* <i className="ni ni-lock-circle-open" /> */}
-                            <UncontrolledDropdown split>
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
-                                <DropdownItem header>
-                                  Sort
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Ascending
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Descending
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Unsort
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon>
-
-                      </InputGroup>
-                    </td>
-                    <td>
-                      <InputGroup>
-                        <Input placeholder="username" bsSize="lg" />
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText >
-                            {/* <i className="ni ni-lock-circle-open" /> */}
-                            <UncontrolledDropdown split>
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
-                                <DropdownItem header>
-                                  Sort
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Ascending
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Descending
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Unsort
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon>
-
-                      </InputGroup>
-                    </td>
-                    <td>
-                      <InputGroup>
-                        <Input placeholder="username" bsSize="lg" />
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText >
-                            {/* <i className="ni ni-lock-circle-open" /> */}
-                            <UncontrolledDropdown split>
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
-                                <DropdownItem header>
-                                  Sort
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Ascending
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Descending
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Unsort
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon>
-
-                      </InputGroup>
-                    </td>
-                    <td>
-                      <InputGroup>
-                        <Input placeholder="username" bsSize="lg" />
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText >
-                            {/* <i className="ni ni-lock-circle-open" /> */}
-                            <UncontrolledDropdown split>
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
-                                <DropdownItem header>
-                                  Sort
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Ascending
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Descending
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Unsort
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon>
-
-                      </InputGroup>
-                    </td>
-                  </tr>
                   {
                     csvItems.map(e => (
                       <tr>
                         <td scope="row">
                           {e.address}
-                          {console.log(e.address)}
                         </td>
-                        <td>
+                        <td>'
                           {e.name}
                         </td>
                         <td>
@@ -675,27 +145,6 @@ const Tables = (props) => {
 
                 </tbody>
               </Table>
-              <CardFooter>
-                <Row>
-                  <Col sm="1">
-                    <Input type="select">
-                      <option>20</option>
-                      <option>50</option>
-                      <option>100</option>
-                    </Input>
-                  </Col>
-                  <Col sm="1">
-                    <Input type="select">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                    </Input>
-                  </Col>
-                  <Col sm="1">
-                    <p>{`${startRangeeeee} - ${endRangeeeee}`}</p>
-                  </Col>
-                </Row>
-              </CardFooter>
             </Card>
           </div>
         </Row>
