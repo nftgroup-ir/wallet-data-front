@@ -1,128 +1,165 @@
-import React, { forwardRef, useEffect, useState, useCallback } from 'react'
-// import AddBox from '@material-ui/icons/AddBox';
-// import ArrowDownward from '@material-ui/icons/ArrowDownward';
-// import Check from '@material-ui/icons/Check';
-// import ChevronLeft from '@material-ui/icons/ChevronLeft';
-// import ChevronRight from '@material-ui/icons/ChevronRight';
-// import Clear from '@material-ui/icons/Clear';
-// import DeleteOutline from '@material-ui/icons/DeleteOutline';
-// import Edit from '@material-ui/icons/Edit';
-// import FilterList from '@material-ui/icons/FilterList';
-// import FirstPage from '@material-ui/icons/FirstPage';
-// import LastPage from '@material-ui/icons/LastPage';
-// import Remove from '@material-ui/icons/Remove';
-// import SaveAlt from '@material-ui/icons/SaveAlt';
-// import Search from '@material-ui/icons/Search';
-// import ViewColumn from '@material-ui/icons/ViewColumn';
-// import MaterialTable from 'material-table'
-import Header from 'components/Headers/Header';
-import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
+import {
+    Badge,
+    Card,
+    CardHeader,
+    InputGroupText,
+    InputGroupAddon,
+    CardFooter,
+    Label,
+    DropdownMenu,
+    Dropdown,
+    DropdownItem,
+    UncontrolledDropdown,
+    Input,
+    InputGroup,
+    DropdownToggle,
+    Media,
+    Pagination,
+    Col,
+    Button,
+    Nav,
+    Option,
+    PaginationItem,
+    PaginationLink,
+    Progress,
+    Table,
+    Container,
+    Row,
+    UncontrolledTooltip,
+    FormGroup,
+} from "reactstrap";
+// core components
+import Header from "components/Headers/Header.js";
+import React, { useState, useEffect, useRef } from 'react'
 
 
-
-// const tableIcons = {
-//   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
-//   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-//   Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-//   Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-//   DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-//   Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-//   Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-//   Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
-//   FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-//   LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-//   NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-//   PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
-//   ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-//   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-//   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
-//   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-//   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
-// };
 
 
 function AllTransactions() {
     const [allTransactions, setAllTransactions] = useState([])
-    const columns = [
-        { name: 'hash', header: 'Hash', minWidth: 50, defaultFlex: 5 },
-        { name: 'nonce', header: 'Nonce', minWidth: 50, defaultFlex: 5, type: 'number' },
-        { name: 'transaction_index', header: 'Transaction index', minWidth: 50, defaultFlex: 5, type: 'number' },
-        { name: 'from_address', header: 'From', minWidth: 50, defaultFlex: 5 },
-        { name: 'to_address', header: 'To', minWidth: 50, defaultFlex: 5 },
-        { name: 'value', header: 'Value', minWidth: 50, defaultFlex: 5, type: 'number' },
-        { name: 'gas', header: 'Gas', minWidth: 50, defaultFlex: 5, type: 'number' },
-        { name: 'gas_price', header: 'Gas price', minWidth: 50, defaultFlex: 5, type: 'number' },
-        { name: 'input', header: 'Input', minWidth: 50, defaultFlex: 5 },
-        { name: 'receipt_cumulative_gas_used', header: 'Receipt cumulative gas used', minWidth: 50, defaultFlex: 5, type: 'number' },
-        { name: 'receipt_gas_used', header: 'Receipt gas used', minWidth: 50, defaultFlex: 5, type: 'number' },
-        { name: 'receipt_contract_address', header: 'Receipt contract address', minWidth: 50, defaultFlex: 5 },
-        { name: 'receipt_root', header: 'Receipt root', minWidth: 50, defaultFlex: 5 },
-        { name: 'receipt_status', header: 'Receipt status', minWidth: 50, defaultFlex: 5, type: 'number' },
-        { name: 'block_timestamp', header: 'Block timestamp', minWidth: 50, defaultFlex: 5 },
-        { name: 'block_number', header: 'Block number', minWidth: 50, defaultFlex: 5, type: 'number' },
-        { name: 'block_hash', header: 'Block hash', minWidth: 50, defaultFlex: 5 },
+    const [csvItems, setcsvItems] = useState([""])
+
+    const data = [
+        {
+            id: 201,
+            hash: "0x7ca358fea3249d8c1a92dc2b95381c6a3a332d428595a5b2efc8c2ea669a6755",
+            nonc: null,
+            transaction_index: null,
+            from_address: "0xf778130cda40056ed0b48c42421020cef88a62e1",
+            to_address: "0xe304283c3e60cefaf7ea514007cf4e8fdc3d869d",
+            value: 659309389,
+            gas: null,
+            gas_price: 93425618283,
+            input: null,
+            receipt_cumulative_gas_used: null,
+            receipt_gas_used: 59076,
+            receipt_contract_address: null,
+            receipt_root: null,
+            receipt_status: null,
+            block_timestamp: "2021-12-06 - 10:39:13",
+            block_number: null,
+            block_hash: null,
+            parent: 5
+        },
+        {
+            id: 202,
+            hash: "0x1438e8605835275e6a247bd57c95da713c63abc818644579ea85ffed6ee40649",
+            nonc: null,
+            transaction_index: null,
+            from_address: "0x9b82087aeac5ede362744d6b4727e4d3d852f404",
+            to_address: "0x2373c5dc96238a64ce4062e74000fd3dacfd3bf7",
+            value: 782332987343,
+            gas: null,
+            gas_price: 75376093833,
+            input: null,
+            receipt_cumulative_gas_used: null,
+            receipt_gas_used: 100965,
+            receipt_contract_address: null,
+            receipt_root: null,
+            receipt_status: null,
+            block_timestamp: "2021-12-06 - 10:39:13",
+            block_number: null,
+            block_hash: null,
+            parent: 5
+        },
+        {
+            id: 203,
+            hash: "0xd253584563a7863ded5c3e01a92f2b62e9e00edd47542ad0d4d8afac0f6beed8",
+            nonc: null,
+            transaction_index: null,
+            from_address: "0x1b962a286e9bea7b51d45a3fb176673405d3ff0f",
+            to_address: "0x265befe2b1a0f4f646dea96ba09c1656b74bda91",
+            value: 2398327474372,
+            gas: null,
+            gas_price: 84852909601,
+            input: null,
+            receipt_cumulative_gas_used: null,
+            receipt_gas_used: 164682,
+            receipt_contract_address: null,
+            receipt_root: null,
+            receipt_status: null,
+            block_timestamp: "2021-12-06 - 10:39:13",
+            block_number: null,
+            block_hash: null,
+            parent: 5
+        },
     ]
-    const defaultFilterValue = [
-        { name: 'hash', operator: 'contains', type: 'string', value: '' },
-        { name: 'nonce', operator: 'gte', type: 'number', value: '' },
-        { name: 'transaction_index', operator: 'gte', type: 'number', value: '' },
-        { name: 'from_address', operator: 'contains', type: 'string', value: '' },
-        { name: 'to_address', operator: 'contains', type: 'string', value: '' },
-        { name: 'value', operator: 'gte', type: 'number', value: '' },
-        { name: 'gas', operator: 'gte', type: 'number', value: '' },
-        { name: 'gas_price', operator: 'gte', type: 'number', value: '' },
-        { name: 'input', operator: 'contains', type: 'string', value: '' },
-        { name: 'receipt_cumulative_gas_used', operator: 'gte', type: 'number', value: '' },
-        { name: 'receipt_gas_used', operator: 'gte', type: 'number', value: '' },
-        { name: 'receipt_contract_address', operator: 'contains', type: 'string', value: '' },
-        { name: 'receipt_root', operator: 'contains', type: 'string', value: '' },
-        { name: 'receipt_status', operator: 'gte', type: 'number', value: '' },
-        { name: 'block_timestamp', operator: 'contains', type: 'string', value: '' },
-        { name: 'block_number', operator: 'gte', type: 'number', value: '' },
-        { name: 'block_hash', operator: 'contains', type: 'string', value: '' },
-    ]
+    const Filters = useRef()
 
-    // function getData({ skip, limit, sortInfo, groupBy, filterValue }) {
-    //   return fetch('http://65.108.59.117:7001/api/csv/' + '?skip='+skip+'&limit='+limit+(groupBy && groupBy.length?'&groupBy='+groupBy:'')+'&sortInfo='+JSON.stringify(sortInfo) + '&filterBy='+JSON.stringify(filterValue), {
-    //     method: 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': 'Token ' + sessionStorage.getItem('token')
-    //     },
-    //   })
-    //     .then(res => {return res.json()})
-    // }
-
-
-
-
-
-    const gridStyle = { minHeight: 550 }
-    //  useCallback(getData, [])
-
+    async function setFilters(e) {
+        e.preventDefault()
+        const xYz = await Array.from(Filters.current.querySelectorAll('input'))
+        const mmmm = xYz.map(e => e.value)
+        console.log(mmmm)
+        var filterObject = {
+            addressSort: mmmm[0],
+            addressBaseSort: "",
+            emailSort: mmmm[1],
+            emailBaseSort: "",
+            pointSort: mmmm[2],
+            pointBaseSort: "",
+            txSort: mmmm[3],
+            txBaseSort: "",
+            nftSort: mmmm[4],
+            nftBaseSort: "",
+            balanceSort: mmmm[5],
+            balanceBaseSort: "",
+        }
+        fetch(`http://65.108.59.117:7001/api/csv/transaction?addressSort=${filterObject.addressSort}&addressBaseSort=${filterObject.addressBaseSort}&emailSort=${filterObject.emailSort}&emailBaseSort=${filterObject.emailBaseSort}&pointSort=${filterObject.pointSort}&pointBaseSort=${filterObject.pointBaseSort}&txSort=${filterObject.txSort}&txBaseSort=${filterObject.txBaseSort}&nftSort=${filterObject.nftSort}&nftBaseSort=${filterObject.nftBaseSort}&balanceSort=${filterObject.balanceSort}&balanceBaseSort=${filterObject.balanceBaseSort}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+    }
 
     useEffect(() => {
-        async function getData() {
-            await fetch('http://65.108.59.117:7001/api/csv/transaction/', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + sessionStorage.getItem('token')
-                },
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setAllTransactions(data)
-                    console.log(data)
-                })
+        function setdata(e) {
+            setcsvItems(e)
         }
-        getData()
+        setdata(data)
+    }, [])
+    const endRangeeeee = 200
+    const startRangeeeee = 1
 
-    }, []);
+    function handleColumn(e) {
+        console.log(e)
+        console.log(document.querySelector('#'+e))
+        var x = document.querySelector('#' + e)
+        x.classList.toggle('deactive-table-button')
+        document.querySelectorAll('.' + e).forEach((d) => {
+            d.classList.toggle('deactive-table')
+        })
 
-    const dataSource = allTransactions
-    console.log(dataSource)
+        //    var x = document.getElementsByClassName(`.${e}`)
+        //    console.log(x)
+        //    for(var i=0; i<x.length;i++){
+        //        x[i].style.display = "none"
+        //    }
+    }
+
 
 
 
@@ -130,53 +167,779 @@ function AllTransactions() {
 
         <div className="align-items-center">
             <Header />
-            {/* <MaterialTable
-        style={{ maxWidth: '90%', display: 'block', margin: '-50px auto 0px auto' }}
-        title="Basic Export Preview"
-        columns={[
-          { title: 'Name', field: 'address' },
-          { title: 'Address', field: 'email' },
-          { title: 'Point', field: 'points' },
-          { title: 'Transactions', field: 'transaction.length', type: 'numeric' },
-          { title: 'NFT', field: 'nft.length', type: 'numeric' },
-          { title: 'Balance', field: 'balancedata[0].balance', type: 'numeric' },
-        ]}
-        // data={[{
-        //   address: "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
-        //   email: "hani@gmail.com",
-        //   points: 2,
-        //   transactions: 158,
-        //   NFT: 0,
-        //   balance: 2115743901717
-        //   },
+            <Container className="mt--7" fluid>
+                {/* Table */}
+                <Row>
+                    <div className="col">
+                        <Card className="shadow">
+                            <CardHeader className="border-0">
+                                <Row className="align-items-center">
+                                    <Col xs="8">
+                                        <h3 className="text-black mb-0">Transactions</h3>
+                                    </Col>
+                                    <Col className="text-right" xs="4">
+                                        <UncontrolledDropdown>
+                                            <DropdownToggle
+                                                className="text-light"
+                                                href="#pablo"
+                                                role="button"
+                                                size="sm"
+                                                color=""
+                                                onClick={e => e.preventDefault()}
+                                            >
+                                                Columns
+                                            </DropdownToggle>
+                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownItem header>
+                                                    Sort
+                                                </DropdownItem>
+                                                <DropdownItem
+                                                    href="#pablo"
+                                                    id="From"
+                                                    className="mmm"
+                                                    onClick={e => handleColumn("From")}
+                                                >
+                                                    From
+                                                </DropdownItem>
+                                                <DropdownItem
+                                                    href="#pablo"
+                                                    onClick={e => e.preventDefault()}
+                                                >
+                                                    Descending
+                                                </DropdownItem>
+                                                <DropdownItem
+                                                    href="#pablo"
+                                                    onClick={e => e.preventDefault()}
+                                                >
+                                                    Unsort
+                                                </DropdownItem>
+                                            </DropdownMenu>
+                                        </UncontrolledDropdown>
+                                        <Button
+                                            color="primary"
+                                            href="#pablo"
+                                            onClick={(e) => e.preventDefault()}
+                                            size="sm"
+                                        >
+                                            Remove filters
+                                        </Button>
+                                        <Button
+                                            color="primary"
+                                            href="#pablo"
+                                            onClick={setFilters}
+                                            size="sm"
+                                        >
+                                            Set filters
+                                        </Button>
+                                        <Button
+                                            color="primary"
+                                            href="#pablo"
+                                            onClick={(e) => e.preventDefault()}
+                                            size="sm"
+                                        >
+                                            Export CSV
+                                        </Button>
+                                        {/* <Nav navbar>{createLinks(ArticlesRoutes)}</Nav> */}
+                                    </Col>
+                                </Row>
+                            </CardHeader>
+                            <Table className="align-items-center table-flush" responsive>
+                                <thead className="thead-light">
+                                    <tr>
+                                        <th scope="col">
+                                            Hash
+                                            <UncontrolledDropdown>
+                                                <DropdownToggle
+                                                    className="btn-icon-only text-light"
+                                                    href="#pablo"
+                                                    role="button"
+                                                    size="sm"
+                                                    color=""
+                                                    onClick={e => e.preventDefault()}
+                                                >
+                                                    <i className="fas fa-ellipsis-v" />
+                                                </DropdownToggle>
+                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                    <DropdownItem header>
+                                                        Sort
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Ascending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Descending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Unsort
+                                                    </DropdownItem>
+                                                </DropdownMenu>
+                                            </UncontrolledDropdown>
+                                        </th>
+                                        <th scope="col" className="From">
+                                            From
+                                            <UncontrolledDropdown>
+                                                <DropdownToggle
+                                                    className="btn-icon-only text-light"
+                                                    href="#pablo"
+                                                    role="button"
+                                                    size="sm"
+                                                    color=""
+                                                    onClick={e => e.preventDefault()}
+                                                >
+                                                    <i className="fas fa-ellipsis-v" />
+                                                </DropdownToggle>
+                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                    <DropdownItem header>
+                                                        Sort
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Ascending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Descending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Unsort
+                                                    </DropdownItem>
+                                                </DropdownMenu>
+                                            </UncontrolledDropdown>
+                                        </th>
+                                        <th scope="col">
+                                            To
+                                            <UncontrolledDropdown>
+                                                <DropdownToggle
+                                                    className="btn-icon-only text-light"
+                                                    href="#pablo"
+                                                    role="button"
+                                                    size="sm"
+                                                    color=""
+                                                    onClick={e => e.preventDefault()}
+                                                >
+                                                    <i className="fas fa-ellipsis-v" />
+                                                </DropdownToggle>
+                                                <DropdownMenu className="dropdown-menu-arrow" left >
+                                                    <DropdownItem header>
+                                                        Sort
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Ascending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Descending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Unsort
+                                                    </DropdownItem>
+                                                </DropdownMenu>
+                                            </UncontrolledDropdown>
+                                        </th>
+                                        <th scope="col">
+                                            Value
+                                            <UncontrolledDropdown>
+                                                <DropdownToggle
+                                                    className="btn-icon-only text-light"
+                                                    href="#pablo"
+                                                    role="button"
+                                                    size="sm"
+                                                    color=""
+                                                    onClick={e => e.preventDefault()}
+                                                >
+                                                    <i className="fas fa-ellipsis-v" />
+                                                </DropdownToggle>
+                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                    <DropdownItem header>
+                                                        Sort
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Ascending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Descending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Unsort
+                                                    </DropdownItem>
+                                                </DropdownMenu>
+                                            </UncontrolledDropdown>
+                                        </th>
+                                        <th scope="col">
+                                            Gas price
+                                            <UncontrolledDropdown>
+                                                <DropdownToggle
+                                                    className="btn-icon-only text-light"
+                                                    href="#pablo"
+                                                    role="button"
+                                                    size="sm"
+                                                    color=""
+                                                    onClick={e => e.preventDefault()}
+                                                >
+                                                    <i className="fas fa-ellipsis-v" />
+                                                </DropdownToggle>
+                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                    <DropdownItem header>
+                                                        Sort
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Ascending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Descending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Unsort
+                                                    </DropdownItem>
 
-        //   ]}
-        data={query =>
-          new Promise((resolve, reject) => {
-            resolve({
-              data: dataTaken,
-              page: 10,
-              totalCount: 646,
-            })
-          })
-        }
-        options={{
-          exportButton: true,
-          filtering: true,
-          search: true
-        }}
+                                                </DropdownMenu>
+                                            </UncontrolledDropdown>
+                                        </th>
+                                        <th scope="col">
+                                            Time
+                                            <UncontrolledDropdown>
+                                                <DropdownToggle
+                                                    className="btn-icon-only text-light"
+                                                    href="#pablo"
+                                                    role="button"
+                                                    size="sm"
+                                                    color=""
+                                                    onClick={e => e.preventDefault()}
+                                                >
+                                                    <i className="fas fa-ellipsis-v" />
+                                                </DropdownToggle>
+                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                    <DropdownItem header>
+                                                        Sort
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Ascending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Descending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Unsort
+                                                    </DropdownItem>
+                                                </DropdownMenu>
+                                            </UncontrolledDropdown>
+                                        </th>
 
-        icons={tableIcons}
 
-      /> */}
-            <ReactDataGrid
-                idProperty="id"
-                columns={columns}
-                dataSource={dataSource}
-                pagination
-                defaultFilterValue={defaultFilterValue}
-                style={gridStyle}
-            />
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ref={Filters}>
+                                        <td>
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText >
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+                                        <td className="From">
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText >
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+                                        <td>
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText >
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+                                        <td>
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend" >
+                                                    <InputGroupText>
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+                                        <td>
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText >
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+                                        <td>
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText >
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+                                    </tr>
+                                    {
+                                        csvItems.map(e => (
+                                            <tr>
+                                                <td scope="row">
+                                                    {e.hash}
+                                                </td>
+                                                <td className="From">
+                                                    {e.from_address}
+                                                </td>
+                                                <td>
+                                                    {e.to_address}
+                                                </td>
+                                                <td>
+                                                    {/* <TxData props={e.address} id={e.id} /> */}
+                                                    {e.value}
+                                                </td>
+                                                <td>
+                                                    {/* <NftData props={e.address} id={e.id} /> */}
+                                                    {e.gas_price}
+                                                </td>
+                                                <td>
+                                                    {/* <BalanceData props={e.address} id={e.id} /> */}
+                                                    {e.block_timestamp}
+                                                </td>
+                                            </tr>
+
+                                        ))
+                                    }
+
+
+                                </tbody>
+                            </Table>
+                            <CardFooter>
+                                <Row>
+                                    <FormGroup row>
+                                        <Label
+                                            for="perPage"
+                                            sm={8}
+                                        >
+                                            Items per page:
+                                        </Label>
+                                        <Col sm="2">
+                                            <Input id="perPage" type="select" className="custom-select" >
+                                                <option>20</option>
+                                                <option>50</option>
+                                                <option>100</option>
+                                            </Input>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label
+                                            for="pageNumber"
+                                            sm={6}
+                                            className="form-control-label"
+                                        >
+                                            Page:
+                                        </Label>
+                                        <Col sm="2">
+                                            <Input id="pageNumber" type="select" className="custom-select">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                            </Input>
+                                        </Col>
+                                    </FormGroup>
+                                    <Col sm="1" >
+                                        <p>{`${startRangeeeee} - ${endRangeeeee}`}</p>
+                                    </Col>
+                                </Row>
+                            </CardFooter>
+                        </Card>
+                    </div>
+                </Row>
+            </Container>
         </div>
     )
 }
