@@ -24,6 +24,7 @@ import TableTest from "views/examples/TableTest";
 import WinnerList from "views/examples/WinnerList";
 import WalletData from "views/examples/WalletData"
 import AllTransactions from "views/examples/AllTransactions";
+import AllNFTs from "views/examples/AllNFTs";
 
 var routes = [
   {
@@ -68,7 +69,12 @@ var routes = [
     component: AllTransactions,
     layout: "/admin",
   },
-  
-  
+  {
+    path: "/NFTs",
+    name: "NFTs",
+    icon: "ni ni-money-coins",
+    component: AllNFTs,
+    layout: "/admin",
+  },
 ];
 export default routes;

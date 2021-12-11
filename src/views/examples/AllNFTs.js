@@ -35,73 +35,61 @@ import React, { useState, useEffect, useRef } from 'react'
 
 
 
-function AllTransactions() {
+function AllNFTs() {
     const [allTransactions, setAllTransactions] = useState([])
     const [csvItems, setcsvItems] = useState([""])
 
     const data = [
         {
-            id: 201,
-            hash: "0x7ca358fea3249d8c1a92dc2b95381c6a3a332d428595a5b2efc8c2ea669a6755",
-            nonc: null,
-            transaction_index: null,
-            from_address: "0xf778130cda40056ed0b48c42421020cef88a62e1",
-            to_address: "0xe304283c3e60cefaf7ea514007cf4e8fdc3d869d",
-            value: 659309389,
-            gas: null,
-            gas_price: 93425618283,
-            input: null,
-            receipt_cumulative_gas_used: null,
-            receipt_gas_used: 59076,
-            receipt_contract_address: null,
-            receipt_root: null,
-            receipt_status: null,
-            block_timestamp: "2021-12-06 - 10:39:13",
-            block_number: null,
-            block_hash: null,
-            parent: 5
+            name: "SecurityFundBasket",
+            amount: 1,
+            frozen: 0,
+            symbol: "SFB",
+            syncing: 1,
+            is_valid: 0,
+            metadata: null,
+            owner_of: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            token_id: 24,
+            synced_at: null,
+            token_uri: null,
+            block_number: 9188006,
+            contract_type: "ERC721",
+            token_address: "0xc9c77b0c2ee79cec54b3af7039f8a7bc684e48bd",
+            block_number_minted: 9188006
         },
         {
-            id: 202,
-            hash: "0x1438e8605835275e6a247bd57c95da713c63abc818644579ea85ffed6ee40649",
-            nonc: null,
-            transaction_index: null,
-            from_address: "0x9b82087aeac5ede362744d6b4727e4d3d852f404",
-            to_address: "0x2373c5dc96238a64ce4062e74000fd3dacfd3bf7",
-            value: 782332987343,
-            gas: null,
-            gas_price: 75376093833,
-            input: null,
-            receipt_cumulative_gas_used: null,
-            receipt_gas_used: 100965,
-            receipt_contract_address: null,
-            receipt_root: null,
-            receipt_status: null,
-            block_timestamp: "2021-12-06 - 10:39:13",
-            block_number: null,
-            block_hash: null,
-            parent: 5
+            name: "SecurityFundBasket",
+            amount: 1,
+            frozen: 0,
+            symbol: "SFB",
+            syncing: 1,
+            is_valid: 0,
+            metadata: null,
+            owner_of: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            token_id: 24,
+            synced_at: null,
+            token_uri: null,
+            block_number: 9188006,
+            contract_type: "ERC721",
+            token_address: "0xc9c77b0c2ee79cec54b3af7039f8a7bc684e48bd",
+            block_number_minted: 9188006
         },
         {
-            id: 203,
-            hash: "0xd253584563a7863ded5c3e01a92f2b62e9e00edd47542ad0d4d8afac0f6beed8",
-            nonc: null,
-            transaction_index: null,
-            from_address: "0x1b962a286e9bea7b51d45a3fb176673405d3ff0f",
-            to_address: "0x265befe2b1a0f4f646dea96ba09c1656b74bda91",
-            value: 2398327474372,
-            gas: null,
-            gas_price: 84852909601,
-            input: null,
-            receipt_cumulative_gas_used: null,
-            receipt_gas_used: 164682,
-            receipt_contract_address: null,
-            receipt_root: null,
-            receipt_status: null,
-            block_timestamp: "2021-12-06 - 10:39:13",
-            block_number: null,
-            block_hash: null,
-            parent: 5
+            name: "SecurityFundBasket",
+            amount: 1,
+            frozen: 0,
+            symbol: "SFB",
+            syncing: 1,
+            is_valid: 0,
+            metadata: null,
+            owner_of: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            token_id: 24,
+            synced_at: null,
+            token_uri: null,
+            block_number: 9188006,
+            contract_type: "ERC721",
+            token_address: "0xc9c77b0c2ee79cec54b3af7039f8a7bc684e48bd",
+            block_number_minted: 9188006
         },
     ]
     const Filters = useRef()
@@ -175,7 +163,7 @@ function AllTransactions() {
                             <CardHeader className="border-0">
                                 <Row className="align-items-center">
                                     <Col xs="8">
-                                        <h3 className="text-black mb-0">Transactions</h3>
+                                        <h3 className="text-black mb-0">NFTs</h3>
                                     </Col>
                                     <Col className="text-right" xs="4">
                                         <UncontrolledDropdown>
@@ -192,123 +180,91 @@ function AllTransactions() {
                                             <DropdownMenu className="dropdown-menu-arrow" left>
                                                 <DropdownItem
                                                     href="#pablo"
-                                                    id="Hash"
+                                                    id="Name"
                                                     className="mmm"
-                                                    onClick={e => handleColumn("Hash")}
+                                                    onClick={e => handleColumn("Name")}
                                                 >
-                                                    Hash
+                                                    Name
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     href="#pablo"
-                                                    id="Nonc"
+                                                    id="Amount"
                                                     className="mmm"
-                                                    onClick={e => handleColumn("Nonc")}
+                                                    onClick={e => handleColumn("Amount")}
                                                 >
-                                                    Nonc
+                                                    Amount
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     href="#pablo"
-                                                    id="TransactionIndex"
+                                                    id="Frozen"
                                                     className="mmm"
-                                                    onClick={e => handleColumn("TransactionIndex")}
+                                                    onClick={e => handleColumn("Frozen")}
                                                 >
-                                                    Transaction Index
+                                                    Frozen
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     href="#pablo"
-                                                    id="From"
+                                                    id="Symbol"
                                                     className="mmm"
-                                                    onClick={e => handleColumn("From")}
+                                                    onClick={e => handleColumn("Symbol")}
                                                 >
-                                                    From
+                                                    Symbol
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     href="#pablo"
-                                                    id="To"
+                                                    id="Syncing"
                                                     className="mmm"
-                                                    onClick={e => handleColumn("To")}
+                                                    onClick={e => handleColumn("Syncing")}
                                                 >
-                                                    To
+                                                    Syncing
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     href="#pablo"
-                                                    id="Value"
+                                                    id="IsValid"
                                                     className="mmm"
-                                                    onClick={e => handleColumn("Value")}
+                                                    onClick={e => handleColumn("IsValid")}
                                                 >
-                                                    Value
+                                                    Is Valid
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     href="#pablo"
-                                                    id="Gas"
+                                                    id="Metadata"
                                                     className="mmm"
-                                                    onClick={e => handleColumn("Gas")}
+                                                    onClick={e => handleColumn("Metadata")}
                                                 >
-                                                    Gas
+                                                    Metadata
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     href="#pablo"
-                                                    id="GasPrice"
+                                                    id="Owner"
                                                     className="mmm"
-                                                    onClick={e => handleColumn("GasPrice")}
+                                                    onClick={e => handleColumn("Owner")}
                                                 >
-                                                    Gas Price
+                                                    Owner
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     href="#pablo"
-                                                    id="Input"
+                                                    id="TokenId"
                                                     className="mmm"
-                                                    onClick={e => handleColumn("Input")}
+                                                    onClick={e => handleColumn("TokenId")}
                                                 >
-                                                    Input
+                                                    Token Id
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     href="#pablo"
-                                                    id="ReceiptCumulativeGasUsed"
+                                                    id="SyncedAt"
                                                     className="mmm"
-                                                    onClick={e => handleColumn("ReceiptCumulativeGasUsed")}
+                                                    onClick={e => handleColumn("SyncedAt")}
                                                 >
-                                                    Receipt Cumulative Gas Used
+                                                    Synced At
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     href="#pablo"
-                                                    id="ReceiptGasUsed"
+                                                    id="TokenUri"
                                                     className="mmm"
-                                                    onClick={e => handleColumn("ReceiptGasUsed")}
+                                                    onClick={e => handleColumn("TokenUri")}
                                                 >
-                                                    Receipt Gas Used
-                                                </DropdownItem>
-                                                <DropdownItem
-                                                    href="#pablo"
-                                                    id="ReceiptContractAddress"
-                                                    className="mmm"
-                                                    onClick={e => handleColumn("ReceiptContractAddress")}
-                                                >
-                                                    Receipt Contract Address
-                                                </DropdownItem>
-                                                <DropdownItem
-                                                    href="#pablo"
-                                                    id="ReceiptRoot"
-                                                    className="mmm"
-                                                    onClick={e => handleColumn("ReceiptRoot")}
-                                                >
-                                                    Receipt Root
-                                                </DropdownItem>
-                                                <DropdownItem
-                                                    href="#pablo"
-                                                    id="ReceiptStatus"
-                                                    className="mmm"
-                                                    onClick={e => handleColumn("ReceiptStatus")}
-                                                >
-                                                    Receipt Status
-                                                </DropdownItem>
-                                                <DropdownItem
-                                                    href="#pablo"
-                                                    id="Time"
-                                                    className="mmm"
-                                                    onClick={e => handleColumn("Time")}
-                                                >
-                                                    Time
+                                                    Token Uri
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     href="#pablo"
@@ -320,11 +276,27 @@ function AllTransactions() {
                                                 </DropdownItem>
                                                 <DropdownItem
                                                     href="#pablo"
-                                                    id="BlockHash"
+                                                    id="ContractType"
                                                     className="mmm"
-                                                    onClick={e => handleColumn("BlockHash")}
+                                                    onClick={e => handleColumn("ContractType")}
                                                 >
-                                                    Block Hash
+                                                    Contract Type
+                                                </DropdownItem>
+                                                <DropdownItem
+                                                    href="#pablo"
+                                                    id="TokenAddress"
+                                                    className="mmm"
+                                                    onClick={e => handleColumn("TokenAddress")}
+                                                >
+                                                    Token Address
+                                                </DropdownItem>
+                                                <DropdownItem
+                                                    href="#pablo"
+                                                    id="BlockNumberMinted"
+                                                    className="mmm"
+                                                    onClick={e => handleColumn("BlockNumberMinted")}
+                                                >
+                                                    Block Number Minted
                                                 </DropdownItem>
                                             </DropdownMenu>
                                         </UncontrolledDropdown>
@@ -359,8 +331,8 @@ function AllTransactions() {
                             <Table className="align-items-center table-flush" responsive>
                                 <thead className="thead-light">
                                     <tr>
-                                        <th scope="col" className="Hash">
-                                            Hash
+                                        <th scope="col" className="Name">
+                                            Name
                                             <UncontrolledDropdown>
                                                 <DropdownToggle
                                                     className="btn-icon-only text-light"
@@ -397,8 +369,8 @@ function AllTransactions() {
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </th>
-                                        <th scope="col" className="Nonc deactive-table">
-                                            Nonc
+                                        <th scope="col" className="Amount">
+                                            Amount
                                             <UncontrolledDropdown>
                                                 <DropdownToggle
                                                     className="btn-icon-only text-light"
@@ -435,84 +407,8 @@ function AllTransactions() {
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </th>
-                                        <th scope="col" className="TransactionIndex deactive-table">
-                                            Transaction Index
-                                            <UncontrolledDropdown>
-                                                <DropdownToggle
-                                                    className="btn-icon-only text-light"
-                                                    href="#pablo"
-                                                    role="button"
-                                                    size="sm"
-                                                    color=""
-                                                    onClick={e => e.preventDefault()}
-                                                >
-                                                    <i className="fas fa-ellipsis-v" />
-                                                </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
-                                                    <DropdownItem header>
-                                                        Sort
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Ascending
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Descending
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Unsort
-                                                    </DropdownItem>
-                                                </DropdownMenu>
-                                            </UncontrolledDropdown>
-                                        </th>
-                                        <th scope="col" className="From">
-                                            From
-                                            <UncontrolledDropdown>
-                                                <DropdownToggle
-                                                    className="btn-icon-only text-light"
-                                                    href="#pablo"
-                                                    role="button"
-                                                    size="sm"
-                                                    color=""
-                                                    onClick={e => e.preventDefault()}
-                                                >
-                                                    <i className="fas fa-ellipsis-v" />
-                                                </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
-                                                    <DropdownItem header>
-                                                        Sort
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Ascending
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Descending
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Unsort
-                                                    </DropdownItem>
-                                                </DropdownMenu>
-                                            </UncontrolledDropdown>
-                                        </th>
-                                        <th scope="col" className="To">
-                                            To
+                                        <th scope="col" className="Frozen deactive-table">
+                                            Frozen
                                             <UncontrolledDropdown>
                                                 <DropdownToggle
                                                     className="btn-icon-only text-light"
@@ -549,8 +445,8 @@ function AllTransactions() {
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </th>
-                                        <th scope="col" className="Value">
-                                            Value
+                                        <th scope="col" className="Symbol">
+                                            Symbol
                                             <UncontrolledDropdown>
                                                 <DropdownToggle
                                                     className="btn-icon-only text-light"
@@ -587,46 +483,8 @@ function AllTransactions() {
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </th>
-                                        <th scope="col" className="Gas deactive-table">
-                                            Gas
-                                            <UncontrolledDropdown>
-                                                <DropdownToggle
-                                                    className="btn-icon-only text-light"
-                                                    href="#pablo"
-                                                    role="button"
-                                                    size="sm"
-                                                    color=""
-                                                    onClick={e => e.preventDefault()}
-                                                >
-                                                    <i className="fas fa-ellipsis-v" />
-                                                </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
-                                                    <DropdownItem header>
-                                                        Sort
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Ascending
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Descending
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Unsort
-                                                    </DropdownItem>
-                                                </DropdownMenu>
-                                            </UncontrolledDropdown>
-                                        </th>
-                                        <th scope="col" className="GasPrice">
-                                            Gas price
+                                        <th scope="col" className="Syncing deactive-table">
+                                            Syncing
                                             <UncontrolledDropdown>
                                                 <DropdownToggle
                                                     className="btn-icon-only text-light"
@@ -664,8 +522,8 @@ function AllTransactions() {
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </th>
-                                        <th scope="col" className="Input deactive-table">
-                                            Input
+                                        <th scope="col" className="IsValid">
+                                            Is Valid
                                             <UncontrolledDropdown>
                                                 <DropdownToggle
                                                     className="btn-icon-only text-light"
@@ -702,8 +560,8 @@ function AllTransactions() {
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </th>
-                                        <th scope="col" className="ReceiptCumulativeGasUsed deactive-table">
-                                            Receipt Cumulative Gas Used
+                                        <th scope="col" className="Metadata deactive-table">
+                                            Metadata
                                             <UncontrolledDropdown>
                                                 <DropdownToggle
                                                     className="btn-icon-only text-light"
@@ -740,8 +598,8 @@ function AllTransactions() {
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </th>
-                                        <th scope="col" className="ReceiptGasUsed deactive-table">
-                                            Receipt Gas Used
+                                        <th scope="col" className="Owner">
+                                            Owner
                                             <UncontrolledDropdown>
                                                 <DropdownToggle
                                                     className="btn-icon-only text-light"
@@ -778,8 +636,46 @@ function AllTransactions() {
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </th>
-                                        <th scope="col" className="ReceiptContractAddress deactive-table">
-                                            Receipt Contract Address
+                                        <th scope="col" className="TokenId deactive-table">
+                                            Token Id
+                                            <UncontrolledDropdown>
+                                                <DropdownToggle
+                                                    className="btn-icon-only text-light"
+                                                    href="#pablo"
+                                                    role="button"
+                                                    size="sm"
+                                                    color=""
+                                                    onClick={e => e.preventDefault()}
+                                                >
+                                                    <i className="fas fa-ellipsis-v" />
+                                                </DropdownToggle>
+                                                <DropdownMenu className="dropdown-menu-arrow" left >
+                                                    <DropdownItem header>
+                                                        Sort
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Ascending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Descending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Unsort
+                                                    </DropdownItem>
+                                                </DropdownMenu>
+                                            </UncontrolledDropdown>
+                                        </th>
+                                        <th scope="col" className="SyncedAt deactive-table">
+                                            Synced At
                                             <UncontrolledDropdown>
                                                 <DropdownToggle
                                                     className="btn-icon-only text-light"
@@ -816,84 +712,8 @@ function AllTransactions() {
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </th>
-                                        <th scope="col" className="ReceiptRoot deactive-table">
-                                            Receipt Root
-                                            <UncontrolledDropdown>
-                                                <DropdownToggle
-                                                    className="btn-icon-only text-light"
-                                                    href="#pablo"
-                                                    role="button"
-                                                    size="sm"
-                                                    color=""
-                                                    onClick={e => e.preventDefault()}
-                                                >
-                                                    <i className="fas fa-ellipsis-v" />
-                                                </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
-                                                    <DropdownItem header>
-                                                        Sort
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Ascending
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Descending
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Unsort
-                                                    </DropdownItem>
-                                                </DropdownMenu>
-                                            </UncontrolledDropdown>
-                                        </th>
-                                        <th scope="col" className="ReceiptStatus deactive-table">
-                                            Receipt Status
-                                            <UncontrolledDropdown>
-                                                <DropdownToggle
-                                                    className="btn-icon-only text-light"
-                                                    href="#pablo"
-                                                    role="button"
-                                                    size="sm"
-                                                    color=""
-                                                    onClick={e => e.preventDefault()}
-                                                >
-                                                    <i className="fas fa-ellipsis-v" />
-                                                </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
-                                                    <DropdownItem header>
-                                                        Sort
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Ascending
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Descending
-                                                    </DropdownItem>
-                                                    <DropdownItem
-                                                        href="#pablo"
-                                                        onClick={e => e.preventDefault()}
-                                                    >
-                                                        Unsort
-                                                    </DropdownItem>
-                                                </DropdownMenu>
-                                            </UncontrolledDropdown>
-                                        </th>
-                                        <th scope="col" className="Time">
-                                            Time
+                                        <th scope="col" className="TokenUri">
+                                            Token Uri
                                             <UncontrolledDropdown>
                                                 <DropdownToggle
                                                     className="btn-icon-only text-light"
@@ -968,8 +788,85 @@ function AllTransactions() {
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </th>
-                                        <th scope="col" className="BlockHash deactive-table">
-                                            Block Hash
+                                        <th scope="col" className="ContractType">
+                                            Contract Type
+                                            <UncontrolledDropdown>
+                                                <DropdownToggle
+                                                    className="btn-icon-only text-light"
+                                                    href="#pablo"
+                                                    role="button"
+                                                    size="sm"
+                                                    color=""
+                                                    onClick={e => e.preventDefault()}
+                                                >
+                                                    <i className="fas fa-ellipsis-v" />
+                                                </DropdownToggle>
+                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                    <DropdownItem header>
+                                                        Sort
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Ascending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Descending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Unsort
+                                                    </DropdownItem>
+                                                </DropdownMenu>
+                                            </UncontrolledDropdown>
+                                        </th>
+                                        <th scope="col" className="TokenAddress deactive-table">
+                                            Token Address
+                                            <UncontrolledDropdown>
+                                                <DropdownToggle
+                                                    className="btn-icon-only text-light"
+                                                    href="#pablo"
+                                                    role="button"
+                                                    size="sm"
+                                                    color=""
+                                                    onClick={e => e.preventDefault()}
+                                                >
+                                                    <i className="fas fa-ellipsis-v" />
+                                                </DropdownToggle>
+                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                    <DropdownItem header>
+                                                        Sort
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Ascending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Descending
+                                                    </DropdownItem>
+                                                    <DropdownItem
+                                                        href="#pablo"
+                                                        onClick={e => e.preventDefault()}
+                                                    >
+                                                        Unsort
+                                                    </DropdownItem>
+
+                                                </DropdownMenu>
+                                            </UncontrolledDropdown>
+                                        </th>
+                                        <th scope="col" className="BlockNumberMinted deactive-table">
+                                            Block Number Minted
                                             <UncontrolledDropdown>
                                                 <DropdownToggle
                                                     className="btn-icon-only text-light"
@@ -1010,7 +907,7 @@ function AllTransactions() {
                                 </thead>
                                 <tbody>
                                     <tr ref={Filters}>
-                                        <td className="Hash">
+                                        <td className="Name">
                                             <InputGroup>
                                                 <Input bsSize="sm" />
                                                 <InputGroupAddon addonType="prepend">
@@ -1074,7 +971,7 @@ function AllTransactions() {
 
                                             </InputGroup>
                                         </td>
-                                        <td className="Nonc deactive-table">
+                                        <td className="Amount">
                                             <InputGroup>
                                                 <Input bsSize="sm" />
                                                 <InputGroupAddon addonType="prepend">
@@ -1138,7 +1035,7 @@ function AllTransactions() {
 
                                             </InputGroup>
                                         </td>
-                                        <td className="TransactionIndex deactive-table">
+                                        <td className="Frozen deactive-table">
                                             <InputGroup>
                                                 <Input bsSize="sm" />
                                                 <InputGroupAddon addonType="prepend">
@@ -1202,135 +1099,7 @@ function AllTransactions() {
 
                                             </InputGroup>
                                         </td>
-                                        <td className="From">
-                                            <InputGroup>
-                                                <Input bsSize="sm" />
-                                                <InputGroupAddon addonType="prepend">
-                                                    <InputGroupText >
-                                                        {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
-                                                            <DropdownToggle
-                                                                className="btn-icon-only text-light"
-                                                                href="#pablo"
-                                                                role="button"
-                                                                size="sm"
-                                                                color=""
-                                                                onClick={e => e.preventDefault()}
-                                                            >
-                                                                <i className="fas fa-ellipsis-v" />
-                                                            </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
-                                                                <DropdownItem header>
-                                                                    Filter by
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then And Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then and Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Dismiss Filter
-                                                                </DropdownItem>
-                                                            </DropdownMenu>
-                                                        </UncontrolledDropdown>
-                                                    </InputGroupText>
-                                                </InputGroupAddon>
-
-                                            </InputGroup>
-                                        </td>
-                                        <td className="To">
-                                            <InputGroup>
-                                                <Input bsSize="sm" />
-                                                <InputGroupAddon addonType="prepend">
-                                                    <InputGroupText >
-                                                        {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
-                                                            <DropdownToggle
-                                                                className="btn-icon-only text-light"
-                                                                href="#pablo"
-                                                                role="button"
-                                                                size="sm"
-                                                                color=""
-                                                                onClick={e => e.preventDefault()}
-                                                            >
-                                                                <i className="fas fa-ellipsis-v" />
-                                                            </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
-                                                                <DropdownItem header>
-                                                                    Filter by
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then And Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then and Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Dismiss Filter
-                                                                </DropdownItem>
-                                                            </DropdownMenu>
-                                                        </UncontrolledDropdown>
-                                                    </InputGroupText>
-                                                </InputGroupAddon>
-
-                                            </InputGroup>
-                                        </td>
-                                        <td className="Value">
+                                        <td className="Symbol">
                                             <InputGroup>
                                                 <Input bsSize="sm" />
                                                 <InputGroupAddon addonType="prepend" >
@@ -1394,8 +1163,328 @@ function AllTransactions() {
 
                                             </InputGroup>
                                         </td>
-                                        <td className="Gas deactive-table">
-                                        <InputGroup>
+                                        <td className="Syncing deactive-table">
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText >
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+                                        <td className="IsValid">
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText >
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+                                        <td className="Metadata deactive-table">
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText >
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+                                        <td className="Owner">
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText >
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+                                        <td className="TokenId deactive-table">
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText >
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+                                        <td className="SyncedAt deactive-table">
+                                            <InputGroup>
                                                 <Input bsSize="sm" />
                                                 <InputGroupAddon addonType="prepend" >
                                                     <InputGroupText>
@@ -1458,455 +1547,7 @@ function AllTransactions() {
 
                                             </InputGroup>
                                         </td>
-                                        <td className="GasPrice">
-                                            <InputGroup>
-                                                <Input bsSize="sm" />
-                                                <InputGroupAddon addonType="prepend">
-                                                    <InputGroupText >
-                                                        {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
-                                                            <DropdownToggle
-                                                                className="btn-icon-only text-light"
-                                                                href="#pablo"
-                                                                role="button"
-                                                                size="sm"
-                                                                color=""
-                                                                onClick={e => e.preventDefault()}
-                                                            >
-                                                                <i className="fas fa-ellipsis-v" />
-                                                            </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
-                                                                <DropdownItem header>
-                                                                    Filter by
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then And Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then and Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Dismiss Filter
-                                                                </DropdownItem>
-                                                            </DropdownMenu>
-                                                        </UncontrolledDropdown>
-                                                    </InputGroupText>
-                                                </InputGroupAddon>
-
-                                            </InputGroup>
-                                        </td>
-                                        <td className="Input deactive-table">
-                                            <InputGroup>
-                                                <Input bsSize="sm" />
-                                                <InputGroupAddon addonType="prepend">
-                                                    <InputGroupText >
-                                                        {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
-                                                            <DropdownToggle
-                                                                className="btn-icon-only text-light"
-                                                                href="#pablo"
-                                                                role="button"
-                                                                size="sm"
-                                                                color=""
-                                                                onClick={e => e.preventDefault()}
-                                                            >
-                                                                <i className="fas fa-ellipsis-v" />
-                                                            </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
-                                                                <DropdownItem header>
-                                                                    Filter by
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then And Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then and Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Dismiss Filter
-                                                                </DropdownItem>
-                                                            </DropdownMenu>
-                                                        </UncontrolledDropdown>
-                                                    </InputGroupText>
-                                                </InputGroupAddon>
-
-                                            </InputGroup>
-                                        </td>
-                                        <td className="ReceiptCumulativeGasUsed deactive-table">
-                                            <InputGroup>
-                                                <Input bsSize="sm" />
-                                                <InputGroupAddon addonType="prepend">
-                                                    <InputGroupText >
-                                                        {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
-                                                            <DropdownToggle
-                                                                className="btn-icon-only text-light"
-                                                                href="#pablo"
-                                                                role="button"
-                                                                size="sm"
-                                                                color=""
-                                                                onClick={e => e.preventDefault()}
-                                                            >
-                                                                <i className="fas fa-ellipsis-v" />
-                                                            </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
-                                                                <DropdownItem header>
-                                                                    Filter by
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then And Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then and Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Dismiss Filter
-                                                                </DropdownItem>
-                                                            </DropdownMenu>
-                                                        </UncontrolledDropdown>
-                                                    </InputGroupText>
-                                                </InputGroupAddon>
-
-                                            </InputGroup>
-                                        </td>
-                                        <td className="ReceiptGasUsed deactive-table">
-                                            <InputGroup>
-                                                <Input bsSize="sm" />
-                                                <InputGroupAddon addonType="prepend">
-                                                    <InputGroupText >
-                                                        {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
-                                                            <DropdownToggle
-                                                                className="btn-icon-only text-light"
-                                                                href="#pablo"
-                                                                role="button"
-                                                                size="sm"
-                                                                color=""
-                                                                onClick={e => e.preventDefault()}
-                                                            >
-                                                                <i className="fas fa-ellipsis-v" />
-                                                            </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
-                                                                <DropdownItem header>
-                                                                    Filter by
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then And Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then and Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Dismiss Filter
-                                                                </DropdownItem>
-                                                            </DropdownMenu>
-                                                        </UncontrolledDropdown>
-                                                    </InputGroupText>
-                                                </InputGroupAddon>
-
-                                            </InputGroup>
-                                        </td>
-                                        <td className="ReceiptContractAddress deactive-table">
-                                            <InputGroup>
-                                                <Input bsSize="sm" />
-                                                <InputGroupAddon addonType="prepend">
-                                                    <InputGroupText >
-                                                        {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
-                                                            <DropdownToggle
-                                                                className="btn-icon-only text-light"
-                                                                href="#pablo"
-                                                                role="button"
-                                                                size="sm"
-                                                                color=""
-                                                                onClick={e => e.preventDefault()}
-                                                            >
-                                                                <i className="fas fa-ellipsis-v" />
-                                                            </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
-                                                                <DropdownItem header>
-                                                                    Filter by
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then And Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then and Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Dismiss Filter
-                                                                </DropdownItem>
-                                                            </DropdownMenu>
-                                                        </UncontrolledDropdown>
-                                                    </InputGroupText>
-                                                </InputGroupAddon>
-
-                                            </InputGroup>
-                                        </td>
-                                        <td className="ReceiptRoot deactive-table">
-                                            <InputGroup>
-                                                <Input bsSize="sm" />
-                                                <InputGroupAddon addonType="prepend">
-                                                    <InputGroupText >
-                                                        {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
-                                                            <DropdownToggle
-                                                                className="btn-icon-only text-light"
-                                                                href="#pablo"
-                                                                role="button"
-                                                                size="sm"
-                                                                color=""
-                                                                onClick={e => e.preventDefault()}
-                                                            >
-                                                                <i className="fas fa-ellipsis-v" />
-                                                            </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
-                                                                <DropdownItem header>
-                                                                    Filter by
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then And Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then and Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Dismiss Filter
-                                                                </DropdownItem>
-                                                            </DropdownMenu>
-                                                        </UncontrolledDropdown>
-                                                    </InputGroupText>
-                                                </InputGroupAddon>
-
-                                            </InputGroup>
-                                        </td>
-                                        <td className="ReceiptStatus deactive-table">
-                                            <InputGroup>
-                                                <Input bsSize="sm" />
-                                                <InputGroupAddon addonType="prepend">
-                                                    <InputGroupText >
-                                                        {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
-                                                            <DropdownToggle
-                                                                className="btn-icon-only text-light"
-                                                                href="#pablo"
-                                                                role="button"
-                                                                size="sm"
-                                                                color=""
-                                                                onClick={e => e.preventDefault()}
-                                                            >
-                                                                <i className="fas fa-ellipsis-v" />
-                                                            </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
-                                                                <DropdownItem header>
-                                                                    Filter by
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then And Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Greater then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then and Equals
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Smaller then
-                                                                </DropdownItem>
-                                                                <DropdownItem
-                                                                    href="#pablo"
-                                                                    onClick={e => e.preventDefault()}
-                                                                >
-                                                                    Dismiss Filter
-                                                                </DropdownItem>
-                                                            </DropdownMenu>
-                                                        </UncontrolledDropdown>
-                                                    </InputGroupText>
-                                                </InputGroupAddon>
-
-                                            </InputGroup>
-                                        </td>
-                                        <td className="Time">
+                                        <td className="TokenUri">
                                             <InputGroup>
                                                 <Input bsSize="sm" />
                                                 <InputGroupAddon addonType="prepend">
@@ -2034,7 +1675,71 @@ function AllTransactions() {
 
                                             </InputGroup>
                                         </td>
-                                        <td className="BlockHash deactive-table">
+                                        <td className="ContractType">
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend" >
+                                                    <InputGroupText>
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+                                        <td className="TokenAddress deactive-table">
                                             <InputGroup>
                                                 <Input bsSize="sm" />
                                                 <InputGroupAddon addonType="prepend">
@@ -2098,63 +1803,126 @@ function AllTransactions() {
 
                                             </InputGroup>
                                         </td>
+                                        <td className="BlockNumberMinted deactive-table">
+                                            <InputGroup>
+                                                <Input bsSize="sm" />
+                                                <InputGroupAddon addonType="prepend">
+                                                    <InputGroupText >
+                                                        {/* <i className="ni ni-lock-circle-open" /> */}
+                                                        <UncontrolledDropdown split>
+                                                            <DropdownToggle
+                                                                className="btn-icon-only text-light"
+                                                                href="#pablo"
+                                                                role="button"
+                                                                size="sm"
+                                                                color=""
+                                                                onClick={e => e.preventDefault()}
+                                                            >
+                                                                <i className="fas fa-ellipsis-v" />
+                                                            </DropdownToggle>
+                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                                <DropdownItem header>
+                                                                    Filter by
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then And Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Greater then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then and Equals
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Smaller then
+                                                                </DropdownItem>
+                                                                <DropdownItem
+                                                                    href="#pablo"
+                                                                    onClick={e => e.preventDefault()}
+                                                                >
+                                                                    Dismiss Filter
+                                                                </DropdownItem>
+                                                            </DropdownMenu>
+                                                        </UncontrolledDropdown>
+                                                    </InputGroupText>
+                                                </InputGroupAddon>
+
+                                            </InputGroup>
+                                        </td>
+
                                     </tr>
                                     {
                                         csvItems.map(e => (
                                             <tr>
-                                                <td scope="row" className="Hash">
-                                                    {e.hash}
+                                                <td scope="row" className="Name">
+                                                    {e.name}
                                                 </td>
-                                                <td scope="row" className="Nonc deactive-table">
-                                                    {e.nonc}
+                                                <td className="Amount">
+                                                    {e.amount}
                                                 </td>
-                                                <td scope="row" className="TransactionIndex deactive-table">
-                                                    {e.transaction_index}
+                                                <td className="Frozen deactive-table">
+                                                    {e.frozen}
                                                 </td>
-                                                <td className="From">
-                                                    {e.from_address}
-                                                </td>
-                                                <td className="To">
-                                                    {e.to_address}
-                                                </td>
-                                                <td className="Value">
+                                                <td className="Symbol">
                                                     {/* <TxData props={e.address} id={e.id} /> */}
-                                                    {e.value}
+                                                    {e.symbol}
                                                 </td>
-                                                <td scope="row" className="Gas deactive-table">
-                                                    {e.gas}
-                                                </td>
-                                                <td className="GasPrice">
+                                                <td className="Syncing deactive-table">
                                                     {/* <NftData props={e.address} id={e.id} /> */}
-                                                    {e.gas_price}
+                                                    {e.syncing}
                                                 </td>
-                                                <td scope="row" className="Input deactive-table">
-                                                    {e.input}
-                                                </td>
-                                                <td scope="row" className="ReceiptCumulativeGasUsed deactive-table">
-                                                    {e.receipt_cumulative_gas_used}
-                                                </td>
-                                                <td scope="row" className="ReceiptGasUsed deactive-table">
-                                                    {e.receipt_gas_used}
-                                                </td>
-                                                <td scope="row" className="ReceiptContractAddress deactive-table">
-                                                    {e.receipt_contract_address}
-                                                </td>
-                                                <td scope="row" className="ReceiptRoot deactive-table">
-                                                    {e.receipt_root}
-                                                </td>
-                                                <td scope="row" className="ReceiptStatus deactive-table">
-                                                    {e.receipt_status}
-                                                </td>
-                                                <td className="Time">
+                                                <td className="IsValid">
                                                     {/* <BalanceData props={e.address} id={e.id} /> */}
-                                                    {e.block_timestamp}
+                                                    {e.is_valid}
                                                 </td>
-                                                <td scope="row" className="BlockNumber deactive-table">
+                                                <td scope="row" className="Metadata deactive-table">
+                                                    {e.metadata}
+                                                </td>
+                                                <td className="Owner">
+                                                    {e.owner_of}
+                                                </td>
+                                                <td className="TokenId deactive-table">
+                                                    {e.token_id}
+                                                </td>
+                                                <td className="SyncedAt deactive-table">
+                                                    {/* <TxData props={e.address} id={e.id} /> */}
+                                                    {e.synced_at}
+                                                </td>
+                                                <td className="TokenUri">
+                                                    {/* <NftData props={e.address} id={e.id} /> */}
+                                                    {e.token_uri}
+                                                </td>
+                                                <td className="BlockNumber deactive-table">
+                                                    {/* <BalanceData props={e.address} id={e.id} /> */}
                                                     {e.block_number}
                                                 </td>
-                                                <td scope="row" className="BlockHash deactive-table">
-                                                    {e.block_hash}
+                                                <td className="ContractType">
+                                                    {e.contract_type}
+                                                </td>
+                                                <td className="TokenAddress deactive-table">
+                                                    {e.token_address}
+                                                </td>
+                                                <td className="BlockNumberMinted deactive-table">
+                                                    {/* <TxData props={e.address} id={e.id} /> */}
+                                                    {e.block_number_minted}
                                                 </td>
                                             </tr>
 
@@ -2210,4 +1978,4 @@ function AllTransactions() {
     )
 }
 
-export default AllTransactions
+export default AllNFTs

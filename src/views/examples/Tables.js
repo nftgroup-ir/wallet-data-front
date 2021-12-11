@@ -65,18 +65,18 @@ const Tables = (props) => {
   async function setFilters(e) {
     e.preventDefault()
     const xYz = await Array.from(Filters.current.querySelectorAll('input'))
-    const mmmm = xYz.map(e=>e.value)
+    const mmmm = xYz.map(e => e.value)
     console.log(mmmm)
     var filterObject = {
-      addressSort:mmmm[0],
+      addressSort: mmmm[0],
       addressBaseSort: "",
       emailSort: mmmm[1],
       emailBaseSort: "",
       pointSort: mmmm[2],
       pointBaseSort: "",
-      txSort: mmmm[3] ,
+      txSort: mmmm[3],
       txBaseSort: "",
-      nftSort: mmmm[4] ,
+      nftSort: mmmm[4],
       nftBaseSort: "",
       balanceSort: mmmm[5],
       balanceBaseSort: "",
@@ -99,7 +99,15 @@ const Tables = (props) => {
   }, [])
   const endRangeeeee = 200
   const startRangeeeee = 1
-
+  function handleColumn(e) {
+    console.log(e)
+    console.log(document.querySelector('#' + e))
+    var x = document.querySelector('#' + e)
+    x.classList.toggle('deactive-table-button')
+    document.querySelectorAll('.' + e).forEach((d) => {
+      d.classList.toggle('deactive-table')
+    })
+  }
 
   return (
     <>
@@ -116,6 +124,76 @@ const Tables = (props) => {
                     <h3 className="text-black mb-0">Wallets</h3>
                   </Col>
                   <Col className="text-right" xs="4">
+                    <UncontrolledDropdown>
+                      <DropdownToggle
+                        className="text-light"
+                        href="#pablo"
+                        role="button"
+                        size="sm"
+                        color=""
+                        onClick={e => e.preventDefault()}
+                      >
+                        Columns
+                      </DropdownToggle>
+                      <DropdownMenu className="dropdown-menu-arrow" left>
+                        <DropdownItem
+                          href="#pablo"
+                          id="Address"
+                          className="mmm"
+                          onClick={e => handleColumn("Address")}
+                        >
+                          Address
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          id="Email"
+                          className="mmm"
+                          onClick={e => handleColumn("Email")}
+                        >
+                          Email
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          id="Point"
+                          className="mmm"
+                          onClick={e => handleColumn("Point")}
+                        >
+                          Point
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          id="Transactions"
+                          className="mmm"
+                          onClick={e => handleColumn("Transactions")}
+                        >
+                          Transactions
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          id="NFT"
+                          className="mmm"
+                          onClick={e => handleColumn("NFT")}
+                        >
+                          NFT
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          id="Balance"
+                          className="mmm"
+                          onClick={e => handleColumn("Balance")}
+                        >
+                          Balance
+                        </DropdownItem>
+                      </DropdownMenu>
+                    </UncontrolledDropdown>
+                    <Button
+                      color="primary"
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                      size="sm"
+                    >
+                      Remove filters
+                    </Button>
                     <Button
                       color="primary"
                       href="#pablo"
@@ -139,7 +217,7 @@ const Tables = (props) => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">
+                    <th scope="col" className="Address">
                       Address
                       <UncontrolledDropdown>
                         <DropdownToggle
@@ -177,7 +255,7 @@ const Tables = (props) => {
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </th>
-                    <th scope="col">
+                    <th scope="col" className="Email">
                       Email
                       <UncontrolledDropdown>
                         <DropdownToggle
@@ -215,7 +293,7 @@ const Tables = (props) => {
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </th>
-                    <th scope="col">
+                    <th scope="col" className="Point">
                       Point
                       <UncontrolledDropdown>
                         <DropdownToggle
@@ -253,7 +331,7 @@ const Tables = (props) => {
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </th>
-                    <th scope="col">
+                    <th scope="col" className="Transactions">
                       Transactions
                       <UncontrolledDropdown>
                         <DropdownToggle
@@ -291,7 +369,7 @@ const Tables = (props) => {
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </th>
-                    <th scope="col">
+                    <th scope="col" className="NFT">
                       NFT
                       <UncontrolledDropdown>
                         <DropdownToggle
@@ -330,7 +408,7 @@ const Tables = (props) => {
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </th>
-                    <th scope="col">
+                    <th scope="col" className="Balance">
                       Balance
                       <UncontrolledDropdown>
                         <DropdownToggle
@@ -374,7 +452,7 @@ const Tables = (props) => {
                 </thead>
                 <tbody>
                   <tr ref={Filters}>
-                    <td>
+                    <td className="Address">
                       <InputGroup>
                         <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend">
@@ -438,7 +516,7 @@ const Tables = (props) => {
 
                       </InputGroup>
                     </td>
-                    <td>
+                    <td className="Email">
                       <InputGroup>
                         <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend">
@@ -502,7 +580,7 @@ const Tables = (props) => {
 
                       </InputGroup>
                     </td>
-                    <td>
+                    <td className="Point">
                       <InputGroup>
                         <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend">
@@ -566,7 +644,7 @@ const Tables = (props) => {
 
                       </InputGroup>
                     </td>
-                    <td>
+                    <td className="Transactions">
                       <InputGroup>
                         <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend" >
@@ -630,7 +708,7 @@ const Tables = (props) => {
 
                       </InputGroup>
                     </td>
-                    <td>
+                    <td className="NFT">
                       <InputGroup>
                         <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend">
@@ -694,7 +772,7 @@ const Tables = (props) => {
 
                       </InputGroup>
                     </td>
-                    <td>
+                    <td className="Balance">
                       <InputGroup>
                         <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend">
@@ -762,22 +840,22 @@ const Tables = (props) => {
                   {
                     csvItems.map(e => (
                       <tr>
-                        <td scope="row">
+                        <td scope="row" className="Address">
                           {e.address}
                         </td>
-                        <td>
+                        <td className="Email"> 
                           {e.name}
                         </td>
-                        <td>
+                        <td className="Point">
                           {e.point}
                         </td>
-                        <td>
+                        <td className="Transactions">
                           <TxData props={e.address} id={e.id} />
                         </td>
-                        <td>
+                        <td className="NFT">
                           <NftData props={e.address} id={e.id} />
                         </td>
-                        <td>
+                        <td className="Balance">
                           <BalanceData props={e.address} id={e.id} />
                         </td>
                       </tr>
