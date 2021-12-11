@@ -25,6 +25,7 @@ import WinnerList from "views/examples/WinnerList";
 import WalletData from "views/examples/WalletData"
 import AllTransactions from "views/examples/AllTransactions";
 import AllNFTs from "views/examples/AllNFTs";
+import Scrapper from "views/examples/Scrapper";
 
 var routes = [
   {
@@ -74,6 +75,13 @@ var routes = [
     name: "NFTs",
     icon: "ni ni-money-coins",
     component: AllNFTs,
+    layout: "/admin",
+  },
+  {
+    path: "/Scrapper",
+    name: "Scrapper",
+    icon: "ni ni-money-coins",
+    component: Scrapper,
     layout: "/admin",
   },
 ];
