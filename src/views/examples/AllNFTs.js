@@ -124,10 +124,21 @@ function AllNFTs() {
     }
 
     useEffect(() => {
-        function setdata(e) {
-            setcsvItems(e)
+        async function getData() {
+            await fetch('http://65.108.59.117:7001/api/csv/transaction/', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token ' + sessionStorage.getItem('token')
+                },
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setcsvItems(data)
+                    console.log(data)
+                })
         }
-        setdata(data)
+        getData()
     }, [])
     const endRangeeeee = 200
     const startRangeeeee = 1
@@ -1870,7 +1881,7 @@ function AllNFTs() {
 
                                     </tr>
                                     {
-                                        csvItems.map(e => (
+                                        data.map(e => (
                                             <tr>
                                                 <td scope="row" className="Name">
                                                     {e.name}

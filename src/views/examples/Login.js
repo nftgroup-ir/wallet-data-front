@@ -78,7 +78,7 @@ const Login = () => {
         if (result.key) {
           sessionStorage.clear();
           sessionStorage.setItem('token', result.key)
-          history.push('/admin/addCSV')
+          history.push('/admin/walletdata')
         } else {
           console.log(result)
         }
