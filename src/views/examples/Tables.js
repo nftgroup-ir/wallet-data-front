@@ -58,55 +58,81 @@ import BalanceData from "./BalanceData";
 const Tables = (props) => {
   const Moralis = require('moralis');
   const [Arry, setArry] = useState([])
+  const [NFTSortBy, setNFTSort] = useState("none")
+  const [txSortBy, settxSort] = useState("none")
+  const [balanceSortBy, setbalanceSort] = useState("none")
+  const [NFTOperator, setNFTOperator] = useState("eq")
+  const [txOperator, settxOperator] = useState("eq")
+  const [balanceOperator, setbalanceOperator] = useState("eq")
   const [csvItems, setcsvItems] = useState([""])
 
   const Filters = useRef()
+  
 
   async function setFilters(e) {
     e.preventDefault()
-    const xYz = await Array.from(Filters.current.querySelectorAll('input'))
-    const mmmm = xYz.map(e => e.value)
-    console.log(mmmm)
+    const AddressInput = document.getElementById("addressInput").value
+    const NFTCount = document.getElementById("NFTInput").value
+    const TxCount = document.getElementById("txInput").value
+    const BalanceValue = document.getElementById("balanceInput").value
     var filterObject = {
-      addressSort: mmmm[0],
-      addressBaseSort: "",
-      emailSort: mmmm[1],
-      emailBaseSort: "",
-      pointSort: mmmm[2],
-      pointBaseSort: "",
-      txSort: mmmm[3],
-      txBaseSort: "",
-      nftSort: mmmm[4],
-      nftBaseSort: "",
-      balanceSort: mmmm[5],
-      balanceBaseSort: "",
+      AddressInput: AddressInput,
+      NFTSortBy: NFTSortBy,
+      NFTCount: NFTCount,
+      NFTOperator: NFTOperator,
+      TxSortBy: txSortBy,
+      TxCount: TxCount,
+      TxOperator: txOperator,
+      BalanceSortBy: balanceSortBy,
+      BalanceValue: BalanceValue,
+      BalanceOperator: balanceOperator,
     }
-    fetch(`http://65.108.59.117:7001/api/csv?addressSort=${filterObject.addressSort}&addressBaseSort=${filterObject.addressBaseSort}&emailSort=${filterObject.emailSort}&emailBaseSort=${filterObject.emailBaseSort}&pointSort=${filterObject.pointSort}&pointBaseSort=${filterObject.pointBaseSort}&txSort=${filterObject.txSort}&txBaseSort=${filterObject.txBaseSort}&nftSort=${filterObject.nftSort}&nftBaseSort=${filterObject.nftBaseSort}&balanceSort=${filterObject.balanceSort}&balanceBaseSort=${filterObject.balanceBaseSort}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => res.json())
-      .then(data => console.log(data))
+    // fetch(`http://65.108.59.117:7001/api/csv?AddressInput=${filterObject.AddressInput}&NFTSortBy=${filterObject.NFTSortBy}&NFTCount=${filterObject.NFTCount}&NFTOperator=${filterObject.NFTOperator}&TxSortBy=${filterObject.TxSortBy}&TxCount=${filterObject.TxCount}&TxOperator=${filterObject.TxOperator}&BalanceSortBy=${filterObject.BalanceSortBy}&BalanceValue=${filterObject.BalanceValue}&BalanceOperator=${filterObject.BalanceOperator}`, {
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+    //   .then(res => res.json())
+    //   .then(data => console.log(data))
+    console.log(filterObject)
   }
 
   useEffect(() => {
-    async function getData() {
-        await fetch('http://65.108.59.117:7001/api/csv/', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + sessionStorage.getItem('token')
-            },
-        })
-            .then(res => res.json())
-            .then(data => {
-                setcsvItems(data)
-                console.log(data)
-            })
-    }
-    getData()
+    // async function getData() {
+    //     await fetch('http://65.108.59.117:7001/api/csv/', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': 'Token ' + sessionStorage.getItem('token')
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setcsvItems(data)
+    //             console.log(data)
+    //         })
+    // }
+    setcsvItems([
+      {
+        address:"0xf6604cfa665937ddc0bf3569cf692ed0eef563d8" ,
+        transactions: 10,
+        NFT: 10,
+        balance:100
+      } , 
+      {
+        address:"0xf6604cfa665937ddc0bf3569cf692ed0eef563d8" ,
+        transactions: 15,
+        NFT: 100,
+        balance:1010
+      } ,
+      {
+        address:"0xf6604cfa665937ddc0bf3569cf692ed0eef563d8" ,
+        transactions: 101,
+        NFT: 70,
+        balance: 5000
+      } ,
+    ])
 
 }, []);
   const endRangeeeee = 200
@@ -156,22 +182,22 @@ const Tables = (props) => {
                         >
                           Address
                         </DropdownItem>
-                        <DropdownItem
+                        {/* <DropdownItem
                           href="#pablo"
                           id="Email"
                           className="mmm"
                           onClick={e => handleColumn("Email")}
                         >
                           Email
-                        </DropdownItem>
-                        <DropdownItem
+                        </DropdownItem> */}
+                        {/* <DropdownItem
                           href="#pablo"
                           id="Point"
                           className="mmm"
                           onClick={e => handleColumn("Point")}
                         >
                           Point
-                        </DropdownItem>
+                        </DropdownItem> */}
                         <DropdownItem
                           href="#pablo"
                           id="Transactions"
@@ -231,7 +257,7 @@ const Tables = (props) => {
                   <tr>
                     <th scope="col" className="Address">
                       Address
-                      <UncontrolledDropdown>
+                      {/* <UncontrolledDropdown>
                         <DropdownToggle
                           className="btn-icon-only text-light"
                           href="#pablo"
@@ -265,9 +291,9 @@ const Tables = (props) => {
                             Unsort
                           </DropdownItem>
                         </DropdownMenu>
-                      </UncontrolledDropdown>
+                      </UncontrolledDropdown> */}
                     </th>
-                    <th scope="col" className="Email">
+                    {/* <th scope="col" className="Email">
                       Email
                       <UncontrolledDropdown>
                         <DropdownToggle
@@ -342,7 +368,7 @@ const Tables = (props) => {
                           </DropdownItem>
                         </DropdownMenu>
                       </UncontrolledDropdown>
-                    </th>
+                    </th> */}
                     <th scope="col" className="Transactions">
                       Transactions
                       <UncontrolledDropdown>
@@ -362,19 +388,34 @@ const Tables = (props) => {
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={e => {
+                              e.preventDefault()
+                              settxSort("ASC")
+                              setNFTSort("none")
+                              setbalanceSort("none")
+                            }}
                           >
                             Ascending
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={e => {
+                              e.preventDefault()
+                              settxSort("DESC")
+                              setNFTSort("none")
+                              setbalanceSort("none")
+                            }}
                           >
                             Descending
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={e => {
+                              e.preventDefault()
+                              settxSort("none")
+                              setNFTSort("none")
+                              setbalanceSort("none")
+                            }}
                           >
                             Unsort
                           </DropdownItem>
@@ -400,19 +441,34 @@ const Tables = (props) => {
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={e => {
+                              e.preventDefault()
+                              settxSort("none")
+                              setNFTSort("ASC")
+                              setbalanceSort("none")
+                            }}
                           >
                             Ascending
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={e => {
+                              e.preventDefault()
+                              settxSort("none")
+                              setNFTSort("DESC")
+                              setbalanceSort("none")
+                            }}
                           >
                             Descending
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={e => {
+                              e.preventDefault()
+                              settxSort("none")
+                              setNFTSort("none")
+                              setbalanceSort("none")
+                            }}
                           >
                             Unsort
                           </DropdownItem>
@@ -439,19 +495,34 @@ const Tables = (props) => {
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={e => {
+                              e.preventDefault()
+                              settxSort("none")
+                              setNFTSort("none")
+                              setbalanceSort("ASC")
+                            }}
                           >
                             Ascending
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={e => {
+                              e.preventDefault()
+                              settxSort("none")
+                              setNFTSort("none")
+                              setbalanceSort("DESC")
+                            }}
                           >
                             Descending
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={e => {
+                              e.preventDefault()
+                              settxSort("none")
+                              setNFTSort("none")
+                              setbalanceSort("none")
+                            }}
                           >
                             Unsort
                           </DropdownItem>
@@ -466,10 +537,10 @@ const Tables = (props) => {
                   <tr ref={Filters}>
                     <td className="Address">
                       <InputGroup>
-                        <Input bsSize="sm" />
-                        <InputGroupAddon addonType="prepend">
+                        <Input bsSize="sm" id="addressInput" />
+                        {/* <InputGroupAddon addonType="prepend">
                           <InputGroupText >
-                            {/* <i className="ni ni-lock-circle-open" /> */}
+                            <i className="ni ni-lock-circle-open" />
                             <UncontrolledDropdown split>
                               <DropdownToggle
                                 className="btn-icon-only text-light"
@@ -524,16 +595,16 @@ const Tables = (props) => {
                               </DropdownMenu>
                             </UncontrolledDropdown>
                           </InputGroupText>
-                        </InputGroupAddon>
+                        </InputGroupAddon> */}
 
                       </InputGroup>
                     </td>
-                    <td className="Email">
+                    {/* <td className="Email">
                       <InputGroup>
                         <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
-                            {/* <i className="ni ni-lock-circle-open" /> */}
+                            <i className="ni ni-lock-circle-open" />
                             <UncontrolledDropdown split>
                               <DropdownToggle
                                 className="btn-icon-only text-light"
@@ -597,7 +668,7 @@ const Tables = (props) => {
                         <Input bsSize="sm" />
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
-                            {/* <i className="ni ni-lock-circle-open" /> */}
+                            <i className="ni ni-lock-circle-open" />
                             <UncontrolledDropdown split>
                               <DropdownToggle
                                 className="btn-icon-only text-light"
@@ -655,10 +726,10 @@ const Tables = (props) => {
                         </InputGroupAddon>
 
                       </InputGroup>
-                    </td>
+                    </td> */}
                     <td className="Transactions">
                       <InputGroup>
-                        <Input bsSize="sm" />
+                        <Input bsSize="sm" id="txInput"/>
                         <InputGroupAddon addonType="prepend" >
                           <InputGroupText>
                             {/* <i className="ni ni-lock-circle-open" /> */}
@@ -679,40 +750,49 @@ const Tables = (props) => {
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
-                                  onClick={e => e.preventDefault()}
+                                  onClick={e => {
+                                    e.preventDefault()
+                                    settxOperator("eq")
+                                  }}
                                 >
                                   Equals
                                 </DropdownItem>
-                                <DropdownItem
+                                {/* <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
                                   Greater then And Equals
-                                </DropdownItem>
+                                </DropdownItem> */}
                                 <DropdownItem
                                   href="#pablo"
-                                  onClick={e => e.preventDefault()}
+                                  onClick={e => {
+                                    e.preventDefault()
+                                    settxOperator("gt")
+                                  }}
                                 >
                                   Greater then
                                 </DropdownItem>
-                                <DropdownItem
+                                {/* <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
                                   Smaller then and Equals
-                                </DropdownItem>
+                                </DropdownItem> */}
                                 <DropdownItem
                                   href="#pablo"
-                                  onClick={e => e.preventDefault()}
+                                  onClick={e => {
+                                    e.preventDefault()
+                                    settxOperator("lt")
+                                  }}
                                 >
                                   Smaller then
                                 </DropdownItem>
-                                <DropdownItem
+                                {/* <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
                                   Dismiss Filter
-                                </DropdownItem>
+                                </DropdownItem> */}
                               </DropdownMenu>
                             </UncontrolledDropdown>
                           </InputGroupText>
@@ -722,7 +802,7 @@ const Tables = (props) => {
                     </td>
                     <td className="NFT">
                       <InputGroup>
-                        <Input bsSize="sm" />
+                        <Input bsSize="sm" id="NFTInput"/>
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             {/* <i className="ni ni-lock-circle-open" /> */}
@@ -743,40 +823,49 @@ const Tables = (props) => {
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
-                                  onClick={e => e.preventDefault()}
+                                  onClick={e => {
+                                    e.preventDefault()
+                                    setNFTOperator("eq")
+                                  }}
                                 >
                                   Equals
                                 </DropdownItem>
-                                <DropdownItem
+                                {/* <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
                                   Greater then And Equals
-                                </DropdownItem>
+                                </DropdownItem> */}
                                 <DropdownItem
                                   href="#pablo"
-                                  onClick={e => e.preventDefault()}
+                                  onClick={e => {
+                                    e.preventDefault()
+                                    setNFTOperator("gt")
+                                  }}
                                 >
                                   Greater then
                                 </DropdownItem>
-                                <DropdownItem
+                                {/* <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
                                   Smaller then and Equals
-                                </DropdownItem>
+                                </DropdownItem> */}
                                 <DropdownItem
                                   href="#pablo"
-                                  onClick={e => e.preventDefault()}
+                                  onClick={e => {
+                                    e.preventDefault()
+                                    setNFTOperator("lt")
+                                  }}
                                 >
                                   Smaller then
                                 </DropdownItem>
-                                <DropdownItem
+                                {/* <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
                                   Dismiss Filter
-                                </DropdownItem>
+                                </DropdownItem> */}
                               </DropdownMenu>
                             </UncontrolledDropdown>
                           </InputGroupText>
@@ -786,7 +875,7 @@ const Tables = (props) => {
                     </td>
                     <td className="Balance">
                       <InputGroup>
-                        <Input bsSize="sm" />
+                        <Input bsSize="sm" id="balanceInput"/>
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             {/* <i className="ni ni-lock-circle-open" /> */}
@@ -807,40 +896,49 @@ const Tables = (props) => {
                                 </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
-                                  onClick={e => e.preventDefault()}
+                                  onClick={e => {
+                                    e.preventDefault()
+                                    setbalanceOperator("eq")
+                                  }}
                                 >
                                   Equals
                                 </DropdownItem>
-                                <DropdownItem
+                                {/* <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
                                   Greater then And Equals
-                                </DropdownItem>
+                                </DropdownItem> */}
                                 <DropdownItem
                                   href="#pablo"
-                                  onClick={e => e.preventDefault()}
+                                  onClick={e =>{
+                                    e.preventDefault()
+                                    setbalanceOperator("gt")
+                                  }}
                                 >
                                   Greater then
                                 </DropdownItem>
-                                <DropdownItem
+                                {/* <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
                                   Smaller then and Equals
-                                </DropdownItem>
+                                </DropdownItem> */}
                                 <DropdownItem
                                   href="#pablo"
-                                  onClick={e => e.preventDefault()}
+                                  onClick={e => {
+                                    e.preventDefault()
+                                    setbalanceOperator("lt")
+                                  }}
                                 >
                                   Smaller then
                                 </DropdownItem>
-                                <DropdownItem
+                                {/* <DropdownItem
                                   href="#pablo"
                                   onClick={e => e.preventDefault()}
                                 >
                                   Dismiss Filter
-                                </DropdownItem>
+                                </DropdownItem> */}
                               </DropdownMenu>
                             </UncontrolledDropdown>
                           </InputGroupText>
@@ -855,20 +953,23 @@ const Tables = (props) => {
                         <td scope="row" className="Address">
                           {e.address}
                         </td>
-                        <td className="Email"> 
+                        {/* <td className="Email"> 
                           {e.name}
                         </td>
                         <td className="Point">
                           {e.point}
-                        </td>
+                        </td> */}
                         <td className="Transactions">
-                          <TxData props={e.address} id={e.id} />
+                          {/* <TxData props={e.address} id={e.id} /> */}
+                          {e.transactions}
                         </td>
                         <td className="NFT">
-                          <NftData props={e.address} id={e.id} />
+                          {/* <NftData props={e.address} id={e.id} /> */}
+                          {e.NFT}
                         </td>
                         <td className="Balance">
-                          <BalanceData props={e.address} id={e.id} />
+                          {/* <BalanceData props={e.address} id={e.id} /> */}
+                          {e.balance  }
                         </td>
                       </tr>
 
