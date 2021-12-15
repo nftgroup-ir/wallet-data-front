@@ -64,10 +64,12 @@ const Tables = (props) => {
   const [NFTOperator, setNFTOperator] = useState("eq")
   const [txOperator, settxOperator] = useState("eq")
   const [balanceOperator, setbalanceOperator] = useState("eq")
-  const [csvItems, setcsvItems] = useState([""])
-
+  const [csvItems, setcsvItems] = useState([])
+  const [nextPageUrl, setnextPage] = useState("")
+  const [previousPageUrl, setpreviousPage] = useState("")
+  const [allData, setallData] = useState(1)
   const Filters = useRef()
-  
+
 
   async function setFilters(e) {
     e.preventDefault()
@@ -87,56 +89,83 @@ const Tables = (props) => {
       BalanceValue: BalanceValue,
       BalanceOperator: balanceOperator,
     }
-    // fetch(`http://65.108.59.117:7001/api/csv?AddressInput=${filterObject.AddressInput}&NFTSortBy=${filterObject.NFTSortBy}&NFTCount=${filterObject.NFTCount}&NFTOperator=${filterObject.NFTOperator}&TxSortBy=${filterObject.TxSortBy}&TxCount=${filterObject.TxCount}&TxOperator=${filterObject.TxOperator}&BalanceSortBy=${filterObject.BalanceSortBy}&BalanceValue=${filterObject.BalanceValue}&BalanceOperator=${filterObject.BalanceOperator}`, {
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
-    //   .then(res => res.json())
-    //   .then(data => console.log(data))
+    fetch(`http://65.108.59.117:7001/api/csv?AddressInput=${filterObject.AddressInput}&NFTSortBy=${filterObject.NFTSortBy}&NFTCount=${filterObject.NFTCount}&NFTOperator=${filterObject.NFTOperator}&TxSortBy=${filterObject.TxSortBy}&TxCount=${filterObject.TxCount}&TxOperator=${filterObject.TxOperator}&BalanceSortBy=${filterObject.BalanceSortBy}&BalanceValue=${filterObject.BalanceValue}&BalanceOperator=${filterObject.BalanceOperator}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        setcsvItems(data.results)
+        setnextPage(data.next)
+        setpreviousPage(data.previous)
+        setallData(data.count)
+      })
     console.log(filterObject)
   }
 
   useEffect(() => {
-    // async function getData() {
-    //     await fetch('http://65.108.59.117:7001/api/csv/', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': 'Token ' + sessionStorage.getItem('token')
-    //         },
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setcsvItems(data)
-    //             console.log(data)
-    //         })
-    // }
-    setcsvItems([
-      {
-        address:"0xf6604cfa665937ddc0bf3569cf692ed0eef563d8" ,
-        transactions: 10,
-        NFT: 10,
-        balance:100
-      } , 
-      {
-        address:"0xf6604cfa665937ddc0bf3569cf692ed0eef563d8" ,
-        transactions: 15,
-        NFT: 100,
-        balance:1010
-      } ,
-      {
-        address:"0xf6604cfa665937ddc0bf3569cf692ed0eef563d8" ,
-        transactions: 101,
-        NFT: 70,
-        balance: 5000
-      } ,
-    ])
+    async function getData() {
+      await fetch('http://65.108.59.117:7001/api/csv/?NFTCount=&TxCount=&BalanceValue=&BalanceSortBy=none&NFTSortBy=none&TxSortBy=none', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Token ' + sessionStorage.getItem('token')
+        },
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          setcsvItems(data.results)
+          setnextPage(data.next)
+          setpreviousPage(data.previous)
+          setallData(data.count)
+        })
+    }
+    getData()
+    console.log(csvItems)
+  }, []);
 
-}, []);
   const endRangeeeee = 200
   const startRangeeeee = 1
+  async function previousPage(e) {
+    console.log(previousPageUrl)
+    e.preventDefault()
+    await fetch(`${previousPageUrl}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + sessionStorage.getItem('token')
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setcsvItems(data.results)
+        setnextPage(data.next)
+        setpreviousPage(data.previous)
+        console.log(data)
+      })
+  }
+  async function nextPage(e) {
+    console.log(nextPageUrl)
+    e.preventDefault()
+    await fetch(`${nextPageUrl}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + sessionStorage.getItem('token')
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setcsvItems(data.results)
+        setnextPage(data.next)
+        setpreviousPage(data.previous)
+        console.log(data)
+      })
+  }
+
   function handleColumn(e) {
     console.log(e)
     console.log(document.querySelector('#' + e))
@@ -729,7 +758,7 @@ const Tables = (props) => {
                     </td> */}
                     <td className="Transactions">
                       <InputGroup>
-                        <Input bsSize="sm" id="txInput"/>
+                        <Input bsSize="sm" id="txInput" />
                         <InputGroupAddon addonType="prepend" >
                           <InputGroupText>
                             {/* <i className="ni ni-lock-circle-open" /> */}
@@ -802,7 +831,7 @@ const Tables = (props) => {
                     </td>
                     <td className="NFT">
                       <InputGroup>
-                        <Input bsSize="sm" id="NFTInput"/>
+                        <Input bsSize="sm" id="NFTInput" />
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             {/* <i className="ni ni-lock-circle-open" /> */}
@@ -875,7 +904,7 @@ const Tables = (props) => {
                     </td>
                     <td className="Balance">
                       <InputGroup>
-                        <Input bsSize="sm" id="balanceInput"/>
+                        <Input bsSize="sm" id="balanceInput" />
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             {/* <i className="ni ni-lock-circle-open" /> */}
@@ -911,7 +940,7 @@ const Tables = (props) => {
                                 </DropdownItem> */}
                                 <DropdownItem
                                   href="#pablo"
-                                  onClick={e =>{
+                                  onClick={e => {
                                     e.preventDefault()
                                     setbalanceOperator("gt")
                                   }}
@@ -961,15 +990,15 @@ const Tables = (props) => {
                         </td> */}
                         <td className="Transactions">
                           {/* <TxData props={e.address} id={e.id} /> */}
-                          {e.transactions}
+                          {e.total_Txs}
                         </td>
                         <td className="NFT">
                           {/* <NftData props={e.address} id={e.id} /> */}
-                          {e.NFT}
+                          {e.total_nfts}
                         </td>
                         <td className="Balance">
                           {/* <BalanceData props={e.address} id={e.id} /> */}
-                          {e.balance  }
+                          {e.balance}
                         </td>
                       </tr>
 
@@ -981,39 +1010,48 @@ const Tables = (props) => {
               </Table>
               <CardFooter>
                 <Row>
+
                   <FormGroup row>
-                    <Label
-                      for="perPage"
-                      sm={8}
-                    >
-                      Items per page:
-                    </Label>
-                    <Col sm="2">
-                      <Input id="perPage" type="select" className="custom-select" >
-                        <option>20</option>
-                        <option>50</option>
-                        <option>100</option>
-                      </Input>
-                    </Col>
-                  </FormGroup>
-                  <FormGroup row>
-                    <Label
-                      for="pageNumber"
-                      sm={6}
-                      className="form-control-label"
-                    >
-                      Page:
-                    </Label>
-                    <Col sm="2">
-                      <Input id="pageNumber" type="select" className="custom-select">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                      </Input>
-                    </Col>
+                    <Pagination>
+                      <PaginationItem>
+                        <PaginationLink
+                          aria-label="Previous"
+                          href="#pablo"
+                          onClick={e => previousPage(e)}
+                        >
+                          <i className="fa fa-angle-left" />
+                          <span className="sr-only">Previous</span>
+                        </PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
+                          1
+                        </PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
+                          2
+                        </PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
+                          3
+                        </PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink
+                          aria-label="Next"
+                          href="#pablo"
+                          onClick={e => nextPage(e)}
+                        >
+                          <i className="fa fa-angle-right" />
+                          <span className="sr-only">Next</span>
+                        </PaginationLink>
+                      </PaginationItem>
+                    </Pagination>
                   </FormGroup>
                   <Col sm="1" >
-                    <p>{`${startRangeeeee} - ${endRangeeeee}`}</p>
+                    <p>{`${startRangeeeee} - ${allData}`}</p>
                   </Col>
                 </Row>
               </CardFooter>

@@ -7,7 +7,6 @@ function WalletData() {
     
     return (
         <div>
-            <Header />
             <Tables/>
         </div>
     )

@@ -48,6 +48,9 @@ function AllNFTs() {
     const [TokenIdOperator, settokenIdOperator] = useState("eq")
     const [BlockNumberMintedOperator, setblockNumberMintedOperator] = useState("eq")
     const [AmountOperator, setamountOperator] = useState("eq")
+    const [nextPageUrl, setnextPage] = useState("")
+    const [previousPageUrl, setpreviousPage] = useState("")
+    const [allData, setallData] = useState(1)
     const data = [
         {
             name: "SecurityFundBasket",
@@ -152,13 +155,13 @@ function AllNFTs() {
         //     }
         // })
         //     .then(res => res.json())
-        //     .then(data => console.log(data))
+        //     .then(data => console.log(data.results))
         console.log(filterObject)
     }
 
     useEffect(() => {
         async function getData() {
-            await fetch('http://65.108.59.117:7001/api/csv/transaction/', {
+            await fetch('http://65.108.59.117:7001/api/csv/nft/', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -167,7 +170,10 @@ function AllNFTs() {
             })
                 .then(res => res.json())
                 .then(data => {
-                    setcsvItems(data)
+                    setcsvItems(data.results)
+                    setnextPage(data.next)
+                    setpreviousPage(data.previous)
+                    setallData(data.count)
                     console.log(data)
                 })
         }
@@ -175,6 +181,43 @@ function AllNFTs() {
     }, [])
     const endRangeeeee = 200
     const startRangeeeee = 1
+
+    async function previousPage(e) {
+        e.preventDefault()
+        await fetch(`${previousPageUrl}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + sessionStorage.getItem('token')
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                setcsvItems(data.results)
+                setnextPage(data.next)
+                setpreviousPage(data.previous)
+                setallData(data.count)
+                console.log(data)
+            })
+    }
+    async function nextPage(e) {
+        e.preventDefault()
+        await fetch(`${nextPageUrl}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + sessionStorage.getItem('token')
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                setcsvItems(data.results)
+                setnextPage(data.next)
+                setpreviousPage(data.previous)
+                setallData(data.count)
+                console.log(data)
+            })
+    }
 
     function handleColumn(e) {
         console.log(e)
@@ -428,7 +471,7 @@ function AllNFTs() {
                                                     </DropdownItem>
                                                     <DropdownItem
                                                         href="#pablo"
-                                                        onClick={e =>{
+                                                        onClick={e => {
                                                             e.preventDefault()
                                                             settokenIdSortBy("none")
                                                             setblockNumberMintedSortBy("none")
@@ -511,7 +554,7 @@ function AllNFTs() {
                                         </th>
                                         <th scope="col" className="Symbol">
                                             Symbol
-                                            
+
                                         </th>
                                         <th scope="col" className="Syncing deactive-table">
                                             Syncing
@@ -646,7 +689,7 @@ function AllNFTs() {
                                         </th>
                                         <th scope="col" className="Metadata deactive-table">
                                             Metadata
-                                            
+
                                         </th>
                                         <th scope="col" className="Owner">
                                             Owner
@@ -899,12 +942,12 @@ function AllNFTs() {
                                     <tr ref={Filters}>
                                         <td className="Name">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="NameValue"/>
+                                                <Input bsSize="sm" id="NameValue" />
                                             </InputGroup>
                                         </td>
                                         <td className="Amount">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="AmountValue"/>
+                                                <Input bsSize="sm" id="AmountValue" />
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
@@ -931,7 +974,7 @@ function AllNFTs() {
                                                                     }}
                                                                 >
                                                                     Equals
-                                                                </DropdownItem>                                                               
+                                                                </DropdownItem>
                                                                 <DropdownItem
                                                                     href="#pablo"
                                                                     onClick={e => {
@@ -959,37 +1002,37 @@ function AllNFTs() {
                                         </td>
                                         <td className="Frozen deactive-table">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="FrozenValue"/>
+                                                <Input bsSize="sm" id="FrozenValue" />
                                             </InputGroup>
                                         </td>
                                         <td className="Symbol">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="SymbolValue"/>
+                                                <Input bsSize="sm" id="SymbolValue" />
                                             </InputGroup>
                                         </td>
                                         <td className="Syncing deactive-table">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="SyncingValue"/>
+                                                <Input bsSize="sm" id="SyncingValue" />
                                             </InputGroup>
                                         </td>
                                         <td className="IsValid">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="IsValidValue"/>
+                                                <Input bsSize="sm" id="IsValidValue" />
                                             </InputGroup>
                                         </td>
                                         <td className="Metadata deactive-table">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="MetadataValue"/>
+                                                <Input bsSize="sm" id="MetadataValue" />
                                             </InputGroup>
                                         </td>
                                         <td className="Owner">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="OwnerOfValue"/>
+                                                <Input bsSize="sm" id="OwnerOfValue" />
                                             </InputGroup>
                                         </td>
                                         <td className="TokenId deactive-table">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="TokenIdValue"/>
+                                                <Input bsSize="sm" id="TokenIdValue" />
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
@@ -1044,32 +1087,32 @@ function AllNFTs() {
                                         </td>
                                         <td className="SyncedAt deactive-table">
                                             <InputGroup>
-                                                <Input bsSize="sm"/>
+                                                <Input bsSize="sm" />
                                             </InputGroup>
                                         </td>
                                         <td className="TokenUri">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="TokenUriValue"/>
+                                                <Input bsSize="sm" id="TokenUriValue" />
                                             </InputGroup>
                                         </td>
                                         <td className="BlockNumber deactive-table">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="BlockNumberValue"/>
+                                                <Input bsSize="sm" id="BlockNumberValue" />
                                             </InputGroup>
                                         </td>
                                         <td className="ContractType">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="ContractTypeValue"/>
+                                                <Input bsSize="sm" id="ContractTypeValue" />
                                             </InputGroup>
                                         </td>
                                         <td className="TokenAddress deactive-table">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="TokenAddressValue"/>
+                                                <Input bsSize="sm" id="TokenAddressValue" />
                                             </InputGroup>
                                         </td>
                                         <td className="BlockNumberMinted deactive-table">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="BlockNumberMintedValue"/>
+                                                <Input bsSize="sm" id="BlockNumberMintedValue" />
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
@@ -1125,7 +1168,7 @@ function AllNFTs() {
 
                                     </tr>
                                     {
-                                        data.map(e => (
+                                        csvItems.map(e => (
                                             <tr>
                                                 <td scope="row" className="Name">
                                                     {e.name}
@@ -1183,38 +1226,46 @@ function AllNFTs() {
                             <CardFooter>
                                 <Row>
                                     <FormGroup row>
-                                        <Label
-                                            for="perPage"
-                                            sm={8}
-                                        >
-                                            Items per page:
-                                        </Label>
-                                        <Col sm="2">
-                                            <Input id="perPage" type="select" className="custom-select" >
-                                                <option>20</option>
-                                                <option>50</option>
-                                                <option>100</option>
-                                            </Input>
-                                        </Col>
-                                    </FormGroup>
-                                    <FormGroup row>
-                                        <Label
-                                            for="pageNumber"
-                                            sm={6}
-                                            className="form-control-label"
-                                        >
-                                            Page:
-                                        </Label>
-                                        <Col sm="2">
-                                            <Input id="pageNumber" type="select" className="custom-select">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                            </Input>
-                                        </Col>
+                                        <Pagination>
+                                            <PaginationItem>
+                                                <PaginationLink
+                                                    aria-label="Previous"
+                                                    href="#pablo"
+                                                    onClick={e => previousPage(e)}
+                                                >
+                                                    <i className="fa fa-angle-left" />
+                                                    <span className="sr-only">Previous</span>
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                            <PaginationItem>
+                                                <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
+                                                    1
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                            <PaginationItem>
+                                                <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
+                                                    2
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                            <PaginationItem>
+                                                <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
+                                                    3
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                            <PaginationItem>
+                                                <PaginationLink
+                                                    aria-label="Next"
+                                                    href="#pablo"
+                                                    onClick={e => nextPage(e)}
+                                                >
+                                                    <i className="fa fa-angle-right" />
+                                                    <span className="sr-only">Next</span>
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                        </Pagination>
                                     </FormGroup>
                                     <Col sm="1" >
-                                        <p>{`${startRangeeeee} - ${endRangeeeee}`}</p>
+                                        <p>{`${startRangeeeee} - ${allData}`}</p>
                                     </Col>
                                 </Row>
                             </CardFooter>

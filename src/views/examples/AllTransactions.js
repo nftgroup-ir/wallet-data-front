@@ -50,6 +50,9 @@ function AllTransactions() {
     const [GasPriceOperator, setGasPriceOperator] = useState("eq")
     const [RCGUOperator, setRCGUOperator] = useState("eq")
     const [RGUOperator, setRGUOperator] = useState("eq")
+    const [nextPageUrl, setnextPage] = useState("")
+    const [previousPageUrl, setpreviousPage] = useState("")
+    const [allData, setallData] = useState(1)
     const data = [
         {
             id: 201,
@@ -174,7 +177,7 @@ function AllTransactions() {
         //     }
         // })
         //     .then(res => res.json())
-        //     .then(data => console.log(data))
+        //     .then(data => console.log(data.results))
         console.log(filterObject)
     }
 
@@ -189,7 +192,10 @@ function AllTransactions() {
             })
                 .then(res => res.json())
                 .then(data => {
-                    setcsvItems(data)
+                    setcsvItems(data.results)
+                    setnextPage(data.next)
+                    setpreviousPage(data.previous)
+                    setallData(data.count)
                     console.log(data)
                 })
         }
@@ -198,6 +204,42 @@ function AllTransactions() {
     }, [])
     const endRangeeeee = 200
     const startRangeeeee = 1
+    async function previousPage(e) {
+        e.preventDefault()
+        await fetch(`${previousPageUrl}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + sessionStorage.getItem('token')
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                setcsvItems(data.results)
+                setnextPage(data.next)
+                setpreviousPage(data.previous)
+                setallData(data.count)
+                console.log(data)
+            })
+    }
+    async function nextPage(e) {
+        e.preventDefault()
+        await fetch(`${nextPageUrl}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + sessionStorage.getItem('token')
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                setcsvItems(data.results)
+                setnextPage(data.next)
+                setpreviousPage(data.previous)
+                setallData(data.count)
+                console.log(data)
+            })
+    }
 
     function handleColumn(e) {
         console.log(e)
@@ -1713,7 +1755,7 @@ function AllTransactions() {
                                         </td>
                                     </tr>
                                     {
-                                        data.map(e => (
+                                        csvItems.map(e => (
                                             <tr>
                                                 <td scope="row" className="Hash">
                                                     {e.hash}
@@ -1780,38 +1822,46 @@ function AllTransactions() {
                             <CardFooter>
                                 <Row>
                                     <FormGroup row>
-                                        <Label
-                                            for="perPage"
-                                            sm={8}
-                                        >
-                                            Items per page:
-                                        </Label>
-                                        <Col sm="2">
-                                            <Input id="perPage" type="select" className="custom-select" >
-                                                <option>20</option>
-                                                <option>50</option>
-                                                <option>100</option>
-                                            </Input>
-                                        </Col>
-                                    </FormGroup>
-                                    <FormGroup row>
-                                        <Label
-                                            for="pageNumber"
-                                            sm={6}
-                                            className="form-control-label"
-                                        >
-                                            Page:
-                                        </Label>
-                                        <Col sm="2">
-                                            <Input id="pageNumber" type="select" className="custom-select">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                            </Input>
-                                        </Col>
+                                        <Pagination>
+                                            <PaginationItem>
+                                                <PaginationLink
+                                                    aria-label="Previous"
+                                                    href="#pablo"
+                                                    onClick={e => previousPage(e)}
+                                                >
+                                                    <i className="fa fa-angle-left" />
+                                                    <span className="sr-only">Previous</span>
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                            <PaginationItem>
+                                                <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
+                                                    1
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                            <PaginationItem>
+                                                <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
+                                                    2
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                            <PaginationItem>
+                                                <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
+                                                    3
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                            <PaginationItem>
+                                                <PaginationLink
+                                                    aria-label="Next"
+                                                    href="#pablo"
+                                                    onClick={e => nextPage(e)}
+                                                >
+                                                    <i className="fa fa-angle-right" />
+                                                    <span className="sr-only">Next</span>
+                                                </PaginationLink>
+                                            </PaginationItem>
+                                        </Pagination>
                                     </FormGroup>
                                     <Col sm="1" >
-                                        <p>{`${startRangeeeee} - ${endRangeeeee}`}</p>
+                                        <p>{`${startRangeeeee} - ${allData}`}</p>
                                     </Col>
                                 </Row>
                             </CardFooter>
