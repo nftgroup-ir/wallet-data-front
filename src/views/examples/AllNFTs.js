@@ -24,6 +24,8 @@ import {
     Progress,
     Table,
     Container,
+    Popover,
+    PopoverBody,
     Row,
     UncontrolledTooltip,
     FormGroup,
@@ -51,6 +53,7 @@ function AllNFTs() {
     const [nextPageUrl, setnextPage] = useState("")
     const [previousPageUrl, setpreviousPage] = useState("")
     const [allData, setallData] = useState(1)
+    const [IsOpen, setIsOpen] = useState(false)
     const data = [
         {
             name: "SecurityFundBasket",
@@ -233,6 +236,13 @@ function AllNFTs() {
         //    for(var i=0; i<x.length;i++){
         //        x[i].style.display = "none"
         //    }
+    }
+
+    const onHover = () => {
+        setIsOpen(true)
+    }
+    const onHoverLeave = () => {
+        setIsOpen(false)
     }
 
 
@@ -1188,7 +1198,7 @@ function AllNFTs() {
                                                 <td className="IsValid">
                                                     {e.is_valid}
                                                 </td>
-                                                <td scope="row" className="Metadata deactive-table">
+                                                <td scope="row" className="Metadata deactive-table OverFlow">
                                                     {e.metadata}
                                                 </td>
                                                 <td className="Owner">
@@ -1200,7 +1210,7 @@ function AllNFTs() {
                                                 <td className="SyncedAt deactive-table">
                                                     {e.synced_at}
                                                 </td>
-                                                <td className="TokenUri">
+                                                <td className="TokenUri OverFlow" >
                                                     {e.token_uri}
                                                 </td>
                                                 <td className="BlockNumber deactive-table">
