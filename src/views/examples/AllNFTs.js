@@ -151,7 +151,7 @@ function AllNFTs() {
             BlockNumberMintedOperator: BlockNumberMintedOperator,
             AmountOperator: AmountOperator,
         }
-        fetch(`http://65.108.59.117:7001/api/csv/nft?NameValue=${filterObject.NameValue}&AmountValue=${filterObject.AmountValue}&FrozenValue=${filterObject.FrozenValue}&SymbolValue=${filterObject.SymbolValue}&SyncingValue=${filterObject.SyncingValue}&IsValidValue=${filterObject.IsValidValue}&MetadataValue=${filterObject.MetadataValue}&TokenIdValue=${filterObject.TokenIdValue}&TokenUriValue=${filterObject.TokenUriValue}&BlockNumberValue=${filterObject.BlockNumberValue}&ContractTypeValue=${filterObject.ContractTypeValue}&TokenAddressValue=${filterObject.TokenAddressValue}&BlockNumberMintedValue=${filterObject.BlockNumberMintedValue}&OwnerOfValue=${filterObject.OwnerOfValue}&TokenIdSortBy=${filterObject.TokenIdSortBy}&BlockNumberMintedSortBy=${filterObject.BlockNumberMintedSortBy}&AmountSortBy=${filterObject.AmountSortBy}&IsValidSortBy=${filterObject.IsValidSortBy}&SyncingSortBy=${filterObject.SyncingSortBy}&FrozenSortBy=${filterObject.FrozenSortBy}&BlockNumberSortBy=${filterObject.BlockNumberSortBy}&TokenIdOperator=${filterObject.TokenIdOperator}&BlockNumberMintedOperator=${filterObject.BlockNumberMintedOperator}&AmountOperator=${filterObject.AmountOperator}`, {
+        fetch(`http://65.108.59.117:7001/api/csv/nft/?NameValue=${filterObject.NameValue}&AmountValue=${filterObject.AmountValue}&FrozenValue=${filterObject.FrozenValue}&SymbolValue=${filterObject.SymbolValue}&SyncingValue=${filterObject.SyncingValue}&IsValidValue=${filterObject.IsValidValue}&MetadataValue=${filterObject.MetadataValue}&TokenIdValue=${filterObject.TokenIdValue}&TokenUriValue=${filterObject.TokenUriValue}&BlockNumberValue=${filterObject.BlockNumberValue}&ContractTypeValue=${filterObject.ContractTypeValue}&TokenAddressValue=${filterObject.TokenAddressValue}&BlockNumberMintedValue=${filterObject.BlockNumberMintedValue}&OwnerOfValue=${filterObject.OwnerOfValue}&TokenIdSortBy=${filterObject.TokenIdSortBy}&BlockNumberMintedSortBy=${filterObject.BlockNumberMintedSortBy}&AmountSortBy=${filterObject.AmountSortBy}&IsValidSortBy=${filterObject.IsValidSortBy}&SyncingSortBy=${filterObject.SyncingSortBy}&FrozenSortBy=${filterObject.FrozenSortBy}&BlockNumberSortBy=${filterObject.BlockNumberSortBy}&TokenIdOperator=${filterObject.TokenIdOperator}&BlockNumberMintedOperator=${filterObject.BlockNumberMintedOperator}&AmountOperator=${filterObject.AmountOperator}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -163,13 +163,15 @@ function AllNFTs() {
                 setnextPage(data.next)
                 setpreviousPage(data.previous)
                 setallData(data.count)
+                console.log(data)
+
             })
         console.log(filterObject)
     }
 
     useEffect(() => {
         async function getData() {
-            await fetch('http://65.108.59.117:7001/api/csv/nft/', {
+            await fetch('http://65.108.59.117:7001/api/csv/nft/?NameValue=&AmountValue=&FrozenValue=&SymbolValue=&SyncingValue=&IsValidValue=&MetadataValue=&TokenIdValue=&TokenUriValue=&BlockNumberValue=&ContractTypeValue=&TokenAddressValue=&BlockNumberMintedValue=&OwnerOfValue=&TokenIdSortBy=&BlockNumberMintedSortBy=&AmountSortBy=&IsValidSortBy=&SyncingSortBy=&FrozenSortBy=&BlockNumberSortBy=&TokenIdOperator=&BlockNumberMintedOperator=&AmountOperator=', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

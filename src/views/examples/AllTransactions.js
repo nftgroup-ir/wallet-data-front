@@ -170,7 +170,7 @@ function AllTransactions() {
             BlockNumberValue: BlockNumberValue,
             BlockHashValue: BlockHashValue,
         }
-        fetch(`http://65.108.59.117:7001/api/csv/transaction?HashValue=${filterObject.HashValue}&NonceValue=${filterObject.NonceValue}&NonceSortBy=${filterObject.NonceSortBy}&NonceOperator=${filterObject.NonceOperator}&TxIndexValue=${filterObject.TxIndexValue}&FromValue=${filterObject.FromValue}&ToValue=${filterObject.ToValue}&ValueValue=${filterObject.ValueValue}&ValueSortBy=${filterObject.ValueSortBy}&ValueOperator=${filterObject.ValueOperator}&GasValue=${filterObject.GasValue}&GasSortBy=${filterObject.GasSortBy}&GasOperator=${filterObject.GasOperator}&GasPriceValue=${filterObject.GasPriceValue}&GasPriceSortBy=${filterObject.GasPriceSortBy}&GasPriceOperator=${filterObject.GasPriceOperator}&InputValue=${filterObject.InputValue}&RCGUValue=${filterObject.RCGUValue}&RCGUSortBy=${filterObject.RCGUSortBy}&RCGUOperator=${filterObject.RCGUOperator}&RGUValue=${filterObject.RGUValue}&RGUSortBy=${filterObject.RGUSortBy}&RGUOperator=${filterObject.RGUOperator}&RCUValue=${filterObject.RCUValue}&RRValue=${filterObject.RRValue}&RSValue=${filterObject.RSValue}&TimeValue=${filterObject.TimeValue}&BlockNumberValue=${filterObject.BlockNumberValue}&BlockHashValue=${filterObject.BlockHashValue}`, {
+        fetch(`http://65.108.59.117:7001/api/csv/transaction/?HashValue=${filterObject.HashValue}&NonceValue=${filterObject.NonceValue}&NonceSortBy=${filterObject.NonceSortBy}&NonceOperator=${filterObject.NonceOperator}&TxIndexValue=${filterObject.TxIndexValue}&FromValue=${filterObject.FromValue}&ToValue=${filterObject.ToValue}&ValueValue=${filterObject.ValueValue}&ValueSortBy=${filterObject.ValueSortBy}&ValueOperator=${filterObject.ValueOperator}&GasValue=${filterObject.GasValue}&GasSortBy=${filterObject.GasSortBy}&GasOperator=${filterObject.GasOperator}&GasPriceValue=${filterObject.GasPriceValue}&GasPriceSortBy=${filterObject.GasPriceSortBy}&GasPriceOperator=${filterObject.GasPriceOperator}&InputValue=${filterObject.InputValue}&RCGUValue=${filterObject.RCGUValue}&RCGUSortBy=${filterObject.RCGUSortBy}&RCGUOperator=${filterObject.RCGUOperator}&RGUValue=${filterObject.RGUValue}&RGUSortBy=${filterObject.RGUSortBy}&RGUOperator=${filterObject.RGUOperator}&RCUValue=${filterObject.RCUValue}&RRValue=${filterObject.RRValue}&RSValue=${filterObject.RSValue}&TimeValue=${filterObject.TimeValue}&BlockNumberValue=${filterObject.BlockNumberValue}&BlockHashValue=${filterObject.BlockHashValue}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -182,13 +182,16 @@ function AllTransactions() {
                 setnextPage(data.next)
                 setpreviousPage(data.previous)
                 setallData(data.count)
+                console.log(data)
+
+
             })
         console.log(filterObject)
     }
 
     useEffect(() => {
         async function getData() {
-            await fetch('http://65.108.59.117:7001/api/csv/transaction/', {
+            await fetch('http://65.108.59.117:7001/api/csv/transaction/?HashValue=&NonceValue=&FromValue=&ToValue=&ValueValue=&GasValue=&GasPriceValue=&InputValue=&RCGUValue=&RGUValue=&BlockHashValue=&RCUValue=&RRValue=&RSValue=&TimeValue=&BlockNumberValue=&BlockHashValue=&RCGUSortBy=&RGUSortBy=&TxIndexValue=&NonceSortBy=&ValueSortBy=&GasSortBy=&NonceOperator=&ValueOperator=&GasOperator=&BlockHashValue =&GasPriceOperator=&RCGUOperator=&RGUOperator=', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
