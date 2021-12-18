@@ -151,14 +151,19 @@ function AllNFTs() {
             BlockNumberMintedOperator: BlockNumberMintedOperator,
             AmountOperator: AmountOperator,
         }
-        // fetch(`http://65.108.59.117:7001/api/csv/transaction?addressSort=${filterObject.addressSort}&addressBaseSort=${filterObject.addressBaseSort}&emailSort=${filterObject.emailSort}&emailBaseSort=${filterObject.emailBaseSort}&pointSort=${filterObject.pointSort}&pointBaseSort=${filterObject.pointBaseSort}&txSort=${filterObject.txSort}&txBaseSort=${filterObject.txBaseSort}&nftSort=${filterObject.nftSort}&nftBaseSort=${filterObject.nftBaseSort}&balanceSort=${filterObject.balanceSort}&balanceBaseSort=${filterObject.balanceBaseSort}`, {
-        //     method: 'GET',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // })
-        //     .then(res => res.json())
-        //     .then(data => console.log(data.results))
+        fetch(`http://65.108.59.117:7001/api/csv/nft?NameValue=${filterObject.NameValue}&AmountValue=${filterObject.AmountValue}&FrozenValue=${filterObject.FrozenValue}&SymbolValue=${filterObject.SymbolValue}&SyncingValue=${filterObject.SyncingValue}&IsValidValue=${filterObject.IsValidValue}&MetadataValue=${filterObject.MetadataValue}&TokenIdValue=${filterObject.TokenIdValue}&TokenUriValue=${filterObject.TokenUriValue}&BlockNumberValue=${filterObject.BlockNumberValue}&ContractTypeValue=${filterObject.ContractTypeValue}&TokenAddressValue=${filterObject.TokenAddressValue}&BlockNumberMintedValue=${filterObject.BlockNumberMintedValue}&OwnerOfValue=${filterObject.OwnerOfValue}&TokenIdSortBy=${filterObject.TokenIdSortBy}&BlockNumberMintedSortBy=${filterObject.BlockNumberMintedSortBy}&AmountSortBy=${filterObject.AmountSortBy}&IsValidSortBy=${filterObject.IsValidSortBy}&SyncingSortBy=${filterObject.SyncingSortBy}&FrozenSortBy=${filterObject.FrozenSortBy}&BlockNumberSortBy=${filterObject.BlockNumberSortBy}&TokenIdOperator=${filterObject.TokenIdOperator}&BlockNumberMintedOperator=${filterObject.BlockNumberMintedOperator}&AmountOperator=${filterObject.AmountOperator}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                setcsvItems(data.results)
+                setnextPage(data.next)
+                setpreviousPage(data.previous)
+                setallData(data.count)
+            })
         console.log(filterObject)
     }
 
