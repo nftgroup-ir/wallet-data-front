@@ -558,7 +558,9 @@ const Tables = (props) => {
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </th>
-
+                    <th>
+                      Option
+                    </th>
 
                   </tr>
                 </thead>
@@ -997,9 +999,35 @@ const Tables = (props) => {
                           {e.total_nfts}
                         </td>
                         <td className="Balance">
-                          {/* <BalanceData props={e.address} id={e.id} /> */}
-                          {e.balance}
+                          <Button
+                            color="primary"
+                            href="#pablo"
+                            onClick={(e) => e.preventDefault()}
+                            size="sm"
+                          >
+                            Show Balance
+                          </Button>
                         </td>
+                        <UncontrolledDropdown>
+                          <DropdownToggle
+                            className="btn-icon-only text-light"
+                            href="#pablo"
+                            role="button"
+                            size="sm"
+                            color=""
+                            onClick={e => e.preventDefault()}
+                          >
+                            <i className="fas fa-ellipsis-v" />
+                          </DropdownToggle>
+                          <DropdownMenu className="dropdown-menu-arrow" left>
+                            <DropdownItem
+                              href="#pablo"
+                              onClick={e => e.preventDefault()}
+                            >
+                              Update
+                            </DropdownItem>
+                          </DropdownMenu>
+                        </UncontrolledDropdown>
                       </tr>
 
                     ))

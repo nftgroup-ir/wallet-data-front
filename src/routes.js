@@ -26,6 +26,8 @@ import WalletData from "views/examples/WalletData"
 import AllTransactions from "views/examples/AllTransactions";
 import AllNFTs from "views/examples/AllNFTs";
 import Scrapper from "views/examples/Scrapper";
+import SpecialWallets from "views/examples/SpecialWallets"
+import AllBalances from "views/examples/AllBalances";
 
 var routes = [
   {
@@ -78,10 +80,24 @@ var routes = [
     layout: "/admin",
   },
   {
+    path: "/balances",
+    name: "Balances",
+    icon: "ni ni-money-coins",
+    component: AllBalances,
+    layout: "/admin",
+  },
+  {
     path: "/Scrapper",
     name: "Scrapper",
     icon: "ni ni-money-coins",
     component: Scrapper,
+    layout: "/admin",
+  },
+  {
+    path: "/specialWallets",
+    name: "Special Wallets",
+    icon: "ni ni-bullet-list-67",
+    component: SpecialWallets,
     layout: "/admin",
   },
 ];
