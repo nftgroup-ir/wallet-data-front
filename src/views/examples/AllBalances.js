@@ -45,12 +45,12 @@ function AllBalances() {
     const [QuoteRate24hSortBy, setQuoteRate24hSortBy] = useState("none")
     const [QuoteSortBy, setQuoteSortBy] = useState("none")
     const [Quote24hSortBy, setQuote24hSortBy] = useState("none")
-    const [BalanceOperator, setBalanceOperator] = useState("eq")
-    const [Balance24hOperator, setBalance24hOperator] = useState("eq")
-    const [QuoteRateOperator, setQuoteRateOperator] = useState("eq")
-    const [QuoteRate24hOperator, setQuoteRate24hOperator] = useState("eq")
-    const [QuoteOperator, setQuoteOperator] = useState("eq")
-    const [Quote24hOperator, setQuote24hOperator] = useState("eq")
+    const [BalanceOperator, setBalanceOperator] = useState("")
+    const [Balance24hOperator, setBalance24hOperator] = useState("")
+    const [QuoteRateOperator, setQuoteRateOperator] = useState("")
+    const [QuoteRate24hOperator, setQuoteRate24hOperator] = useState("")
+    const [QuoteOperator, setQuoteOperator] = useState("")
+    const [Quote24hOperator, setQuote24hOperator] = useState("")
     const [nextPageUrl, setnextPage] = useState("")
     const [previousPageUrl, setpreviousPage] = useState("")
     const [allData, setallData] = useState(1)
@@ -1115,10 +1115,9 @@ function AllBalances() {
                                         </td>
                                         <td className="QuoteRate">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="QuoteRateValue" />
-                                                <InputGroupAddon addonType="prepend">
+                                                <Input bsSize="sm" id="QuoteRateValue" disabled/>
+                                                {/* <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
-                                                        {/* <i className="ni ni-lock-circle-open" /> */}
                                                         <UncontrolledDropdown split>
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
@@ -1164,7 +1163,7 @@ function AllBalances() {
                                                             </DropdownMenu>
                                                         </UncontrolledDropdown>
                                                     </InputGroupText>
-                                                </InputGroupAddon>
+                                                </InputGroupAddon> */}
 
                                             </InputGroup>
                                         </td>
@@ -1335,7 +1334,7 @@ function AllBalances() {
                                         csvItems.map(e => (
                                             <tr>
                                                 <td scope="row" className="Address">
-                                                    {e.parent}
+                                                    {e.owner}
                                                 </td>
                                                 <td scope="row" className="ContractDecimal deactive-table">
                                                     {e.contract_decimals}
@@ -1376,7 +1375,7 @@ function AllBalances() {
                                                     {(e.balance / Math.pow(10, e.contract_decimals))}
                                                 </td>
                                                 <td scope="row" className="Balance24h deactive-table">
-                                                    {e.balance_24h}
+                                                    {(e.balance_24h / Math.pow(10, e.contract_decimals))}
                                                 </td>
                                                 <td scope="row" className="QuoteRate">
                                                     {e.quote_rate}

@@ -44,12 +44,12 @@ function AllTransactions() {
     const [GasPriceSortBy, setGasPriceSortBy] = useState("none")
     const [RCGUSortBy, setRCGUSortBy] = useState("none")
     const [RGUSortBy, setRGUSortBy] = useState("none")
-    const [NonceOperator, setNonceOperator] = useState("eq")
-    const [ValueOperator, setValueOperator] = useState("eq")
-    const [GasOperator, setGasOperator] = useState("eq")
-    const [GasPriceOperator, setGasPriceOperator] = useState("eq")
-    const [RCGUOperator, setRCGUOperator] = useState("eq")
-    const [RGUOperator, setRGUOperator] = useState("eq")
+    const [NonceOperator, setNonceOperator] = useState("")
+    const [ValueOperator, setValueOperator] = useState("")
+    const [GasOperator, setGasOperator] = useState("")
+    const [GasPriceOperator, setGasPriceOperator] = useState("")
+    const [RCGUOperator, setRCGUOperator] = useState("")
+    const [RGUOperator, setRGUOperator] = useState("")
     const [nextPageUrl, setnextPage] = useState("")
     const [previousPageUrl, setpreviousPage] = useState("")
     const [allData, setallData] = useState(1)
@@ -170,6 +170,7 @@ function AllTransactions() {
             BlockNumberValue: BlockNumberValue,
             BlockHashValue: BlockHashValue,
         }
+        console.log(`http://65.108.59.117:7001/api/csv/transaction/?HashValue=${filterObject.HashValue}&NonceValue=${filterObject.NonceValue}&NonceSortBy=${filterObject.NonceSortBy}&NonceOperator=${filterObject.NonceOperator}&TxIndexValue=${filterObject.TxIndexValue}&FromValue=${filterObject.FromValue}&ToValue=${filterObject.ToValue}&ValueValue=${filterObject.ValueValue}&ValueSortBy=${filterObject.ValueSortBy}&ValueOperator=${filterObject.ValueOperator}&GasValue=${filterObject.GasValue}&GasSortBy=${filterObject.GasSortBy}&GasOperator=${filterObject.GasOperator}&GasPriceValue=${filterObject.GasPriceValue}&GasPriceSortBy=${filterObject.GasPriceSortBy}&GasPriceOperator=${filterObject.GasPriceOperator}&InputValue=${filterObject.InputValue}&RCGUValue=${filterObject.RCGUValue}&RCGUSortBy=${filterObject.RCGUSortBy}&RCGUOperator=${filterObject.RCGUOperator}&RGUValue=${filterObject.RGUValue}&RGUSortBy=${filterObject.RGUSortBy}&RGUOperator=${filterObject.RGUOperator}&RCUValue=${filterObject.RCUValue}&RRValue=${filterObject.RRValue}&RSValue=${filterObject.RSValue}&TimeValue=${filterObject.TimeValue}&BlockNumberValue=${filterObject.BlockNumberValue}&BlockHashValue=${filterObject.BlockHashValue}`)
         fetch(`http://65.108.59.117:7001/api/csv/transaction/?HashValue=${filterObject.HashValue}&NonceValue=${filterObject.NonceValue}&NonceSortBy=${filterObject.NonceSortBy}&NonceOperator=${filterObject.NonceOperator}&TxIndexValue=${filterObject.TxIndexValue}&FromValue=${filterObject.FromValue}&ToValue=${filterObject.ToValue}&ValueValue=${filterObject.ValueValue}&ValueSortBy=${filterObject.ValueSortBy}&ValueOperator=${filterObject.ValueOperator}&GasValue=${filterObject.GasValue}&GasSortBy=${filterObject.GasSortBy}&GasOperator=${filterObject.GasOperator}&GasPriceValue=${filterObject.GasPriceValue}&GasPriceSortBy=${filterObject.GasPriceSortBy}&GasPriceOperator=${filterObject.GasPriceOperator}&InputValue=${filterObject.InputValue}&RCGUValue=${filterObject.RCGUValue}&RCGUSortBy=${filterObject.RCGUSortBy}&RCGUOperator=${filterObject.RCGUOperator}&RGUValue=${filterObject.RGUValue}&RGUSortBy=${filterObject.RGUSortBy}&RGUOperator=${filterObject.RGUOperator}&RCUValue=${filterObject.RCUValue}&RRValue=${filterObject.RRValue}&RSValue=${filterObject.RSValue}&TimeValue=${filterObject.TimeValue}&BlockNumberValue=${filterObject.BlockNumberValue}&BlockHashValue=${filterObject.BlockHashValue}`, {
             method: 'GET',
             headers: {
@@ -191,7 +192,7 @@ function AllTransactions() {
 
     useEffect(() => {
         async function getData() {
-            await fetch('http://65.108.59.117:7001/api/csv/transaction/?HashValue=&NonceValue=&FromValue=&ToValue=&ValueValue=&GasValue=&GasPriceValue=&InputValue=&RCGUValue=&RGUValue=&BlockHashValue=&RCUValue=&RRValue=&RSValue=&TimeValue=&BlockNumberValue=&BlockHashValue=&RCGUSortBy=&RGUSortBy=&TxIndexValue=&NonceSortBy=&ValueSortBy=&GasSortBy=&NonceOperator=&ValueOperator=&GasOperator=&BlockHashValue =&GasPriceOperator=&RCGUOperator=&RGUOperator=', {
+            await fetch('http://65.108.59.117:7001/api/csv/transaction/?HashValue=&NonceValue=&FromValue=&ToValue=&ValueValue=&GasValue=&GasPriceValue=&GasPriceSortBy=&InputValue=&RCGUValue=&RGUValue=&BlockHashValue=&RCUValue=&RRValue=&RSValue=&TimeValue=&BlockNumberValue=&BlockHashValue=&RCGUSortBy=&RGUSortBy=&TxIndexValue=&NonceSortBy=&ValueSortBy=&GasSortBy=&NonceOperator=&ValueOperator=&GasOperator=&BlockHashValue=&GasPriceOperator=&RCGUOperator=&RGUOperator=', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
