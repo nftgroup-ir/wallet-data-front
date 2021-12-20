@@ -84,7 +84,7 @@ const SpecialWallets = (props) => {
             BalanceValue: BalanceValue,
             BalanceOperator: balanceOperator,
         }
-        fetch(`http://65.108.59.117:7001/api/csv?AddressInput=${filterObject.AddressInput}&NFTSortBy=${filterObject.NFTSortBy}&NFTCount=${filterObject.NFTCount}&NFTOperator=${filterObject.NFTOperator}&TxSortBy=${filterObject.TxSortBy}&TxCount=${filterObject.TxCount}&TxOperator=${filterObject.TxOperator}&BalanceSortBy=${filterObject.BalanceSortBy}&BalanceValue=${filterObject.BalanceValue}&BalanceOperator=${filterObject.BalanceOperator}`, {
+        fetch(`http://65.108.59.117:7001/api/csv?AddressInput=${filterObject.AddressInput}&NFTSortBy=${filterObject.NFTSortBy}&NFTCount=${filterObject.NFTCount}&NFTOperator=${filterObject.NFTOperator}&TxSortBy=${filterObject.TxSortBy}&TxCount=${filterObject.TxCount}&TxOperator=${filterObject.TxOperator}&BalanceSortBy=${filterObject.BalanceSortBy}&BalanceValue=${filterObject.BalanceValue}&BalanceOperator=${filterObject.BalanceOperator}&special=true`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -102,7 +102,7 @@ const SpecialWallets = (props) => {
 
     useEffect(() => {
         async function getData() {
-            await fetch('http://65.108.59.117:7001/api/csv/?NFTCount=&TxCount=&BalanceValue=&BalanceSortBy=none&NFTSortBy=none&TxSortBy=none', {
+            await fetch('http://65.108.59.117:7001/api/csv/?NFTCount=&TxCount=&BalanceValue=&BalanceSortBy=none&NFTSortBy=none&TxSortBy=none&special=true', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
