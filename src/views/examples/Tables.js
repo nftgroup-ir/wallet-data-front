@@ -72,7 +72,7 @@ const Tables = (props) => {
 
 
   async function setFilters(e) {
-    e.preventDefault()
+    e ? e.preventDefault() : console.log("-")
     const AddressInput = document.getElementById("addressInput").value
     const NFTCount = document.getElementById("NFTInput").value
     const TxCount = document.getElementById("txInput").value
@@ -187,6 +187,22 @@ const Tables = (props) => {
       d.classList.toggle('deactive-table')
     })
   }
+  function updateTokens(e) {
+    e.preventDefault()
+    const tokenUpdate = document.getElementById('tokenUpdate').value
+    fetch(`http://65.108.59.117:7001/api/csv/data_getter_by_token/?token=${tokenUpdate}&special=false` , {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + sessionStorage.getItem('token')
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.result)
+        setFilters()
+      })
+  }
 
   return (
     <>
@@ -203,6 +219,17 @@ const Tables = (props) => {
                     <h3 className="text-black mb-0">Wallets</h3>
                   </Col>
                   <Col className="text-right" xs="4">
+                    <InputGroup className="input-group-alternative mb-2">
+                      <Input bsSize="sm" id="tokenUpdate" />
+                      <Button
+                      color="primary"
+                      href="#pablo"
+                      onClick={(e) => updateTokens(e)}
+                      size="sm"
+                    >
+                      UPDATE
+                    </Button>
+                    </InputGroup>
                     <UncontrolledDropdown>
                       <DropdownToggle
                         className="text-light"
@@ -1020,44 +1047,46 @@ const Tables = (props) => {
                             Show Balance
                           </Button>
                         </td>
-                        <UncontrolledDropdown>
-                          <DropdownToggle
-                            className="btn-icon-only text-light"
-                            href="#pablo"
-                            role="button"
-                            size="sm"
-                            color=""
-                            onClick={e => e.preventDefault()}
-                          >
-                            <i className="fas fa-ellipsis-v" />
-                          </DropdownToggle>
-                          <DropdownMenu className="dropdown-menu-arrow" left>
-                            <DropdownItem
+                        <td>
+                          <UncontrolledDropdown>
+                            <DropdownToggle
+                              className="btn-icon-only text-light"
                               href="#pablo"
-                              onClick={() => getSingleWalletData(e.address, 'true', 'true', 'true')}
+                              role="button"
+                              size="sm"
+                              color=""
+                              onClick={e => e.preventDefault()}
                             >
-                              Update NFTs & TX & balance
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={() => getSingleWalletData(e.address, 'true', 'false', 'false')}
-                            >
-                              Update NFTs
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={() => getSingleWalletData(e.address, 'false', 'true', 'false')}
-                            >
-                              Update TXs
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={() => getSingleWalletData(e.address, 'false', 'false', 'true')}
-                            >
-                              Update balance
-                            </DropdownItem>
-                          </DropdownMenu>
-                        </UncontrolledDropdown>
+                              <i className="fas fa-ellipsis-v" />
+                            </DropdownToggle>
+                            <DropdownMenu className="dropdown-menu-arrow" left>
+                              <DropdownItem
+                                href="#pablo"
+                                onClick={() => getSingleWalletData(e.address, 'true', 'true', 'true')}
+                              >
+                                Update NFTs & TX & balance
+                              </DropdownItem>
+                              <DropdownItem
+                                href="#pablo"
+                                onClick={() => getSingleWalletData(e.address, 'true', 'false', 'false')}
+                              >
+                                Update NFTs
+                              </DropdownItem>
+                              <DropdownItem
+                                href="#pablo"
+                                onClick={() => getSingleWalletData(e.address, 'false', 'true', 'false')}
+                              >
+                                Update TXs
+                              </DropdownItem>
+                              <DropdownItem
+                                href="#pablo"
+                                onClick={() => getSingleWalletData(e.address, 'false', 'false', 'true')}
+                              >
+                                Update balance
+                              </DropdownItem>
+                            </DropdownMenu>
+                          </UncontrolledDropdown>
+                        </td>
                       </tr>
 
                     ))

@@ -57,7 +57,7 @@ function AllBalances() {
     const Filters = useRef()
 
     async function setFilters(e) {
-        e.preventDefault()
+        e ? e.preventDefault() : console.log("-")
         const AddressValue = document.getElementById("AddressValue").value
         const ContractDecimalValue = document.getElementById("ContractDecimalValue").value
         const ContractNameValue = document.getElementById("ContractNameValue").value
@@ -191,6 +191,21 @@ function AllBalances() {
         //        x[i].style.display = "none"
         //    }
     }
+    const updateSingleBalance = (e , address , contractAddress) => {
+        e.preventDefault()
+        fetch(`http://65.108.59.117:7001/api/csv/data_getter_by_token/?address=${address}&token=${contractAddress}` , {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + sessionStorage.getItem('token')
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.result)
+                setFilters()
+            })
+    }
 
 
 
@@ -210,6 +225,7 @@ function AllBalances() {
                                         <h3 className="text-black mb-0">Balances</h3>
                                     </Col>
                                     <Col className="text-right" xs="4">
+
                                         <UncontrolledDropdown>
                                             <DropdownToggle
                                                 className="text-light"
@@ -843,6 +859,9 @@ function AllBalances() {
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </th>
+                                        <th>
+                                            Option
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1115,7 +1134,7 @@ function AllBalances() {
                                         </td>
                                         <td className="QuoteRate">
                                             <InputGroup>
-                                                <Input bsSize="sm" id="QuoteRateValue" disabled/>
+                                                <Input bsSize="sm" id="QuoteRateValue" disabled />
                                                 {/* <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         <UncontrolledDropdown split>
@@ -1388,6 +1407,28 @@ function AllBalances() {
                                                 </td>
                                                 <td scope="row" className="Quote24h deactive-table">
                                                     {e.quote_24h}
+                                                </td>
+                                                <td>
+                                                    <UncontrolledDropdown>
+                                                        <DropdownToggle
+                                                            className="btn-icon-only text-light"
+                                                            href="#pablo"
+                                                            role="button"
+                                                            size="sm"
+                                                            color=""
+                                                            onClick={e => e.preventDefault()}
+                                                        >
+                                                            <i className="fas fa-ellipsis-v" />
+                                                        </DropdownToggle>
+                                                        <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownItem
+                                                                href="#pablo"
+                                                                onClick={d => updateSingleBalance(d , e.owner , e.contract_address )}
+                                                            >
+                                                                Update balance
+                                                            </DropdownItem>
+                                                        </DropdownMenu>
+                                                    </UncontrolledDropdown>
                                                 </td>
                                             </tr>
 

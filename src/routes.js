@@ -28,6 +28,7 @@ import AllNFTs from "views/examples/AllNFTs";
 import Scrapper from "views/examples/Scrapper";
 import SpecialWallets from "views/examples/SpecialWallets"
 import AllBalances from "views/examples/AllBalances";
+import Charts from "views/examples/Charts";
 
 var routes = [
   {
@@ -98,6 +99,13 @@ var routes = [
     name: "Special Wallets",
     icon: "ni ni-bullet-list-67",
     component: SpecialWallets,
+    layout: "/admin",
+  },
+  {
+    path: "/charts",
+    name: "Charts",
+    icon: "ni ni-bullet-list-67",
+    component: Charts,
     layout: "/admin",
   },
 ];
