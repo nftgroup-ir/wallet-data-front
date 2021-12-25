@@ -104,7 +104,19 @@ const Tables = (props) => {
       })
     console.log(filterObject)
   }
-
+  function getSingleWalletData(walletAddress, NFT, TX, balance) {
+    fetch('http://65.108.59.117:7001/api/csv/data_getter/?wallet=' + walletAddress + '&Tx=' + TX + '&NFT=' + NFT + '&balance=' + balance, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + sessionStorage.getItem('token')
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.result)
+      })
+  }
   useEffect(() => {
     async function getData() {
       await fetch('http://65.108.59.117:7001/api/csv/?NFTCount=&TxCount=&BalanceValue=&BalanceSortBy=none&NFTSortBy=none&TxSortBy=none', {
@@ -1022,9 +1034,27 @@ const Tables = (props) => {
                           <DropdownMenu className="dropdown-menu-arrow" left>
                             <DropdownItem
                               href="#pablo"
-                              onClick={e => e.preventDefault()}
+                              onClick={() => getSingleWalletData(e.address, 'true', 'true', 'true')}
                             >
-                              Update
+                              Update NFTs & TX & balance
+                            </DropdownItem>
+                            <DropdownItem
+                              href="#pablo"
+                              onClick={() => getSingleWalletData(e.address, 'true', 'false', 'false')}
+                            >
+                              Update NFTs
+                            </DropdownItem>
+                            <DropdownItem
+                              href="#pablo"
+                              onClick={() => getSingleWalletData(e.address, 'false', 'true', 'false')}
+                            >
+                              Update TXs
+                            </DropdownItem>
+                            <DropdownItem
+                              href="#pablo"
+                              onClick={() => getSingleWalletData(e.address, 'false', 'false', 'true')}
+                            >
+                              Update balance
                             </DropdownItem>
                           </DropdownMenu>
                         </UncontrolledDropdown>
