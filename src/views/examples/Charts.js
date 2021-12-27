@@ -1,36 +1,14 @@
 import Header from "components/Headers/Header.js";
 import {
-    Badge,
-    Card,
-    CardHeader,
-    InputGroupText,
-    InputGroupAddon,
-    CardFooter,
-    Label,
     DropdownMenu,
-    Dropdown,
     DropdownItem,
     UncontrolledDropdown,
-    Input,
-    InputGroup,
     DropdownToggle,
-    Media,
-    Pagination,
     Col,
-    Button,
-    Nav,
-    Option,
-    PaginationItem,
-    PaginationLink,
-    Progress,
-    Table,
-    Container,
     Row,
-    UncontrolledTooltip,
-    FormGroup,
 } from "reactstrap";
-import React, { useState, useEffect, useRef } from 'react'
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, BarChart, Bar, Brush, ReferenceLine, ResponsiveContainer, } from 'recharts';
+import React, { useState } from 'react'
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, BarChart, Bar, Brush, ReferenceLine, } from 'recharts';
 
 
 function Charts() {
@@ -160,7 +138,32 @@ function Charts() {
     const YearlyChart = e => {
         e.preventDefault()
         setdataTx(dataYearly)
+        setbalanceData([
+            { token: "THT" , balance: 124800 },
+            { token: "ETH" , balance: 65480 },
+            { token: "RLC" , balance: 9498 },
+            { token: "THT" , balance: 111800 },
+            { token: "BTC" , balance: 95860 },
+            { token: "RLC" , balance: 6598 },
+            { token: "THT" , balance: 163800 },
+            { token: "SXP" , balance: 98549 },
+            { token: "RLC" , balance: 7498 },
+            { token: "THT" , balance: 188800 },
+            { token: "SLP" , balance: 77540 },
+            { token: "RLC" , balance: 3298 },
+            { token: "THT" , balance: 139800 },
+            { token: "BNB" , balance: 65544 },
+            { token: "RLC" , balance: 1298 },
+            { token: "THT" , balance: 145800 },
+            { token: "BSC" , balance: 84856 },
+            { token: "RLC" , balance: 9598 },
+            { token: "THT" , balance: 196800 },
+            { token: "SAND" , balance: 57446 },
+            { token: "RLC" , balance: 3698 },
+            { token: "THT" , balance: 154800 },
+        ])
     }
+    
 
 
     return (
@@ -178,7 +181,7 @@ function Charts() {
                     </LineChart>
                 </Col>
                 <Col xs="4">
-                    <UncontrolledDropdown style={{ marginTop: "60px"}}>
+                    <UncontrolledDropdown style={{ marginTop: "60px" , marginLeft:"30px"}}>
                         <DropdownToggle
                             className="text-white"
                             href="#pablo"
@@ -189,7 +192,7 @@ function Charts() {
                         >
                             data
                         </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left>
+                        <DropdownMenu className="dropdown-menu-arrow">
                             <DropdownItem
                                 href="#pablo"
                                 id="Address"
@@ -243,7 +246,7 @@ function Charts() {
                         >
                             data
                         </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left>
+                        <DropdownMenu className="dropdown-menu-arrow" >
                             <DropdownItem
                                 href="#pablo"
                                 id="Address"

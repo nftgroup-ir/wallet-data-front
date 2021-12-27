@@ -1,19 +1,10 @@
 import {
     Button,
     Card,
-    CardHeader,
     CardBody,
-    FormGroup,
-    Form,
-    Input,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroup,
-    Row,
     Col,
 } from "reactstrap";
-import React, { useState, useEffect } from 'react'
-import { useHistory } from "react-router-dom";
+import React from 'react'
 import Header from "components/Headers/Header";
 
 function Scrapper() {

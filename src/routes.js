@@ -15,12 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Index from "views/Index.js";
-import Profile from "views/examples/Profile.js";
 import Lottery from "views/examples/Lottery.js";
-import Login from "views/examples/Login.js";
-import Tables from "views/examples/Tables.js";
-import TableTest from "views/examples/TableTest";
 import WinnerList from "views/examples/WinnerList";
 import WalletData from "views/examples/WalletData"
 import AllTransactions from "views/examples/AllTransactions";

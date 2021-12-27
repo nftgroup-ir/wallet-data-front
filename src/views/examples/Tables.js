@@ -17,47 +17,33 @@
 */
 // reactstrap components
 import {
-  Badge,
   Card,
   CardHeader,
   InputGroupText,
   InputGroupAddon,
   CardFooter,
-  Label,
   DropdownMenu,
-  Dropdown,
   DropdownItem,
   UncontrolledDropdown,
   Input,
   InputGroup,
   DropdownToggle,
-  Media,
   Pagination,
   Col,
   Button,
-  Nav,
-  Option,
   PaginationItem,
   PaginationLink,
-  Progress,
   Table,
   Container,
   Row,
-  UncontrolledTooltip,
   FormGroup,
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
 import React, { useState, useEffect, useRef } from 'react'
-import { useMoralis } from "react-moralis";
-import TxData from "./TxData";
-import NftData from "./NftData";
-import BalanceData from "./BalanceData";
 
 
-const Tables = (props) => {
-  const Moralis = require('moralis');
-  const [Arry, setArry] = useState([])
+const Tables = () => {
   const [NFTSortBy, setNFTSort] = useState("none")
   const [txSortBy, settxSort] = useState("none")
   const [balanceSortBy, setbalanceSort] = useState("none")
@@ -136,10 +122,27 @@ const Tables = (props) => {
         })
     }
     getData()
-    console.log(csvItems)
   }, []);
 
-  const endRangeeeee = 200
+  async function removeFilters(e) {
+    e.preventDefault()
+    await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Token ' + sessionStorage.getItem('token')
+        },
+    })
+        .then(res => res.json())
+        .then(data => {
+            setcsvItems(data.results)
+            setnextPage(data.next)
+            setpreviousPage(data.previous)
+            setallData(data.count)
+            console.log(data)
+        })
+}
+
   const startRangeeeee = 1
   async function previousPage(e) {
     console.log(previousPageUrl)
@@ -241,7 +244,7 @@ const Tables = (props) => {
                       >
                         Columns
                       </DropdownToggle>
-                      <DropdownMenu className="dropdown-menu-arrow" left>
+                      <DropdownMenu className="dropdown-menu-arrow" >
                         <DropdownItem
                           href="#pablo"
                           id="Address"
@@ -295,7 +298,7 @@ const Tables = (props) => {
                     <Button
                       color="primary"
                       href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={(e) => removeFilters(e)}
                       size="sm"
                     >
                       Remove filters
@@ -336,7 +339,7 @@ const Tables = (props) => {
                         >
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left>
+                        <DropdownMenu className="dropdown-menu-arrow" >
                           <DropdownItem header>
                             Sort
                           </DropdownItem>
@@ -374,7 +377,7 @@ const Tables = (props) => {
                         >
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left>
+                        <DropdownMenu className="dropdown-menu-arrow" >
                           <DropdownItem header>
                             Sort
                           </DropdownItem>
@@ -450,7 +453,7 @@ const Tables = (props) => {
                         >
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left>
+                        <DropdownMenu className="dropdown-menu-arrow" >
                           <DropdownItem header>
                             Sort
                           </DropdownItem>
@@ -503,7 +506,7 @@ const Tables = (props) => {
                         >
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left>
+                        <DropdownMenu className="dropdown-menu-arrow" >
                           <DropdownItem header>
                             Sort
                           </DropdownItem>
@@ -557,7 +560,7 @@ const Tables = (props) => {
                         >
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left>
+                        <DropdownMenu className="dropdown-menu-arrow" >
                           <DropdownItem header>
                             Sort
                           </DropdownItem>
@@ -611,7 +614,7 @@ const Tables = (props) => {
                         {/* <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             <i className="ni ni-lock-circle-open" />
-                            <UncontrolledDropdown split>
+                            <UncontrolledDropdown >
                               <DropdownToggle
                                 className="btn-icon-only text-light"
                                 href="#pablo"
@@ -622,7 +625,7 @@ const Tables = (props) => {
                               >
                                 <i className="fas fa-ellipsis-v" />
                               </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
+                              <DropdownMenu className="dropdown-menu-arrow" >
                                 <DropdownItem header>
                                   Filter by
                                 </DropdownItem>
@@ -675,7 +678,7 @@ const Tables = (props) => {
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             <i className="ni ni-lock-circle-open" />
-                            <UncontrolledDropdown split>
+                            <UncontrolledDropdown >
                               <DropdownToggle
                                 className="btn-icon-only text-light"
                                 href="#pablo"
@@ -686,7 +689,7 @@ const Tables = (props) => {
                               >
                                 <i className="fas fa-ellipsis-v" />
                               </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
+                              <DropdownMenu className="dropdown-menu-arrow" >
                                 <DropdownItem header>
                                   Filter by
                                 </DropdownItem>
@@ -739,7 +742,7 @@ const Tables = (props) => {
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             <i className="ni ni-lock-circle-open" />
-                            <UncontrolledDropdown split>
+                            <UncontrolledDropdown >
                               <DropdownToggle
                                 className="btn-icon-only text-light"
                                 href="#pablo"
@@ -750,7 +753,7 @@ const Tables = (props) => {
                               >
                                 <i className="fas fa-ellipsis-v" />
                               </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
+                              <DropdownMenu className="dropdown-menu-arrow" >
                                 <DropdownItem header>
                                   Filter by
                                 </DropdownItem>
@@ -803,7 +806,7 @@ const Tables = (props) => {
                         <InputGroupAddon addonType="prepend" >
                           <InputGroupText>
                             {/* <i className="ni ni-lock-circle-open" /> */}
-                            <UncontrolledDropdown split>
+                            <UncontrolledDropdown >
                               <DropdownToggle
                                 className="btn-icon-only text-light"
                                 href="#pablo"
@@ -814,7 +817,7 @@ const Tables = (props) => {
                               >
                                 <i className="fas fa-ellipsis-v" />
                               </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
+                              <DropdownMenu className="dropdown-menu-arrow" >
                                 <DropdownItem header>
                                   Filter by
                                 </DropdownItem>
@@ -876,7 +879,7 @@ const Tables = (props) => {
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             {/* <i className="ni ni-lock-circle-open" /> */}
-                            <UncontrolledDropdown split>
+                            <UncontrolledDropdown >
                               <DropdownToggle
                                 className="btn-icon-only text-light"
                                 href="#pablo"
@@ -887,7 +890,7 @@ const Tables = (props) => {
                               >
                                 <i className="fas fa-ellipsis-v" />
                               </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
+                              <DropdownMenu className="dropdown-menu-arrow" >
                                 <DropdownItem header>
                                   Filter by
                                 </DropdownItem>
@@ -949,7 +952,7 @@ const Tables = (props) => {
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText >
                             {/* <i className="ni ni-lock-circle-open" /> */}
-                            <UncontrolledDropdown split>
+                            <UncontrolledDropdown >
                               <DropdownToggle
                                 className="btn-icon-only text-light"
                                 href="#pablo"
@@ -960,7 +963,7 @@ const Tables = (props) => {
                               >
                                 <i className="fas fa-ellipsis-v" />
                               </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" left>
+                              <DropdownMenu className="dropdown-menu-arrow" >
                                 <DropdownItem header>
                                   Filter by
                                 </DropdownItem>
@@ -1020,7 +1023,7 @@ const Tables = (props) => {
                   {
                     csvItems.map(e => (
                       <tr>
-                        <td scope="row" className="Address">
+                        <td className="Address">
                           {e.address}
                         </td>
                         {/* <td className="Email"> 
@@ -1059,7 +1062,7 @@ const Tables = (props) => {
                             >
                               <i className="fas fa-ellipsis-v" />
                             </DropdownToggle>
-                            <DropdownMenu className="dropdown-menu-arrow" left>
+                            <DropdownMenu className="dropdown-menu-arrow" >
                               <DropdownItem
                                 href="#pablo"
                                 onClick={() => getSingleWalletData(e.address, 'true', 'true', 'true')}

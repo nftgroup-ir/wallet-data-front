@@ -16,20 +16,16 @@
 
 */
 import React from "react";
-import { useLocation, Route, Switch, Redirect , useHistory } from "react-router-dom";
+import { useLocation, Route, Switch, Redirect  } from "react-router-dom";
 // reactstrap components
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row } from "reactstrap";
 
 // core components
-import AuthNavbar from "components/Navbars/AuthNavbar.js";
-import AuthFooter from "components/Footers/AuthFooter.js";
-
 import authRoutes from "../authRoutes";
 
 const Auth = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
-  const history = useHistory()
 
 
   React.useEffect(() => {

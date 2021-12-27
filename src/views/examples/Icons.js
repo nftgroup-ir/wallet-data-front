@@ -2586,18 +2586,18 @@ const Icons = () => {
                   </Col>
                   <Col lg="3" md="6">
                     <CopyToClipboard
-                      text={"ni ni-zoom-split-in"}
-                      onCopy={() => setCopiedText("ni ni-zoom-split-in")}
+                      text={"ni ni-zoom--in"}
+                      onCopy={() => setCopiedText("ni ni-zoom--in")}
                     >
                       <button
                         className="btn-icon-clipboard"
-                        data-clipboard-text="zoom-split-in"
+                        data-clipboard-text="zoom--in"
                         id="tooltip916423293"
                         type="button"
                       >
                         <div>
-                          <i className="ni ni-zoom-split-in" />
-                          <span>zoom-split-in</span>
+                          <i className="ni ni-zoom--in" />
+                          <span>zoom--in</span>
                         </div>
                       </button>
                     </CopyToClipboard>
@@ -2606,7 +2606,7 @@ const Icons = () => {
                       trigger="hover focus"
                       target="tooltip916423293"
                     >
-                      {copiedText === "ni ni-zoom-split-in"
+                      {copiedText === "ni ni-zoom--in"
                         ? "This was Copied!"
                         : "Copy To Clipbord"}
                     </UncontrolledTooltip>

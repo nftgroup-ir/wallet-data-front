@@ -1,31 +1,23 @@
 import {
-    Badge,
     Card,
     CardHeader,
     InputGroupText,
     InputGroupAddon,
     CardFooter,
-    Label,
     DropdownMenu,
-    Dropdown,
     DropdownItem,
     UncontrolledDropdown,
     Input,
     InputGroup,
     DropdownToggle,
-    Media,
     Pagination,
     Col,
     Button,
-    Nav,
-    Option,
     PaginationItem,
     PaginationLink,
-    Progress,
     Table,
     Container,
     Row,
-    UncontrolledTooltip,
     FormGroup,
 } from "reactstrap";
 // core components
@@ -36,7 +28,6 @@ import React, { useState, useEffect, useRef } from 'react'
 
 
 function AllBalances() {
-    const [allTransactions, setAllTransactions] = useState([])
     const [csvItems, setcsvItems] = useState([""])
     const [ContractDecimalSortBy, setContractDecimalSortBySortBy] = useState("none")
     const [BalanceSortBy, setBalanceSortBy] = useState("none")
@@ -138,6 +129,24 @@ function AllBalances() {
         getData()
 
     }, [])
+    async function removeFilters(e) {
+        e.preventDefault()
+        await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + sessionStorage.getItem('token')
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                setcsvItems(data.results)
+                setnextPage(data.next)
+                setpreviousPage(data.previous)
+                setallData(data.count)
+                console.log(data)
+            })
+    }
     const startRangeeeee = 1
     async function previousPage(e) {
         e.preventDefault()
@@ -173,6 +182,7 @@ function AllBalances() {
                 setpreviousPage(data.previous)
                 setallData(data.count)
                 console.log(data)
+                setQuoteRateOperator("")
             })
     }
 
@@ -237,7 +247,7 @@ function AllBalances() {
                                             >
                                                 Columns
                                             </DropdownToggle>
-                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                 <DropdownItem
                                                     href="#pablo"
                                                     id="Address"
@@ -355,7 +365,7 @@ function AllBalances() {
                                         <Button
                                             color="primary"
                                             href="#pablo"
-                                            onClick={(e) => e.preventDefault()}
+                                            onClick={e => removeFilters(e)}
                                             size="sm"
                                         >
                                             Remove filters
@@ -399,7 +409,7 @@ function AllBalances() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -482,7 +492,7 @@ function AllBalances() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -547,7 +557,7 @@ function AllBalances() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -612,7 +622,7 @@ function AllBalances() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -677,7 +687,7 @@ function AllBalances() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -742,7 +752,7 @@ function AllBalances() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -807,7 +817,7 @@ function AllBalances() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -872,7 +882,7 @@ function AllBalances() {
                                                 {/* <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         <i className="ni ni-lock-circle-open" />
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -883,7 +893,7 @@ function AllBalances() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -940,7 +950,7 @@ function AllBalances() {
                                                 <Input bsSize="sm" id="ContractNameValue" />
                                                 {/* <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -951,7 +961,7 @@ function AllBalances() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1029,7 +1039,7 @@ function AllBalances() {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1040,7 +1050,7 @@ function AllBalances() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1083,7 +1093,7 @@ function AllBalances() {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1094,7 +1104,7 @@ function AllBalances() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1137,7 +1147,7 @@ function AllBalances() {
                                                 <Input bsSize="sm" id="QuoteRateValue" disabled />
                                                 {/* <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1148,7 +1158,7 @@ function AllBalances() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1192,7 +1202,7 @@ function AllBalances() {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1203,7 +1213,7 @@ function AllBalances() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1246,7 +1256,7 @@ function AllBalances() {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1257,7 +1267,7 @@ function AllBalances() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1300,7 +1310,7 @@ function AllBalances() {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1311,7 +1321,7 @@ function AllBalances() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1352,13 +1362,13 @@ function AllBalances() {
                                     {
                                         csvItems.map(e => (
                                             <tr>
-                                                <td scope="row" className="Address">
+                                                <td  className="Address">
                                                     {e.owner}
                                                 </td>
-                                                <td scope="row" className="ContractDecimal deactive-table">
+                                                <td  className="ContractDecimal deactive-table">
                                                     {e.contract_decimals}
                                                 </td>
-                                                <td scope="row" className="ContractName deactive-table">
+                                                <td  className="ContractName deactive-table">
                                                     {e.contract_name}
                                                 </td>
                                                 <td className="ContractTickerSymbol">
@@ -1383,29 +1393,29 @@ function AllBalances() {
                                                         </a>
                                                     </div>
                                                 </td>
-                                                <td scope="row" className="LastTransferredAt deactive-table">
+                                                <td  className="LastTransferredAt deactive-table">
                                                     {e.last_transferred_at}
                                                 </td>
                                                 <td className="Type deactive-table">
                                                     {/* <NftData props={e.address} id={e.id} /> */}
                                                     {e.type}
                                                 </td>
-                                                <td scope="row" className="Balance">
+                                                <td className="Balance">
                                                     {(e.balance / Math.pow(10, e.contract_decimals))}
                                                 </td>
-                                                <td scope="row" className="Balance24h deactive-table">
+                                                <td className="Balance24h deactive-table">
                                                     {(e.balance_24h / Math.pow(10, e.contract_decimals))}
                                                 </td>
-                                                <td scope="row" className="QuoteRate">
+                                                <td className="QuoteRate">
                                                     {e.quote_rate}
                                                 </td>
-                                                <td scope="row" className="QuoteRate24h deactive-table">
+                                                <td className="QuoteRate24h deactive-table">
                                                     {e.quote_rate_24h}
                                                 </td>
-                                                <td scope="row" className="Quote">
+                                                <td className="Quote">
                                                     {e.quote}
                                                 </td>
-                                                <td scope="row" className="Quote24h deactive-table">
+                                                <td className="Quote24h deactive-table">
                                                     {e.quote_24h}
                                                 </td>
                                                 <td>
@@ -1420,7 +1430,7 @@ function AllBalances() {
                                                         >
                                                             <i className="fas fa-ellipsis-v" />
                                                         </DropdownToggle>
-                                                        <DropdownMenu className="dropdown-menu-arrow" left>
+                                                        <DropdownMenu className="dropdown-menu-arrow" >
                                                             <DropdownItem
                                                                 href="#pablo"
                                                                 onClick={d => updateSingleBalance(d , e.owner , e.contract_address )}

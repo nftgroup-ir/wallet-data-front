@@ -20,7 +20,6 @@
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   FormGroup,
   Form,
@@ -28,10 +27,9 @@ import {
   InputGroupAddon,
   InputGroupText,
   InputGroup,
-  Row,
   Col,
 } from "reactstrap";
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
 
 
@@ -66,9 +64,9 @@ const Login = () => {
     })
       
       .then((response) => {
-        if(response.status == 400) {
+        if(response.status === 400) {
           document.getElementById('errorrr').innerHTML = "check your username or password!"
-        }else if (response.status == 500 ){
+        }else if (response.status === 500 ){
           document.getElementById('errorrr').innerHTML = "something went wrong!"
         }
         return response.json()

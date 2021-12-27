@@ -18,16 +18,12 @@
 
 // reactstrap components
 import {
-  Button,
   Card,
   CardHeader,
   CardBody,
   FormGroup,
   Form,
   Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   Row,
   Container,
   Col,
@@ -101,7 +97,6 @@ const Lottery = () => {
                               className="form-control-alternative"
                               name='firstname'
                               id="input-Firstname"
-                              required
                               placeholder="First Name"
                               type="text"
                               value={firstname}
@@ -122,7 +117,6 @@ const Lottery = () => {
                               className="form-control-alternative"
                               name='lastname'
                               id="input-Lastname"
-                              required
                               placeholder="Last Name"
                               type="text"
                               value={lastname}
@@ -145,7 +139,6 @@ const Lottery = () => {
                               className="form-control-alternative"
                               name='email'
                               id="input-Email"
-                              required
                               placeholder="Email"
                               type="email"
                               value={email}
@@ -166,7 +159,6 @@ const Lottery = () => {
                               className="form-control-alternative"
                               name='walletaddress'
                               id="input-WalletAddress"
-                              required
                               placeholder="Wallet Address"
                               type="text"
                               value={walletaddress}

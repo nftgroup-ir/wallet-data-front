@@ -1,31 +1,23 @@
 import {
-    Badge,
     Card,
     CardHeader,
     InputGroupText,
     InputGroupAddon,
     CardFooter,
-    Label,
     DropdownMenu,
-    Dropdown,
     DropdownItem,
     UncontrolledDropdown,
     Input,
     InputGroup,
     DropdownToggle,
-    Media,
     Pagination,
     Col,
     Button,
-    Nav,
-    Option,
     PaginationItem,
     PaginationLink,
-    Progress,
     Table,
     Container,
     Row,
-    UncontrolledTooltip,
     FormGroup,
 } from "reactstrap";
 // core components
@@ -36,7 +28,6 @@ import React, { useState, useEffect, useRef } from 'react'
 
 
 function AllTransactions() {
-    const [allTransactions, setAllTransactions] = useState([])
     const [csvItems, setcsvItems] = useState([""])
     const [NonceSortBy, setNonceSortBy] = useState("none")
     const [ValueSortBy, setValueSortBy] = useState("none")
@@ -53,71 +44,71 @@ function AllTransactions() {
     const [nextPageUrl, setnextPage] = useState("")
     const [previousPageUrl, setpreviousPage] = useState("")
     const [allData, setallData] = useState(1)
-    const data = [
-        {
-            id: 201,
-            hash: "0x7ca358fea3249d8c1a92dc2b95381c6a3a332d428595a5b2efc8c2ea669a6755",
-            nonc: null,
-            transaction_index: null,
-            from_address: "0xf778130cda40056ed0b48c42421020cef88a62e1",
-            to_address: "0xe304283c3e60cefaf7ea514007cf4e8fdc3d869d",
-            value: 659309389,
-            gas: null,
-            gas_price: 93425618283,
-            input: null,
-            receipt_cumulative_gas_used: null,
-            receipt_gas_used: 59076,
-            receipt_contract_address: null,
-            receipt_root: null,
-            receipt_status: null,
-            block_timestamp: "2021-12-06 - 10:39:13",
-            block_number: null,
-            block_hash: null,
-            parent: 5
-        },
-        {
-            id: 202,
-            hash: "0x1438e8605835275e6a247bd57c95da713c63abc818644579ea85ffed6ee40649",
-            nonc: null,
-            transaction_index: null,
-            from_address: "0x9b82087aeac5ede362744d6b4727e4d3d852f404",
-            to_address: "0x2373c5dc96238a64ce4062e74000fd3dacfd3bf7",
-            value: 782332987343,
-            gas: null,
-            gas_price: 75376093833,
-            input: null,
-            receipt_cumulative_gas_used: null,
-            receipt_gas_used: 100965,
-            receipt_contract_address: null,
-            receipt_root: null,
-            receipt_status: null,
-            block_timestamp: "2021-12-06 - 10:39:13",
-            block_number: null,
-            block_hash: null,
-            parent: 5
-        },
-        {
-            id: 203,
-            hash: "0xd253584563a7863ded5c3e01a92f2b62e9e00edd47542ad0d4d8afac0f6beed8",
-            nonc: null,
-            transaction_index: null,
-            from_address: "0x1b962a286e9bea7b51d45a3fb176673405d3ff0f",
-            to_address: "0x265befe2b1a0f4f646dea96ba09c1656b74bda91",
-            value: 2398327474372,
-            gas: null,
-            gas_price: 84852909601,
-            input: null,
-            receipt_cumulative_gas_used: null,
-            receipt_gas_used: 164682,
-            receipt_contract_address: null,
-            receipt_root: null,
-            receipt_status: null,
-            block_timestamp: "2021-12-06 - 10:39:13",
-            block_number: null,
-            block_hash: null,
-            parent: 5
-        },
-    ]
+    // const data = [
+    //     {
+    //         id: 201,
+    //         hash: "0x7ca358fea3249d8c1a92dc2b95381c6a3a332d428595a5b2efc8c2ea669a6755",
+    //         nonc: null,
+    //         transaction_index: null,
+    //         from_address: "0xf778130cda40056ed0b48c42421020cef88a62e1",
+    //         to_address: "0xe304283c3e60cefaf7ea514007cf4e8fdc3d869d",
+    //         value: 659309389,
+    //         gas: null,
+    //         gas_price: 93425618283,
+    //         input: null,
+    //         receipt_cumulative_gas_used: null,
+    //         receipt_gas_used: 59076,
+    //         receipt_contract_address: null,
+    //         receipt_root: null,
+    //         receipt_status: null,
+    //         block_timestamp: "2021-12-06 - 10:39:13",
+    //         block_number: null,
+    //         block_hash: null,
+    //         parent: 5
+    //     },
+    //     {
+    //         id: 202,
+    //         hash: "0x1438e8605835275e6a247bd57c95da713c63abc818644579ea85ffed6ee40649",
+    //         nonc: null,
+    //         transaction_index: null,
+    //         from_address: "0x9b82087aeac5ede362744d6b4727e4d3d852f404",
+    //         to_address: "0x2373c5dc96238a64ce4062e74000fd3dacfd3bf7",
+    //         value: 782332987343,
+    //         gas: null,
+    //         gas_price: 75376093833,
+    //         input: null,
+    //         receipt_cumulative_gas_used: null,
+    //         receipt_gas_used: 100965,
+    //         receipt_contract_address: null,
+    //         receipt_root: null,
+    //         receipt_status: null,
+    //         block_timestamp: "2021-12-06 - 10:39:13",
+    //         block_number: null,
+    //         block_hash: null,
+    //         parent: 5
+    //     },
+    //     {
+    //         id: 203,
+    //         hash: "0xd253584563a7863ded5c3e01a92f2b62e9e00edd47542ad0d4d8afac0f6beed8",
+    //         nonc: null,
+    //         transaction_index: null,
+    //         from_address: "0x1b962a286e9bea7b51d45a3fb176673405d3ff0f",
+    //         to_address: "0x265befe2b1a0f4f646dea96ba09c1656b74bda91",
+    //         value: 2398327474372,
+    //         gas: null,
+    //         gas_price: 84852909601,
+    //         input: null,
+    //         receipt_cumulative_gas_used: null,
+    //         receipt_gas_used: 164682,
+    //         receipt_contract_address: null,
+    //         receipt_root: null,
+    //         receipt_status: null,
+    //         block_timestamp: "2021-12-06 - 10:39:13",
+    //         block_number: null,
+    //         block_hash: null,
+    //         parent: 5
+    //     },
+    // ]
     const Filters = useRef()
 
     async function setFilters(e) {
@@ -211,7 +202,25 @@ function AllTransactions() {
         getData()
 
     }, [])
-    const endRangeeeee = 200
+
+    async function removeFilters(e) {
+        e.preventDefault()
+        await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + sessionStorage.getItem('token')
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                setcsvItems(data.results)
+                setnextPage(data.next)
+                setpreviousPage(data.previous)
+                setallData(data.count)
+                console.log(data)
+            })
+    }
     const startRangeeeee = 1
     async function previousPage(e) {
         e.preventDefault()
@@ -295,7 +304,7 @@ function AllTransactions() {
                                             >
                                                 Columns
                                             </DropdownToggle>
-                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                 <DropdownItem
                                                     href="#pablo"
                                                     id="Hash"
@@ -437,7 +446,7 @@ function AllTransactions() {
                                         <Button
                                             color="primary"
                                             href="#pablo"
-                                            onClick={(e) => e.preventDefault()}
+                                            onClick={(e) => removeFilters(e)}
                                             size="sm"
                                         >
                                             Remove filters
@@ -478,7 +487,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -516,7 +525,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -578,7 +587,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -616,7 +625,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -692,7 +701,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -754,7 +763,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -816,7 +825,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -879,7 +888,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -917,7 +926,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -979,7 +988,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -1041,7 +1050,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -1079,7 +1088,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -1117,7 +1126,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -1155,7 +1164,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -1193,7 +1202,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -1231,7 +1240,7 @@ function AllTransactions() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -1266,7 +1275,7 @@ function AllTransactions() {
                                                 {/* <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         <i className="ni ni-lock-circle-open" />
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1277,7 +1286,7 @@ function AllTransactions() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1330,7 +1339,7 @@ function AllTransactions() {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1341,7 +1350,7 @@ function AllTransactions() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1384,7 +1393,7 @@ function AllTransactions() {
                                                 <Input bsSize="sm" id="TxIndexValue" />
                                                 {/* <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1395,7 +1404,7 @@ function AllTransactions() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1458,7 +1467,7 @@ function AllTransactions() {
                                                 <InputGroupAddon addonType="prepend" >
                                                     <InputGroupText>
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1469,7 +1478,7 @@ function AllTransactions() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1513,7 +1522,7 @@ function AllTransactions() {
                                                 <InputGroupAddon addonType="prepend" >
                                                     <InputGroupText>
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1524,7 +1533,7 @@ function AllTransactions() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1568,7 +1577,7 @@ function AllTransactions() {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1579,7 +1588,7 @@ function AllTransactions() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1628,7 +1637,7 @@ function AllTransactions() {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1639,7 +1648,7 @@ function AllTransactions() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1683,7 +1692,7 @@ function AllTransactions() {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1694,7 +1703,7 @@ function AllTransactions() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1766,13 +1775,13 @@ function AllTransactions() {
                                     {
                                         csvItems.map(e => (
                                             <tr>
-                                                <td scope="row" className="Hash">
+                                                <td  className="Hash">
                                                     {e.hash}
                                                 </td>
-                                                <td scope="row" className="Nonc deactive-table">
+                                                <td  className="Nonc deactive-table">
                                                     {e.nonc}
                                                 </td>
-                                                <td scope="row" className="TransactionIndex deactive-table">
+                                                <td  className="TransactionIndex deactive-table">
                                                     {e.transaction_index}
                                                 </td>
                                                 <td className="From">
@@ -1785,39 +1794,39 @@ function AllTransactions() {
                                                     {/* <TxData props={e.address} id={e.id} /> */}
                                                     {e.value}
                                                 </td>
-                                                <td scope="row" className="Gas deactive-table">
+                                                <td  className="Gas deactive-table">
                                                     {e.gas}
                                                 </td>
                                                 <td className="GasPrice">
                                                     {/* <NftData props={e.address} id={e.id} /> */}
                                                     {e.gas_price}
                                                 </td>
-                                                <td scope="row" className="Input deactive-table">
+                                                <td  className="Input deactive-table">
                                                     {e.input}
                                                 </td>
-                                                <td scope="row" className="ReceiptCumulativeGasUsed deactive-table">
+                                                <td  className="ReceiptCumulativeGasUsed deactive-table">
                                                     {e.receipt_cumulative_gas_used}
                                                 </td>
-                                                <td scope="row" className="ReceiptGasUsed deactive-table">
+                                                <td  className="ReceiptGasUsed deactive-table">
                                                     {e.receipt_gas_used}
                                                 </td>
-                                                <td scope="row" className="ReceiptContractAddress deactive-table">
+                                                <td  className="ReceiptContractAddress deactive-table">
                                                     {e.receipt_contract_address}
                                                 </td>
-                                                <td scope="row" className="ReceiptRoot deactive-table">
+                                                <td  className="ReceiptRoot deactive-table">
                                                     {e.receipt_root}
                                                 </td>
-                                                <td scope="row" className="ReceiptStatus deactive-table">
+                                                <td  className="ReceiptStatus deactive-table">
                                                     {e.receipt_status}
                                                 </td>
                                                 <td className="Time">
                                                     {/* <BalanceData props={e.address} id={e.id} /> */}
                                                     {e.block_timestamp}
                                                 </td>
-                                                <td scope="row" className="BlockNumber deactive-table">
+                                                <td  className="BlockNumber deactive-table">
                                                     {e.block_number}
                                                 </td>
-                                                <td scope="row" className="BlockHash deactive-table">
+                                                <td  className="BlockHash deactive-table">
                                                     {e.block_hash}
                                                 </td>
                                             </tr>

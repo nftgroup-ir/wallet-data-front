@@ -1,33 +1,23 @@
 import {
-    Badge,
     Card,
     CardHeader,
     InputGroupText,
     InputGroupAddon,
     CardFooter,
-    Label,
     DropdownMenu,
-    Dropdown,
     DropdownItem,
     UncontrolledDropdown,
     Input,
     InputGroup,
     DropdownToggle,
-    Media,
     Pagination,
     Col,
     Button,
-    Nav,
-    Option,
     PaginationItem,
     PaginationLink,
-    Progress,
     Table,
     Container,
-    Popover,
-    PopoverBody,
     Row,
-    UncontrolledTooltip,
     FormGroup,
 } from "reactstrap";
 // core components
@@ -38,7 +28,6 @@ import React, { useState, useEffect, useRef } from 'react'
 
 
 function AllNFTs() {
-    const [allTransactions, setAllTransactions] = useState([])
     const [csvItems, setcsvItems] = useState([""])
     const [TokenIdSortBy, settokenIdSortBy] = useState("none")
     const [BlockNumberMintedSortBy, setblockNumberMintedSortBy] = useState("none")
@@ -53,60 +42,6 @@ function AllNFTs() {
     const [nextPageUrl, setnextPage] = useState("")
     const [previousPageUrl, setpreviousPage] = useState("")
     const [allData, setallData] = useState(1)
-    const [IsOpen, setIsOpen] = useState(false)
-    const data = [
-        {
-            name: "SecurityFundBasket",
-            amount: 1,
-            frozen: 0,
-            symbol: "SFB",
-            syncing: 1,
-            is_valid: 0,
-            metadata: null,
-            owner_of: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-            token_id: 24,
-            synced_at: null,
-            token_uri: null,
-            block_number: 9188006,
-            contract_type: "ERC721",
-            token_address: "0xc9c77b0c2ee79cec54b3af7039f8a7bc684e48bd",
-            block_number_minted: 9188006
-        },
-        {
-            name: "SecurityFundBasket",
-            amount: 1,
-            frozen: 0,
-            symbol: "SFB",
-            syncing: 1,
-            is_valid: 0,
-            metadata: null,
-            owner_of: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-            token_id: 24,
-            synced_at: null,
-            token_uri: null,
-            block_number: 9188006,
-            contract_type: "ERC721",
-            token_address: "0xc9c77b0c2ee79cec54b3af7039f8a7bc684e48bd",
-            block_number_minted: 9188006
-        },
-        {
-            name: "SecurityFundBasket",
-            amount: 1,
-            frozen: 0,
-            symbol: "SFB",
-            syncing: 1,
-            is_valid: 0,
-            metadata: null,
-            owner_of: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-            token_id: 24,
-            synced_at: null,
-            token_uri: null,
-            block_number: 9188006,
-            contract_type: "ERC721",
-            token_address: "0xc9c77b0c2ee79cec54b3af7039f8a7bc684e48bd",
-            block_number_minted: 9188006
-        },
-    ]
     const Filters = useRef()
 
     async function setFilters(e) {
@@ -189,7 +124,25 @@ function AllNFTs() {
         }
         getData()
     }, [])
-    const endRangeeeee = 200
+
+    async function removeFilters(e) {
+        e.preventDefault()
+        await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + sessionStorage.getItem('token')
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                setcsvItems(data.results)
+                setnextPage(data.next)
+                setpreviousPage(data.previous)
+                setallData(data.count)
+                console.log(data)
+            })
+    }
     const startRangeeeee = 1
 
     async function previousPage(e) {
@@ -237,19 +190,6 @@ function AllNFTs() {
         document.querySelectorAll('.' + e).forEach((d) => {
             d.classList.toggle('deactive-table')
         })
-
-        //    var x = document.getElementsByClassName(`.${e}`)
-        //    console.log(x)
-        //    for(var i=0; i<x.length;i++){
-        //        x[i].style.display = "none"
-        //    }
-    }
-
-    const onHover = () => {
-        setIsOpen(true)
-    }
-    const onHoverLeave = () => {
-        setIsOpen(false)
     }
 
 
@@ -281,7 +221,7 @@ function AllNFTs() {
                                             >
                                                 Columns
                                             </DropdownToggle>
-                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                 <DropdownItem
                                                     href="#pablo"
                                                     id="Name"
@@ -407,7 +347,7 @@ function AllNFTs() {
                                         <Button
                                             color="primary"
                                             href="#pablo"
-                                            onClick={(e) => e.preventDefault()}
+                                            onClick={(e) => removeFilters(e)}
                                             size="sm"
                                         >
                                             Remove filters
@@ -452,7 +392,7 @@ function AllNFTs() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -586,7 +526,7 @@ function AllNFTs() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -652,7 +592,7 @@ function AllNFTs() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -789,7 +729,7 @@ function AllNFTs() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -830,7 +770,7 @@ function AllNFTs() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -901,7 +841,7 @@ function AllNFTs() {
                                                 >
                                                     <i className="fas fa-ellipsis-v" />
                                                 </DropdownToggle>
-                                                <DropdownMenu className="dropdown-menu-arrow" left>
+                                                <DropdownMenu className="dropdown-menu-arrow" >
                                                     <DropdownItem header>
                                                         Sort
                                                     </DropdownItem>
@@ -968,7 +908,7 @@ function AllNFTs() {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -979,7 +919,7 @@ function AllNFTs() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1053,7 +993,7 @@ function AllNFTs() {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1064,7 +1004,7 @@ function AllNFTs() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1133,7 +1073,7 @@ function AllNFTs() {
                                                 <InputGroupAddon addonType="prepend">
                                                     <InputGroupText >
                                                         {/* <i className="ni ni-lock-circle-open" /> */}
-                                                        <UncontrolledDropdown split>
+                                                        <UncontrolledDropdown >
                                                             <DropdownToggle
                                                                 className="btn-icon-only text-light"
                                                                 href="#pablo"
@@ -1144,7 +1084,7 @@ function AllNFTs() {
                                                             >
                                                                 <i className="fas fa-ellipsis-v" />
                                                             </DropdownToggle>
-                                                            <DropdownMenu className="dropdown-menu-arrow" left>
+                                                            <DropdownMenu className="dropdown-menu-arrow" >
                                                                 <DropdownItem header>
                                                                     Filter by
                                                                 </DropdownItem>
@@ -1187,7 +1127,7 @@ function AllNFTs() {
                                     {
                                         csvItems.map(e => (
                                             <tr>
-                                                <td scope="row" className="Name">
+                                                <td className="Name">
                                                     {e.name}
                                                 </td>
                                                 <td className="Amount">
@@ -1205,7 +1145,7 @@ function AllNFTs() {
                                                 <td className="IsValid">
                                                     {e.is_valid}
                                                 </td>
-                                                <td scope="row" className="Metadata deactive-table OverFlow">
+                                                <td className="Metadata deactive-table OverFlow">
                                                     {e.metadata}
                                                 </td>
                                                 <td className="Owner">
@@ -1254,7 +1194,7 @@ function AllNFTs() {
                                                     <span className="sr-only">Previous</span>
                                                 </PaginationLink>
                                             </PaginationItem>
-                                            <PaginationItem>
+                                            {/* <PaginationItem>
                                                 <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
                                                     1
                                                 </PaginationLink>
@@ -1268,7 +1208,7 @@ function AllNFTs() {
                                                 <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
                                                     3
                                                 </PaginationLink>
-                                            </PaginationItem>
+                                            </PaginationItem> */}
                                             <PaginationItem>
                                                 <PaginationLink
                                                     aria-label="Next"

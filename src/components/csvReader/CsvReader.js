@@ -5,7 +5,6 @@ import Tables from 'views/examples/Tables';
 export default function CsvReader() {
     const [csvFile, setCsvFile] = useState();
     const [csvArray, setCsvArray] = useState([]);
-    const [data, setData] = useState()
 
 
     const loginButton = {
@@ -15,9 +14,7 @@ export default function CsvReader() {
         borderRadius: "30px",
         margin: '50px'
     }
-    const table = {
-        borderTop: '1px solid black'
-    }
+    
     function chekEmpty(params) {
         if (params.address !== '') {
             return params
