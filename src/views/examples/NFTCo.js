@@ -995,7 +995,9 @@ const NFTCo = () => {
                         </td>
                         <td className="Tags">
                           {/* <NftData props={e.address} id={e.id} /> */}
-                          {e.company_features}
+                          {e.features.map(a =>(
+                            `${a.name} , `
+                          ))}
                         </td>
                         {/* <td className="Balance">
                           <Button
