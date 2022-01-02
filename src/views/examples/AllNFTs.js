@@ -110,7 +110,7 @@ function AllNFTs() {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + sessionStorage.getItem('token')
+                    // 'Authorization': 'Token ' + sessionStorage.getItem('token')
                 },
             })
                 .then(res => res.json())
@@ -127,7 +127,7 @@ function AllNFTs() {
 
     async function removeFilters(e) {
         e.preventDefault()
-        await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
+        await fetch('http://65.108.59.117:7001/api/csv/nft/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -341,6 +341,14 @@ function AllNFTs() {
                                                     onClick={e => handleColumn("BlockNumberMinted")}
                                                 >
                                                     Block Number Minted
+                                                </DropdownItem>
+                                                <DropdownItem
+                                                    href="#pablo"
+                                                    id="Tags"
+                                                    className="mmm"
+                                                    onClick={e => handleColumn("Tags")}
+                                                >
+                                                    Tags
                                                 </DropdownItem>
                                             </DropdownMenu>
                                         </UncontrolledDropdown>
@@ -893,6 +901,9 @@ function AllNFTs() {
                                                 </DropdownMenu>
                                             </UncontrolledDropdown>
                                         </th>
+                                        <th scope="col" className="Tags">
+                                            Tags
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1171,6 +1182,11 @@ function AllNFTs() {
                                                 </td>
                                                 <td className="BlockNumberMinted deactive-table">
                                                     {e.block_number_minted}
+                                                </td>
+                                                <td className="Tags">
+                                                    {e.nft_feature? e.nft_feature.map(a => (
+                                                        `${a.name}, `
+                                                    )): ""}
                                                 </td>
                                             </tr>
 
