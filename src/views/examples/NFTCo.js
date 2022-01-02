@@ -44,12 +44,6 @@ import React, { useState, useEffect, useRef } from 'react'
 
 
 const NFTCo = () => {
-  const [NFTSortBy, setNFTSort] = useState("none")
-  const [txSortBy, settxSort] = useState("none")
-  const [balanceSortBy, setbalanceSort] = useState("none")
-  const [NFTOperator, setNFTOperator] = useState("eq")
-  const [txOperator, settxOperator] = useState("eq")
-  const [balanceOperator, setbalanceOperator] = useState("eq")
   const [csvItems, setcsvItems] = useState([])
   const [nextPageUrl, setnextPage] = useState("")
   const [previousPageUrl, setpreviousPage] = useState("")
@@ -59,23 +53,20 @@ const NFTCo = () => {
 
   async function setFilters(e) {
     e ? e.preventDefault() : console.log("-")
-    const AddressInput = document.getElementById("addressInput").value
-    const NFTCount = document.getElementById("NFTInput").value
-    const TxCount = document.getElementById("txInput").value
-    const BalanceValue = document.getElementById("balanceInput").value
-    var filterObject = {
-      AddressInput: AddressInput,
-      NFTSortBy: NFTSortBy,
-      NFTCount: NFTCount,
-      NFTOperator: NFTOperator,
-      TxSortBy: txSortBy,
-      TxCount: TxCount,
-      TxOperator: txOperator,
-      BalanceSortBy: balanceSortBy,
-      BalanceValue: BalanceValue,
-      BalanceOperator: balanceOperator,
+    const nameInput = document.getElementById("nameInput").value
+    const urlInput = document.getElementById("urlInput").value
+    const tagInput = document.getElementById("tagInput").value
+    const tagArray = tagInput.split(" ")
+    var s = ""
+    for (var i = 0 ; i < tagArray.length ; i++){
+      s += "&tagInput="+tagArray[i]
     }
-    fetch(`http://65.108.59.117:7001/api/csv?AddressInput=${filterObject.AddressInput}&NFTSortBy=${filterObject.NFTSortBy}&NFTCount=${filterObject.NFTCount}&NFTOperator=${filterObject.NFTOperator}&TxSortBy=${filterObject.TxSortBy}&TxCount=${filterObject.TxCount}&TxOperator=${filterObject.TxOperator}&BalanceSortBy=${filterObject.BalanceSortBy}&BalanceValue=${filterObject.BalanceValue}&BalanceOperator=${filterObject.BalanceOperator}`, {
+    var filterObject = {
+      nameInput: nameInput,
+      urlInput: urlInput,
+      tagInput: tagInput,
+    }
+    fetch(`http://65.108.59.117:7001/api/csv/nftcompany/?nameInput=${filterObject.nameInput}&urlInput=${filterObject.urlInput}${s}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -105,7 +96,7 @@ const NFTCo = () => {
   // }
   useEffect(() => {
     async function getData() {
-      await fetch("http://65.108.59.117:7001/api/csv/nftcompany/", {
+      await fetch(`http://65.108.59.117:7001/api/csv/nftcompany/?nameInput=&urlInput=&tagInput=`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -126,21 +117,21 @@ const NFTCo = () => {
 
   async function removeFilters(e) {
     e.preventDefault()
-    // await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
-    //     method: 'GET',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': 'Token ' + sessionStorage.getItem('token')
-    //     },
-    // })
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         setcsvItems(data.results)
-    //         setnextPage(data.next)
-    //         setpreviousPage(data.previous)
-    //         setallData(data.count)
-    //         console.log(data)
-    //     })
+    await fetch('http://65.108.59.117:7001/api/csv/nftcompany/?nameInput=&urlInput=&tagInput=', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': 'Token ' + sessionStorage.getItem('token')
+        },
+    })
+        .then(res => res.json())
+        .then(data => {
+            setcsvItems(data.results)
+              // setnextPage(data.next)
+              // setpreviousPage(data.previous)
+              // setallData(data.count)
+              // console.log(data)
+        })
 }
 
   const startRangeeeee = 1
@@ -206,17 +197,6 @@ const NFTCo = () => {
                     <h3 className="text-black mb-0">NFT Company</h3>
                   </Col>
                   <Col className="text-right" xs="4">
-                    {/* <InputGroup className="input-group-alternative mb-2">
-                      <Input bsSize="sm" id="tokenUpdate" />
-                      <Button
-                      color="primary"
-                      href="#pablo"
-                      onClick={(e) => updateTokens(e)}
-                      size="sm"
-                    >
-                      UPDATE
-                    </Button>
-                    </InputGroup> */}
                     <UncontrolledDropdown>
                       <DropdownToggle
                         className="text-light"
@@ -237,22 +217,6 @@ const NFTCo = () => {
                         >
                           Name
                         </DropdownItem>
-                        {/* <DropdownItem
-                          href="#pablo"
-                          id="Email"
-                          className="mmm"
-                          onClick={e => handleColumn("Email")}
-                        >
-                          Email
-                        </DropdownItem> */}
-                        {/* <DropdownItem
-                          href="#pablo"
-                          id="Point"
-                          className="mmm"
-                          onClick={e => handleColumn("Point")}
-                        >
-                          Point
-                        </DropdownItem> */}
                         <DropdownItem
                           href="#pablo"
                           id="URL"
@@ -295,7 +259,6 @@ const NFTCo = () => {
                     >
                       Export CSV
                     </Button>
-                    {/* <Nav navbar>{createLinks(ArticlesRoutes)}</Nav> */}
                   </Col>
                 </Row>
               </CardHeader>
@@ -304,678 +267,32 @@ const NFTCo = () => {
                   <tr>
                     <th scope="col" className="Name">
                       Name
-                      {/* <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" >
-                          <DropdownItem header>
-                            Sort
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Ascending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Descending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Unsort
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown> */}
                     </th>
-                    {/* <th scope="col" className="Email">
-                      Email
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" >
-                          <DropdownItem header>
-                            Sort
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Ascending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Descending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Unsort
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </th>
-                    <th scope="col" className="Point">
-                      Point
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" left >
-                          <DropdownItem header>
-                            Sort
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Ascending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Descending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                          >
-                            Unsort
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </th> */}
                     <th scope="col" className="URL">
                       URL
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" >
-                          <DropdownItem header>
-                            Sort
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => {
-                              e.preventDefault()
-                              settxSort("ASC")
-                              setNFTSort("none")
-                              setbalanceSort("none")
-                            }}
-                          >
-                            Ascending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => {
-                              e.preventDefault()
-                              settxSort("DESC")
-                              setNFTSort("none")
-                              setbalanceSort("none")
-                            }}
-                          >
-                            Descending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => {
-                              e.preventDefault()
-                              settxSort("none")
-                              setNFTSort("none")
-                              setbalanceSort("none")
-                            }}
-                          >
-                            Unsort
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
                     </th>
                     <th scope="col" className="Tags">
                       Tags
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" >
-                          <DropdownItem header>
-                            Sort
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => {
-                              e.preventDefault()
-                              settxSort("none")
-                              setNFTSort("ASC")
-                              setbalanceSort("none")
-                            }}
-                          >
-                            Ascending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => {
-                              e.preventDefault()
-                              settxSort("none")
-                              setNFTSort("DESC")
-                              setbalanceSort("none")
-                            }}
-                          >
-                            Descending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => {
-                              e.preventDefault()
-                              settxSort("none")
-                              setNFTSort("none")
-                              setbalanceSort("none")
-                            }}
-                          >
-                            Unsort
-                          </DropdownItem>
-
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
                     </th>
-                    {/* <th scope="col" className="Balance">
-                      Balance
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" >
-                          <DropdownItem header>
-                            Sort
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => {
-                              e.preventDefault()
-                              settxSort("none")
-                              setNFTSort("none")
-                              setbalanceSort("ASC")
-                            }}
-                          >
-                            Ascending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => {
-                              e.preventDefault()
-                              settxSort("none")
-                              setNFTSort("none")
-                              setbalanceSort("DESC")
-                            }}
-                          >
-                            Descending
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={e => {
-                              e.preventDefault()
-                              settxSort("none")
-                              setNFTSort("none")
-                              setbalanceSort("none")
-                            }}
-                          >
-                            Unsort
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </th>
-                    <th>
-                      Option
-                    </th> */}
-
                   </tr>
                 </thead>
                 <tbody>
                   <tr ref={Filters}>
                     <td className="Name">
                       <InputGroup>
-                        <Input bsSize="sm" id="addressInput" />
-                        {/* <InputGroupAddon addonType="prepend">
-                          <InputGroupText >
-                            <i className="ni ni-lock-circle-open" />
-                            <UncontrolledDropdown >
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" >
-                                <DropdownItem header>
-                                  Filter by
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Greater then And Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Greater then
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Smaller then and Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Smaller then
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Dismiss Filter
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon> */}
-
+                        <Input bsSize="sm" id="nameInput" />
                       </InputGroup>
                     </td>
-                    {/* <td className="Email">
-                      <InputGroup>
-                        <Input bsSize="sm" />
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText >
-                            <i className="ni ni-lock-circle-open" />
-                            <UncontrolledDropdown >
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" >
-                                <DropdownItem header>
-                                  Filter by
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Greater then And Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Greater then
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Smaller then and Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Smaller then
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Dismiss Filter
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon>
-
-                      </InputGroup>
-                    </td>
-                    <td className="Point">
-                      <InputGroup>
-                        <Input bsSize="sm" />
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText >
-                            <i className="ni ni-lock-circle-open" />
-                            <UncontrolledDropdown >
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" >
-                                <DropdownItem header>
-                                  Filter by
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Greater then And Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Greater then
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Smaller then and Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Smaller then
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Dismiss Filter
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon>
-
-                      </InputGroup>
-                    </td> */}
                     <td className="URL">
                       <InputGroup>
-                        <Input bsSize="sm" id="txInput" />
-                        <InputGroupAddon addonType="prepend" >
-                          <InputGroupText>
-                            {/* <i className="ni ni-lock-circle-open" /> */}
-                            <UncontrolledDropdown >
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" >
-                                <DropdownItem header>
-                                  Filter by
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => {
-                                    e.preventDefault()
-                                    settxOperator("eq")
-                                  }}
-                                >
-                                  Equals
-                                </DropdownItem>
-                                {/* <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Greater then And Equals
-                                </DropdownItem> */}
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => {
-                                    e.preventDefault()
-                                    settxOperator("gt")
-                                  }}
-                                >
-                                  Greater then
-                                </DropdownItem>
-                                {/* <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Smaller then and Equals
-                                </DropdownItem> */}
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => {
-                                    e.preventDefault()
-                                    settxOperator("lt")
-                                  }}
-                                >
-                                  Smaller then
-                                </DropdownItem>
-                                {/* <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Dismiss Filter
-                                </DropdownItem> */}
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon>
-
+                        <Input bsSize="sm" id="urlInput" />
                       </InputGroup>
                     </td>
                     <td className="Tags">
                       <InputGroup>
-                        <Input bsSize="sm" id="NFTInput" />
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText >
-                            {/* <i className="ni ni-lock-circle-open" /> */}
-                            <UncontrolledDropdown >
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" >
-                                <DropdownItem header>
-                                  Filter by
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => {
-                                    e.preventDefault()
-                                    setNFTOperator("eq")
-                                  }}
-                                >
-                                  Equals
-                                </DropdownItem>
-                                {/* <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Greater then And Equals
-                                </DropdownItem> */}
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => {
-                                    e.preventDefault()
-                                    setNFTOperator("gt")
-                                  }}
-                                >
-                                  Greater then
-                                </DropdownItem>
-                                {/* <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Smaller then and Equals
-                                </DropdownItem> */}
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => {
-                                    e.preventDefault()
-                                    setNFTOperator("lt")
-                                  }}
-                                >
-                                  Smaller then
-                                </DropdownItem>
-                                {/* <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => e.preventDefault()}
-                                >
-                                  Dismiss Filter
-                                </DropdownItem> */}
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon>
-
+                        <Input bsSize="sm" id="tagInput" />
                       </InputGroup>
                     </td>
-                    {/* <td className="Balance">
-                      <InputGroup>
-                        <Input bsSize="sm" id="balanceInput" />
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText >
-                            <UncontrolledDropdown >
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={e => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu className="dropdown-menu-arrow" >
-                                <DropdownItem header>
-                                  Filter by
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => {
-                                    e.preventDefault()
-                                    setbalanceOperator("eq")
-                                  }}
-                                >
-                                  Equals
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => {
-                                    e.preventDefault()
-                                    setbalanceOperator("gt")
-                                  }}
-                                >
-                                  Greater then
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={e => {
-                                    e.preventDefault()
-                                    setbalanceOperator("lt")
-                                  }}
-                                >
-                                  Smaller then
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </InputGroupText>
-                        </InputGroupAddon>
-
-                      </InputGroup>
-                    </td> */}
                   </tr>
                   {
                     csvItems.map(e => (
@@ -990,65 +307,13 @@ const NFTCo = () => {
                           {e.point}
                         </td> */}
                         <td className="URL">
-                          {/* <TxData props={e.address} id={e.id} /> */}
                           <a href={e.site_url}>{e.site_url}</a>
                         </td>
                         <td className="Tags">
-                          {/* <NftData props={e.address} id={e.id} /> */}
                           {e.features.map(a =>(
                             `${a.name} , `
                           ))}
                         </td>
-                        {/* <td className="Balance">
-                          <Button
-                            color="primary"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                            size="sm"
-                          >
-                            Show Balance
-                          </Button>
-                        </td> */}
-                        {/* <td>
-                          <UncontrolledDropdown>
-                            <DropdownToggle
-                              className="btn-icon-only text-light"
-                              href="#pablo"
-                              role="button"
-                              size="sm"
-                              color=""
-                              onClick={e => e.preventDefault()}
-                            >
-                              <i className="fas fa-ellipsis-v" />
-                            </DropdownToggle>
-                            <DropdownMenu className="dropdown-menu-arrow" >
-                              <DropdownItem
-                                href="#pablo"
-                                onClick={() => getSingleWalletData(e.address, 'true', 'true', 'true')}
-                              >
-                                Update NFTs & TX & balance
-                              </DropdownItem>
-                              <DropdownItem
-                                href="#pablo"
-                                onClick={() => getSingleWalletData(e.address, 'true', 'false', 'false')}
-                              >
-                                Update NFTs
-                              </DropdownItem>
-                              <DropdownItem
-                                href="#pablo"
-                                onClick={() => getSingleWalletData(e.address, 'false', 'true', 'false')}
-                              >
-                                Update TXs
-                              </DropdownItem>
-                              <DropdownItem
-                                href="#pablo"
-                                onClick={() => getSingleWalletData(e.address, 'false', 'false', 'true')}
-                              >
-                                Update balance
-                              </DropdownItem>
-                            </DropdownMenu>
-                          </UncontrolledDropdown>
-                        </td> */}
                       </tr>
 
                     ))
