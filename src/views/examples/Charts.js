@@ -16,6 +16,8 @@ import LineChart from "../Charts/LineChart";
 import PieChart from "views/Charts/PieChart";
 
 function Charts() {
+    const [balanceData, setbalanceData] = useState([])
+    
 
     return (
         <div>

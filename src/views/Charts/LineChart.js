@@ -4,8 +4,29 @@ import * as am5xy from "@amcharts/amcharts5/xy";
 
 
 function LineChart() {
+  const [txData, settxData] = useState()
 
     useEffect(() => {
+      async function getData(){
+        await fetch('http://65.108.59.117:7001/api/csv/chart/?address=0xFbDe24Ac8A2051d874a70CB18344dda8F2b54E33&Type=Transaction&fromdate=2016-01-01&todate=2017-01-01&TimeBase=day' , {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+        })
+          .then(res => res.json())
+          .then (data => {
+            console.log(data)
+            settxData(data.result)
+          })
+      }
+
+      getData()
+    }, [])
+
+
+    useEffect(() => {
+      if(txData!=null){
         am5.ready(function() {
 
             // Create root element
@@ -84,7 +105,7 @@ function LineChart() {
               name: "Series",
               xAxis: xAxis,
               yAxis: yAxis,
-              valueYField: "value",
+              valueYField: "total",
               valueXField: "date",
               tooltip: am5.Tooltip.new(root, {
                 labelText: "{valueY}"
@@ -101,7 +122,10 @@ function LineChart() {
             
             // Set data
             var data = generateDatas(1200);
-            series.data.setAll(data);
+            console.log(data)
+            console.log(typeof(txData[1].date))
+            console.log(txData)
+            series.data.setAll(txData);
             
             
             // Make stuff animate on load
@@ -110,7 +134,8 @@ function LineChart() {
             chart.appear(1000, 100);
             
         });
-    }, [])
+      }
+    }, [txData])
 
     return (
         <div>

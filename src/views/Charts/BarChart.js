@@ -5,18 +5,37 @@ import * as am5xy from "@amcharts/amcharts5/xy";
 
 
 function BarChart() {
-    const [balanceData, setbalanceData] = useState([
-        { token: "ETH" , balance: 23453534 },
-        { token: "BTC" , balance: 53454353 },
-        { token: "SXP" , balance: 83454351  },
-        { token: "SLP" , balance: 13234355},
-        { token: "BNB" , balance: 16765783},
-        { token: "THT" , balance: 18346534 },
-        { token: "BSC" , balance: 19346634},
-        { token: "SAND", balance: 22346356 },
-    ])
+    const [balanceData, setbalanceData] = useState(null)
+        // { token: "ETH" , balance: 23453534 },
+        // { token: "BTC" , balance: 53454353 },
+        // { token: "SXP" , balance: 83454351  },
+        // { token: "SLP" , balance: 13234355},
+        // { token: "BNB" , balance: 16765783},
+        // { token: "THT" , balance: 18346534 },
+        // { token: "BSC" , balance: 19346634},
+        // { token: "SAND", balance: 22346356 },
+    
+    useEffect(() => {
+      async function getData(){
+        await fetch('http://65.108.59.117:7001/api/csv/chart/?address=0x00000000219ab540356cbb839cbe05303d7705fa&Type=Balance' , {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+        })
+          .then(res => res.json())
+          .then (data => {
+            setbalanceData(data.result)
+          })
+      }
+
+      getData()
+    }, [])
+
+    
 
     useEffect(() => {
+      if (balanceData!= null){
         am5.ready(function() {
 
             // Create root element
@@ -100,7 +119,7 @@ function BarChart() {
             chart.set("scrollbarX", am5.Scrollbar.new(root, {
                 orientation: "horizontal"
             }));
-            
+            console.log(typeof(balanceData[0].balance))
             xAxis.data.setAll(balanceData);
             series.data.setAll(balanceData);
             
@@ -111,7 +130,10 @@ function BarChart() {
             chart.appear(1000, 100);
             
         })
-}, [])
+      }
+}, [balanceData])
+
+    
 
     return (
         <div>

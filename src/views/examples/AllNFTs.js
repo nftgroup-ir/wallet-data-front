@@ -60,6 +60,7 @@ function AllNFTs() {
         const TokenAddressValue = document.getElementById("TokenAddressValue").value
         const BlockNumberMintedValue = document.getElementById("BlockNumberMintedValue").value
         const OwnerOfValue = document.getElementById("OwnerOfValue").value
+        const TagsValue = document.getElementById("TagsValue").value
         var filterObject = {
             NameValue: NameValue,
             AmountValue: AmountValue,
@@ -85,8 +86,9 @@ function AllNFTs() {
             TokenIdOperator: TokenIdOperator,
             BlockNumberMintedOperator: BlockNumberMintedOperator,
             AmountOperator: AmountOperator,
+            TagsValue: TagsValue
         }
-        fetch(`http://65.108.59.117:7001/api/csv/nft/?NameValue=${filterObject.NameValue}&AmountValue=${filterObject.AmountValue}&FrozenValue=${filterObject.FrozenValue}&SymbolValue=${filterObject.SymbolValue}&SyncingValue=${filterObject.SyncingValue}&IsValidValue=${filterObject.IsValidValue}&MetadataValue=${filterObject.MetadataValue}&TokenIdValue=${filterObject.TokenIdValue}&TokenUriValue=${filterObject.TokenUriValue}&BlockNumberValue=${filterObject.BlockNumberValue}&ContractTypeValue=${filterObject.ContractTypeValue}&TokenAddressValue=${filterObject.TokenAddressValue}&BlockNumberMintedValue=${filterObject.BlockNumberMintedValue}&OwnerOfValue=${filterObject.OwnerOfValue}&TokenIdSortBy=${filterObject.TokenIdSortBy}&BlockNumberMintedSortBy=${filterObject.BlockNumberMintedSortBy}&AmountSortBy=${filterObject.AmountSortBy}&IsValidSortBy=${filterObject.IsValidSortBy}&SyncingSortBy=${filterObject.SyncingSortBy}&FrozenSortBy=${filterObject.FrozenSortBy}&BlockNumberSortBy=${filterObject.BlockNumberSortBy}&TokenIdOperator=${filterObject.TokenIdOperator}&BlockNumberMintedOperator=${filterObject.BlockNumberMintedOperator}&AmountOperator=${filterObject.AmountOperator}`, {
+        fetch(`http://65.108.59.117:7001/api/csv/nft/?NameValue=${filterObject.NameValue}&AmountValue=${filterObject.AmountValue}&FrozenValue=${filterObject.FrozenValue}&SymbolValue=${filterObject.SymbolValue}&SyncingValue=${filterObject.SyncingValue}&IsValidValue=${filterObject.IsValidValue}&MetadataValue=${filterObject.MetadataValue}&TokenIdValue=${filterObject.TokenIdValue}&TokenUriValue=${filterObject.TokenUriValue}&BlockNumberValue=${filterObject.BlockNumberValue}&ContractTypeValue=${filterObject.ContractTypeValue}&TokenAddressValue=${filterObject.TokenAddressValue}&BlockNumberMintedValue=${filterObject.BlockNumberMintedValue}&OwnerOfValue=${filterObject.OwnerOfValue}&TokenIdSortBy=${filterObject.TokenIdSortBy}&BlockNumberMintedSortBy=${filterObject.BlockNumberMintedSortBy}&AmountSortBy=${filterObject.AmountSortBy}&IsValidSortBy=${filterObject.IsValidSortBy}&SyncingSortBy=${filterObject.SyncingSortBy}&FrozenSortBy=${filterObject.FrozenSortBy}&BlockNumberSortBy=${filterObject.BlockNumberSortBy}&TokenIdOperator=${filterObject.TokenIdOperator}&BlockNumberMintedOperator=${filterObject.BlockNumberMintedOperator}&AmountOperator=${filterObject.AmountOperator}&TagsValue=${filterObject.TagsValue}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -1131,6 +1133,11 @@ function AllNFTs() {
                                                     </InputGroupText>
                                                 </InputGroupAddon>
 
+                                            </InputGroup>
+                                        </td>
+                                        <td className="Tags">
+                                            <InputGroup>
+                                                <Input bsSize="sm" id="TagsValue" />
                                             </InputGroup>
                                         </td>
 
