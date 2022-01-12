@@ -24,6 +24,8 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import React, { useState, useEffect, useRef } from 'react'
+import "../../assets/css/CustomCss.css"
+
 
 
 
@@ -1220,7 +1222,7 @@ function AllNFTs() {
                             <CardFooter>
                                 <Row>
                                     <FormGroup row>
-                                        <Pagination>
+                                        <Pagination className="pagination">
                                             <PaginationItem>
                                                 <PaginationLink
                                                     aria-label="Previous"

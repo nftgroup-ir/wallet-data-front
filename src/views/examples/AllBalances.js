@@ -24,6 +24,8 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import React, { useState, useEffect, useRef } from 'react'
+import "../../assets/css/CustomCss.css"
+
 
 
 
@@ -1465,7 +1467,7 @@ function AllBalances() {
                             <CardFooter>
                                 <Row>
                                     <FormGroup row>
-                                        <Pagination>
+                                        <Pagination className="pagination">
                                             <PaginationItem>
                                                 <PaginationLink
                                                     aria-label="Previous"
@@ -1476,7 +1478,7 @@ function AllBalances() {
                                                     <span className="sr-only">Previous</span>
                                                 </PaginationLink>
                                             </PaginationItem>
-                                            <PaginationItem>
+                                            {/* <PaginationItem>
                                                 <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
                                                     1
                                                 </PaginationLink>
@@ -1490,7 +1492,7 @@ function AllBalances() {
                                                 <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
                                                     3
                                                 </PaginationLink>
-                                            </PaginationItem>
+                                            </PaginationItem> */}
                                             <PaginationItem>
                                                 <PaginationLink
                                                     aria-label="Next"

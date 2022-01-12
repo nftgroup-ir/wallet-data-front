@@ -42,6 +42,8 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import React, { useState, useEffect, useRef } from 'react'
+import "../../assets/css/CustomCss.css"
+
 
 
 
@@ -1123,7 +1125,7 @@ const SpecialWallets = (props) => {
                 <Row>
 
                   <FormGroup row>
-                    <Pagination>
+                    <Pagination className="pagination">
                       <PaginationItem>
                         <PaginationLink
                           aria-label="Previous"
@@ -1134,7 +1136,7 @@ const SpecialWallets = (props) => {
                           <span className="sr-only">Previous</span>
                         </PaginationLink>
                       </PaginationItem>
-                      <PaginationItem>
+                      {/* <PaginationItem>
                         <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
                           1
                         </PaginationLink>
@@ -1148,7 +1150,7 @@ const SpecialWallets = (props) => {
                         <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
                           3
                         </PaginationLink>
-                      </PaginationItem>
+                      </PaginationItem> */}
                       <PaginationItem>
                         <PaginationLink
                           aria-label="Next"

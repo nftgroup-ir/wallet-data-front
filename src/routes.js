@@ -34,32 +34,18 @@ var routes = [{
         component: WalletData,
         layout: "/admin",
     },
-    // {
-    //   path: "/addCSV",
-    //   name: "Add",
-    //   icon: "ni ni-folder-17",
-    //   component: Profile,
-    //   layout: "/admin",
-    // },
-    // {
-    //   path: "/TableTest",
-    //   name: "Wallets",
-    //   icon: "ni ni-archive-2",
-    //   component: TableTest,
-    //   layout: "/admin",
-    // },
     {
-        path: "/Lottery",
-        name: "Lottery",
-        // icon: "ni ni-money-coins",
-        component: Lottery,
+        path: "/specialWallets",
+        name: "Special Wallets",
+        // icon: "ni ni-bullet-list-67",
+        component: SpecialWallets,
         layout: "/admin",
     },
     {
-        path: "/winnerList",
-        name: "WinnerList",
-        // icon: "ni ni-money-coins",
-        component: WinnerList,
+        path: "/TransactionTracker",
+        name: "Wallet Tracker",
+        // icon: "ni ni-bullet-list-67",
+        component: TransactionTracker,
         layout: "/admin",
     },
     {
@@ -77,6 +63,13 @@ var routes = [{
         layout: "/admin",
     },
     {
+        path: "/NFTcompany",
+        name: "NFTcompany",
+        // icon: "ni ni-bullet-list-67",
+        component: NFTCo,
+        layout: "/admin",
+    },
+    {
         path: "/balances",
         name: "Balances",
         // icon: "ni ni-money-coins",
@@ -90,13 +83,7 @@ var routes = [{
         component: Scrapper,
         layout: "/admin",
     },
-    {
-        path: "/specialWallets",
-        name: "Special Wallets",
-        // icon: "ni ni-bullet-list-67",
-        component: SpecialWallets,
-        layout: "/admin",
-    },
+    
     {
         path: "/charts",
         name: "Charts",
@@ -105,18 +92,20 @@ var routes = [{
         layout: "/admin",
     },
     {
-        path: "/NFTcompany",
-        name: "NFTcompany",
-        // icon: "ni ni-bullet-list-67",
-        component: NFTCo,
+        path: "/Lottery",
+        name: "Lottery",
+        // icon: "ni ni-money-coins",
+        component: Lottery,
         layout: "/admin",
     },
     {
-        path: "/TransactionTracker",
-        name: "Transaction Tracker",
-        // icon: "ni ni-bullet-list-67",
-        component: TransactionTracker,
+        path: "/winnerList",
+        name: "WinnerList",
+        // icon: "ni ni-money-coins",
+        component: WinnerList,
         layout: "/admin",
     },
+    
+    
 ];
 export default routes;

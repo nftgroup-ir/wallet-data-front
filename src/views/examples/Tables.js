@@ -43,6 +43,8 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import React, { useState, useEffect, useRef } from 'react'
+import "../../assets/css/CustomCss.css"
+
 
 
 const Tables = () => {
@@ -67,7 +69,7 @@ const Tables = () => {
     const NFTCount = document.getElementById("NFTInput").value
     const TxCount = document.getElementById("txInput").value
     const BalanceValue = document.getElementById("balanceInput").value
-    const TagsValue = document.getElementById("TagsValue").value
+    // const TagsValue = document.getElementById("TagsValue").value
     var filterObject = {
       AddressInput: AddressInput,
       NFTSortBy: NFTSortBy,
@@ -80,7 +82,7 @@ const Tables = () => {
       BalanceValue: BalanceValue,
       BalanceOperator: balanceOperator,
     }
-    fetch(`http://65.108.59.117:7001/api/csv?AddressInput=${filterObject.AddressInput}&NFTSortBy=${filterObject.NFTSortBy}&NFTCount=${filterObject.NFTCount}&NFTOperator=${filterObject.NFTOperator}&TxSortBy=${filterObject.TxSortBy}&TxCount=${filterObject.TxCount}&TxOperator=${filterObject.TxOperator}&BalanceSortBy=${filterObject.BalanceSortBy}&BalanceValue=${filterObject.BalanceValue}&BalanceOperator=${filterObject.BalanceOperator}`, {
+    fetch(`http://65.108.59.117:7001/api/csv/?AddressInput=${filterObject.AddressInput}&NFTSortBy=${filterObject.NFTSortBy}&NFTCount=${filterObject.NFTCount}&NFTOperator=${filterObject.NFTOperator}&TxSortBy=${filterObject.TxSortBy}&TxCount=${filterObject.TxCount}&TxOperator=${filterObject.TxOperator}&BalanceSortBy=${filterObject.BalanceSortBy}&BalanceValue=${filterObject.BalanceValue}&BalanceOperator=${filterObject.BalanceOperator}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -1134,7 +1136,7 @@ const Tables = () => {
                 <Row>
 
                   <FormGroup row>
-                    <Pagination>
+                    <Pagination className="pagination">
                       <PaginationItem>
                         <PaginationLink
                           aria-label="Previous"
@@ -1145,7 +1147,7 @@ const Tables = () => {
                           <span className="sr-only">Previous</span>
                         </PaginationLink>
                       </PaginationItem>
-                      <PaginationItem>
+                      {/* <PaginationItem>
                         <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
                           1
                         </PaginationLink>
@@ -1159,7 +1161,7 @@ const Tables = () => {
                         <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
                           3
                         </PaginationLink>
-                      </PaginationItem>
+                      </PaginationItem> */}
                       <PaginationItem>
                         <PaginationLink
                           aria-label="Next"

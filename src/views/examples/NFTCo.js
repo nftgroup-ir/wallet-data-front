@@ -40,6 +40,7 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import React, { useState, useEffect, useRef } from 'react'
+import "../../assets/css/CustomCss.css"
 
 
 const NFTCo = () => {
@@ -203,7 +204,7 @@ const NFTCo = () => {
               <CardHeader className="border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="text-black mb-0">NFT Company</h3>
+                    <h3 className="text-black mb-0 Header">NFT Company</h3>
                   </Col>
                   <Col className="text-right" xs="4">
                     <UncontrolledDropdown>
@@ -337,7 +338,7 @@ const NFTCo = () => {
                 <Row>
 
                   <FormGroup row>
-                    <Pagination>
+                    <Pagination className="pagination">
                       <PaginationItem>
                         <PaginationLink
                           aria-label="Previous"
@@ -348,7 +349,7 @@ const NFTCo = () => {
                           <span className="sr-only">Previous</span>
                         </PaginationLink>
                       </PaginationItem>
-                      <PaginationItem>
+                      {/* <PaginationItem>
                         <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
                           1
                         </PaginationLink>
@@ -362,7 +363,7 @@ const NFTCo = () => {
                         <PaginationLink href="#pablo" onClick={e => e.preventDefault()}>
                           3
                         </PaginationLink>
-                      </PaginationItem>
+                      </PaginationItem> */}
                       <PaginationItem>
                         <PaginationLink
                           aria-label="Next"

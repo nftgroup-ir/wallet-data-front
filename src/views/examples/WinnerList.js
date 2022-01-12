@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
+import Header from "components/Headers/Header.js";
+
 
 
 
@@ -70,6 +72,8 @@ function WinnerList() {
   const dataSource = csvItems
 
   return (
+    <>
+    <Header />
     <ReactDataGrid
       idProperty="id"
       columns={columns}
@@ -78,6 +82,7 @@ function WinnerList() {
       defaultFilterValue={filterValue}
       style={gridStyle}
     />
+    </>
   )
 }
 
