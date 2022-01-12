@@ -155,6 +155,7 @@ function AllNFTs() {
 
     async function previousPage(e) {
         e.preventDefault()
+        if (previousPageUrl) {
         setIsLoading(true)
         await fetch(`${previousPageUrl}`, {
             method: 'GET',
@@ -172,6 +173,7 @@ function AllNFTs() {
                 console.log(data)
                 setIsLoading(false)
             })
+        }
     }
     async function nextPage(e) {
         e.preventDefault()

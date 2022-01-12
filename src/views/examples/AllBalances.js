@@ -156,6 +156,7 @@ function AllBalances() {
     const startRangeeeee = 1
     async function previousPage(e) {
         e.preventDefault()
+        if (previousPageUrl) {
         setIsLoading(true)
         await fetch(`${previousPageUrl}`, {
             method: 'GET',
@@ -173,6 +174,7 @@ function AllBalances() {
                 setIsLoading(false)
                 console.log(data)
             })
+        }
     }
     async function nextPage(e) {
         e.preventDefault()

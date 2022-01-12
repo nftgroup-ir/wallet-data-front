@@ -155,6 +155,7 @@ const Tables = () => {
   const startRangeeeee = 1
   async function previousPage(e) {
     e.preventDefault()
+    if (previousPageUrl) {
     setIsLoading(true)
     await fetch(`${previousPageUrl}`, {
       method: 'GET',
@@ -171,6 +172,7 @@ const Tables = () => {
         console.log(data)
         setIsLoading(false)
       })
+    }
   }
   async function nextPage(e) {
     console.log(nextPageUrl)

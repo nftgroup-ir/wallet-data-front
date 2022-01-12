@@ -227,6 +227,7 @@ function AllTransactions() {
     const startRangeeeee = 1
     async function previousPage(e) {
         e.preventDefault()
+        if (previousPageUrl) {
         setIsLoading(true)
         await fetch(`${previousPageUrl}`, {
             method: 'GET',
@@ -244,6 +245,7 @@ function AllTransactions() {
                 console.log(data)
                 setIsLoading(false)
             })
+        }
     }
     async function nextPage(e) {
         e.preventDefault()
