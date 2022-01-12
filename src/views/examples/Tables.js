@@ -16,6 +16,7 @@
 
 */
 // reactstrap components
+//
 import {
   Card,
   CardHeader,
@@ -31,6 +32,7 @@ import {
   Pagination,
   Col,
   Button,
+  Spinner,
   PaginationItem,
   PaginationLink,
   Table,
@@ -54,15 +56,18 @@ const Tables = () => {
   const [nextPageUrl, setnextPage] = useState("")
   const [previousPageUrl, setpreviousPage] = useState("")
   const [allData, setallData] = useState(1)
+  const [IsLoading, setIsLoading] = useState(true)
   const Filters = useRef()
 
 
   async function setFilters(e) {
     e ? e.preventDefault() : console.log("-")
+    setIsLoading(true)
     const AddressInput = document.getElementById("addressInput").value
     const NFTCount = document.getElementById("NFTInput").value
     const TxCount = document.getElementById("txInput").value
     const BalanceValue = document.getElementById("balanceInput").value
+    const TagsValue = document.getElementById("TagsValue").value
     var filterObject = {
       AddressInput: AddressInput,
       NFTSortBy: NFTSortBy,
@@ -87,6 +92,7 @@ const Tables = () => {
         setnextPage(data.next)
         setpreviousPage(data.previous)
         setallData(data.count)
+        setIsLoading(false)
       })
     console.log(filterObject)
   }
@@ -109,7 +115,7 @@ const Tables = () => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Token ' + sessionStorage.getItem('token')
+          // 'Authorization': 'Token ' + sessionStorage.getItem('token')
         },
       })
         .then(res => res.json())
@@ -119,6 +125,7 @@ const Tables = () => {
           setnextPage(data.next)
           setpreviousPage(data.previous)
           setallData(data.count)
+          setIsLoading(false)
         })
     }
     getData()
@@ -126,7 +133,8 @@ const Tables = () => {
 
   async function removeFilters(e) {
     e.preventDefault()
-    await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
+    setIsLoading(true)
+    await fetch('http://65.108.59.117:7001/api/csv/?NFTCount=&TxCount=&BalanceValue=&BalanceSortBy=none&NFTSortBy=none&TxSortBy=none', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -139,14 +147,15 @@ const Tables = () => {
             setnextPage(data.next)
             setpreviousPage(data.previous)
             setallData(data.count)
+            setIsLoading(false)
             console.log(data)
         })
 }
 
   const startRangeeeee = 1
   async function previousPage(e) {
-    console.log(previousPageUrl)
     e.preventDefault()
+    setIsLoading(true)
     await fetch(`${previousPageUrl}`, {
       method: 'GET',
       headers: {
@@ -160,11 +169,13 @@ const Tables = () => {
         setnextPage(data.next)
         setpreviousPage(data.previous)
         console.log(data)
+        setIsLoading(false)
       })
   }
   async function nextPage(e) {
     console.log(nextPageUrl)
     e.preventDefault()
+    setIsLoading(true)
     await fetch(`${nextPageUrl}`, {
       method: 'GET',
       headers: {
@@ -178,6 +189,7 @@ const Tables = () => {
         setnextPage(data.next)
         setpreviousPage(data.previous)
         console.log(data)
+        setIsLoading(false)
       })
   }
 
@@ -197,7 +209,7 @@ const Tables = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Token ' + sessionStorage.getItem('token')
+        // 'Authorization': 'Token ' + sessionStorage.getItem('token')
       },
     })
       .then(res => res.json())
@@ -292,6 +304,14 @@ const Tables = () => {
                           onClick={e => handleColumn("Balance")}
                         >
                           Balance
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          id="Tags"
+                          className="mmm"
+                          onClick={e => handleColumn("Tags")}
+                        >
+                          Tags
                         </DropdownItem>
                       </DropdownMenu>
                     </UncontrolledDropdown>
@@ -600,12 +620,16 @@ const Tables = () => {
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </th>
+                    <th scope="col" className="Tags">
+                      Tags
+                    </th>
                     <th>
                       Option
                     </th>
 
                   </tr>
                 </thead>
+                {!IsLoading ?
                 <tbody>
                   <tr ref={Filters}>
                     <td className="Address">
@@ -1050,6 +1074,11 @@ const Tables = () => {
                             Show Balance
                           </Button>
                         </td>
+                        <td className="Tags">
+                          {e.tags ? e.tags.map(a => (
+                              `${a.name}, `
+                          )): ""}
+                        </td>
                         <td>
                           <UncontrolledDropdown>
                             <DropdownToggle
@@ -1092,11 +1121,12 @@ const Tables = () => {
                         </td>
                       </tr>
 
-                    ))
+                    )) 
                   }
 
 
-                </tbody>
+                </tbody> : <tbody style={{ textAlign:"center"}}><td></td><td></td><Spinner animation="border" style={{ margin:"10px"}}/></tbody>
+                }
               </Table>
               <CardFooter>
                 <Row>

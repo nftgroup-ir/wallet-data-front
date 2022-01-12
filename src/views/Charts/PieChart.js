@@ -1,6 +1,6 @@
-import React, { useState , useEffect } from 'react'
+import React, { useEffect } from 'react'
 import * as am5 from "@amcharts/amcharts5";
-import * as am5xy from "@amcharts/amcharts5/xy";
+// import * as am5xy from "@amcharts/amcharts5/xy";
 import * as am5percent from "@amcharts/amcharts5/percent"
 
 
@@ -248,7 +248,7 @@ function PieChart() {
                 }
               });
               // if all hidden, show dummy
-              if (visibleCount == 0) {
+              if (visibleCount === 0) {
                 series.dataItems[0].show();
               } else {
                 series.dataItems[0].hide();
@@ -260,7 +260,7 @@ function PieChart() {
             
             // hide all except dummy
             am5.array.each(series1.dataItems, function (dataItem) {
-              if (dataItem.get("category") != "Dummy") {
+              if (dataItem.get("category") !== "Dummy") {
                 dataItem.hide(0);
               }
             });

@@ -30,16 +30,18 @@ function WinnerList() {
   const [csvItems, setcsvItems] = useState([])
 
   const columns = [
-    { name: 'firstname', header: 'firstname', minWidth: 50, defaultFlex: 2 },
-    { name: 'lastname', header: 'lastname', minWidth: 50, defaultFlex: 2 },
-    { name: 'email', header: 'email', minWidth: 50, defaultFlex: 2 },
-    { name: 'walletaddress', header: 'walletaddress', maxWidth: 1000, defaultFlex: 1 }
+    { name: 'wallet', header: 'wallet', minWidth: 50, defaultFlex: 2 },
+    { name: 'buyToken', header: 'buyToken', minWidth: 50, defaultFlex: 2 },
+    { name: 'spendEth', header: 'spendEth', minWidth: 50, defaultFlex: 2 },
+    { name: 'sellToken', header: 'sellToken', minWidth: 50, defaultFlex: 2 },
+    { name: 'earnETH', header: 'earnETH', minWidth: 50, defaultFlex: 2 },
   ]
   const filterValue = [
-    { name: 'firstname', operator: 'contains', type: 'string', value: '' },
-    { name: 'lastname', operator: 'contains', type: 'string', value: '' },
-    { name: 'email', operator: 'contains', type: 'string', value: '' },
-    { name: 'walletaddress', operator: 'contains', type: 'string', value: 0 },
+    { name: 'wallet', operator: 'contains', type: 'string', value: '' },
+    { name: 'buyToken', operator: 'contains', type: 'string', value: '' },
+    { name: 'spendEth', operator: 'contains', type: 'string', value: '' },
+    { name: 'sellToken', operator: 'contains', type: 'string', value: '' },
+    { name: 'earnETH', operator: 'contains', type: 'string', value: '' },
   ]
   
   const gridStyle = { minHeight: 550 }

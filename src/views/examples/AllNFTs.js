@@ -15,6 +15,7 @@ import {
     Button,
     PaginationItem,
     PaginationLink,
+    Spinner,
     Table,
     Container,
     Row,
@@ -42,10 +43,12 @@ function AllNFTs() {
     const [nextPageUrl, setnextPage] = useState("")
     const [previousPageUrl, setpreviousPage] = useState("")
     const [allData, setallData] = useState(1)
+    const [IsLoading, setIsLoading] = useState(true)
     const Filters = useRef()
 
     async function setFilters(e) {
         e.preventDefault()
+        setIsLoading(true)
         const NameValue = document.getElementById("NameValue").value
         const AmountValue = document.getElementById("AmountValue").value
         const FrozenValue = document.getElementById("FrozenValue").value
@@ -101,14 +104,14 @@ function AllNFTs() {
                 setpreviousPage(data.previous)
                 setallData(data.count)
                 console.log(data)
-
+                setIsLoading(false)
             })
         console.log(filterObject)
     }
 
     useEffect(() => {
         async function getData() {
-            await fetch('http://65.108.59.117:7001/api/csv/nft/?NameValue=&AmountValue=&FrozenValue=&SymbolValue=&SyncingValue=&IsValidValue=&MetadataValue=&TokenIdValue=&TokenUriValue=&BlockNumberValue=&ContractTypeValue=&TokenAddressValue=&BlockNumberMintedValue=&OwnerOfValue=&TokenIdSortBy=&BlockNumberMintedSortBy=&AmountSortBy=&IsValidSortBy=&SyncingSortBy=&FrozenSortBy=&BlockNumberSortBy=&TokenIdOperator=&BlockNumberMintedOperator=&AmountOperator=', {
+            await fetch('http://65.108.59.117:7001/api/csv/nft/?NameValue=&AmountValue=&FrozenValue=&SymbolValue=&SyncingValue=&IsValidValue=&MetadataValue=&TokenIdValue=&TokenUriValue=&BlockNumberValue=&ContractTypeValue=&TokenAddressValue=&BlockNumberMintedValue=&OwnerOfValue=&TokenIdSortBy=&BlockNumberMintedSortBy=&AmountSortBy=&IsValidSortBy=&SyncingSortBy=&FrozenSortBy=&BlockNumberSortBy=&TokenIdOperator=&BlockNumberMintedOperator=&AmountOperator=&TagsValue=', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -122,6 +125,7 @@ function AllNFTs() {
                     setpreviousPage(data.previous)
                     setallData(data.count)
                     console.log(data)
+                    setIsLoading(false)
                 })
         }
         getData()
@@ -129,7 +133,8 @@ function AllNFTs() {
 
     async function removeFilters(e) {
         e.preventDefault()
-        await fetch('http://65.108.59.117:7001/api/csv/nft/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
+        setIsLoading(true)
+        await fetch('http://65.108.59.117:7001/api/csv/nft/?NameValue=&AmountValue=&FrozenValue=&SymbolValue=&SyncingValue=&IsValidValue=&MetadataValue=&TokenIdValue=&TokenUriValue=&BlockNumberValue=&ContractTypeValue=&TokenAddressValue=&BlockNumberMintedValue=&OwnerOfValue=&TokenIdSortBy=&BlockNumberMintedSortBy=&AmountSortBy=&IsValidSortBy=&SyncingSortBy=&FrozenSortBy=&BlockNumberSortBy=&TokenIdOperator=&BlockNumberMintedOperator=&AmountOperator=&TagsValue=', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -143,12 +148,14 @@ function AllNFTs() {
                 setpreviousPage(data.previous)
                 setallData(data.count)
                 console.log(data)
+                setIsLoading(false)
             })
     }
     const startRangeeeee = 1
 
     async function previousPage(e) {
         e.preventDefault()
+        setIsLoading(true)
         await fetch(`${previousPageUrl}`, {
             method: 'GET',
             headers: {
@@ -163,10 +170,12 @@ function AllNFTs() {
                 setpreviousPage(data.previous)
                 setallData(data.count)
                 console.log(data)
+                setIsLoading(false)
             })
     }
     async function nextPage(e) {
         e.preventDefault()
+        setIsLoading(true)
         await fetch(`${nextPageUrl}`, {
             method: 'GET',
             headers: {
@@ -181,6 +190,7 @@ function AllNFTs() {
                 setpreviousPage(data.previous)
                 setallData(data.count)
                 console.log(data)
+                setIsLoading(false)
             })
     }
 
@@ -908,6 +918,7 @@ function AllNFTs() {
                                         </th>
                                     </tr>
                                 </thead>
+                                {!IsLoading ?
                                 <tbody>
                                     <tr ref={Filters}>
                                         <td className="Name">
@@ -1201,7 +1212,8 @@ function AllNFTs() {
                                     }
 
 
-                                </tbody>
+                                </tbody>: <tbody style={{ textAlign:"center"}}><td></td><td></td><td></td><Spinner animation="border" style={{ margin:"10px"}}/></tbody>
+                            }
                             </Table>
                             <CardFooter>
                                 <Row>

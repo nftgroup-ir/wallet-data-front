@@ -19,8 +19,6 @@
 import {
   Card,
   CardHeader,
-  InputGroupText,
-  InputGroupAddon,
   CardFooter,
   DropdownMenu,
   DropdownItem,
@@ -34,6 +32,7 @@ import {
   PaginationItem,
   PaginationLink,
   Table,
+  Spinner,
   Container,
   Row,
   FormGroup,
@@ -48,11 +47,13 @@ const NFTCo = () => {
   const [nextPageUrl, setnextPage] = useState("")
   const [previousPageUrl, setpreviousPage] = useState("")
   const [allData, setallData] = useState(1)
+  const [IsLoading, setIsLoading] = useState(true)
   const Filters = useRef()
 
 
   async function setFilters(e) {
     e ? e.preventDefault() : console.log("-")
+    setIsLoading(true)
     const nameInput = document.getElementById("nameInput").value
     const urlInput = document.getElementById("urlInput").value
     const tagInput = document.getElementById("tagInput").value
@@ -75,6 +76,7 @@ const NFTCo = () => {
       .then(res => res.json())
       .then(data => {
         setcsvItems(data.results)
+        setIsLoading(false)
         // setnextPage(data.next)
         // setpreviousPage(data.previous)
         // setallData(data.count)
@@ -110,6 +112,7 @@ const NFTCo = () => {
           setnextPage(data.next)
           setpreviousPage(data.previous)
           setallData(data.count)
+          setIsLoading(false)
         })
     }
     getData()
@@ -117,6 +120,7 @@ const NFTCo = () => {
 
   async function removeFilters(e) {
     e.preventDefault()
+    setIsLoading(true)
     await fetch('http://65.108.59.117:7001/api/csv/nftcompany/?nameInput=&urlInput=&tagInput=', {
         method: 'GET',
         headers: {
@@ -127,6 +131,7 @@ const NFTCo = () => {
         .then(res => res.json())
         .then(data => {
             setcsvItems(data.results)
+            setIsLoading(false)
               // setnextPage(data.next)
               // setpreviousPage(data.previous)
               // setallData(data.count)
@@ -136,7 +141,6 @@ const NFTCo = () => {
 
   const startRangeeeee = 1
   async function previousPage(e) {
-    console.log(previousPageUrl)
     e.preventDefault()
     // await fetch(`${previousPageUrl}`, {
     //   method: 'GET',
@@ -154,7 +158,6 @@ const NFTCo = () => {
     //   })
   }
   async function nextPage(e) {
-    console.log(nextPageUrl)
     e.preventDefault()
     // await fetch(`${nextPageUrl}`, {
     //   method: 'GET',
@@ -276,6 +279,7 @@ const NFTCo = () => {
                     </th>
                   </tr>
                 </thead>
+                {!IsLoading ?
                 <tbody>
                   <tr ref={Filters}>
                     <td className="Name">
@@ -320,7 +324,8 @@ const NFTCo = () => {
                   }
 
 
-                </tbody>
+                </tbody> : <tbody style={{ textAlign:"center"}}><td></td><Spinner animation="border" style={{ margin:"10px"}}/></tbody>
+              }
               </Table>
               <CardFooter>
                 <Row>

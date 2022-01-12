@@ -25,6 +25,7 @@ import SpecialWallets from "views/examples/SpecialWallets"
 import AllBalances from "views/examples/AllBalances";
 import Charts from "views/examples/Charts";
 import NFTCo from "views/examples/NFTCo";
+import TransactionTracker from "views/examples/TransactionTracker"
 
 var routes = [{
         path: "/walletdata",
@@ -108,6 +109,13 @@ var routes = [{
         name: "NFTcompany",
         // icon: "ni ni-bullet-list-67",
         component: NFTCo,
+        layout: "/admin",
+    },
+    {
+        path: "/TransactionTracker",
+        name: "Transaction Tracker",
+        // icon: "ni ni-bullet-list-67",
+        component: TransactionTracker,
         layout: "/admin",
     },
 ];

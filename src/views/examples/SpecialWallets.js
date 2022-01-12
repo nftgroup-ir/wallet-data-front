@@ -33,6 +33,7 @@ import {
   Button,
   PaginationItem,
   PaginationLink,
+  Spinner,
   Table,
   Container,
   Row,
@@ -55,11 +56,13 @@ const SpecialWallets = (props) => {
   const [nextPageUrl, setnextPage] = useState("")
   const [previousPageUrl, setpreviousPage] = useState("")
   const [allData, setallData] = useState(1)
+  const [IsLoading, setIsLoading] = useState(true)
   const Filters = useRef()
 
 
   async function setFilters(e) {
     e ? e.preventDefault() : console.log("-")
+    setIsLoading(true)
     const AddressInput = document.getElementById("addressInput").value
     const NFTCount = document.getElementById("NFTInput").value
     const TxCount = document.getElementById("txInput").value
@@ -87,6 +90,7 @@ const SpecialWallets = (props) => {
         setcsvItems(data.results)
         setnextPage(data.next)
         setpreviousPage(data.previous)
+        setIsLoading(false)
         setallData(data.count)
       })
     console.log(filterObject)
@@ -119,6 +123,7 @@ const SpecialWallets = (props) => {
           setcsvItems(data.results)
           setnextPage(data.next)
           setpreviousPage(data.previous)
+          setIsLoading(false)
           setallData(data.count)
         })
     }
@@ -127,6 +132,7 @@ const SpecialWallets = (props) => {
 
   async function removeFilters(e) {
     e.preventDefault()
+    setIsLoading(true)
     await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
         method: 'GET',
         headers: {
@@ -140,14 +146,15 @@ const SpecialWallets = (props) => {
             setnextPage(data.next)
             setpreviousPage(data.previous)
             setallData(data.count)
+            setIsLoading(false)
             console.log(data)
         })
 }
 
   const startRangeeeee = 1
   async function previousPage(e) {
-    console.log(previousPageUrl)
     e.preventDefault()
+    setIsLoading(true)
     await fetch(`${previousPageUrl}`, {
       method: 'GET',
       headers: {
@@ -160,12 +167,13 @@ const SpecialWallets = (props) => {
         setcsvItems(data.results)
         setnextPage(data.next)
         setpreviousPage(data.previous)
+        setIsLoading(false)
         console.log(data)
       })
   }
   async function nextPage(e) {
-    console.log(nextPageUrl)
     e.preventDefault()
+    setIsLoading(true)
     await fetch(`${nextPageUrl}`, {
       method: 'GET',
       headers: {
@@ -178,6 +186,7 @@ const SpecialWallets = (props) => {
         setcsvItems(data.results)
         setnextPage(data.next)
         setpreviousPage(data.previous)
+        setIsLoading(false)
         console.log(data)
       })
   }
@@ -616,6 +625,7 @@ const SpecialWallets = (props) => {
 
                   </tr>
                 </thead>
+                {!IsLoading ?
                 <tbody>
                   <tr ref={Filters}>
                     <td className="Address">
@@ -1104,7 +1114,8 @@ const SpecialWallets = (props) => {
                   }
 
 
-                </tbody>
+                </tbody> : <tbody style={{ textAlign:"center"}}><td></td><td></td><Spinner animation="border" style={{ margin:"10px"}}/></tbody>
+              }
               </Table>
               <CardFooter>
                 <Row>

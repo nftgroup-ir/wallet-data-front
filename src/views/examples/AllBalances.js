@@ -17,6 +17,7 @@ import {
     PaginationLink,
     Table,
     Container,
+    Spinner,
     Row,
     FormGroup,
 } from "reactstrap";
@@ -45,10 +46,12 @@ function AllBalances() {
     const [nextPageUrl, setnextPage] = useState("")
     const [previousPageUrl, setpreviousPage] = useState("")
     const [allData, setallData] = useState(1)
+    const [IsLoading, setIsLoading] = useState(true)
     const Filters = useRef()
 
     async function setFilters(e) {
         e ? e.preventDefault() : console.log("-")
+        setIsLoading(true)
         const AddressValue = document.getElementById("AddressValue").value
         const ContractDecimalValue = document.getElementById("ContractDecimalValue").value
         const ContractNameValue = document.getElementById("ContractNameValue").value
@@ -90,7 +93,6 @@ function AllBalances() {
             Quote24hSortBy: Quote24hSortBy,
             Quote24hOperator: Quote24hOperator,
         }
-        console.log(`http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=${filterObject.AddressValue}&ContractDecimalValue=${filterObject.ContractDecimalValue}&ContractDecimalSortBy=${filterObject.ContractDecimalSortBy}&ContractNameValue=${filterObject.ContractNameValue}&ContractTickerSymbolValue=${filterObject.ContractTickerSymbolValue}&ContractAddressValue=${filterObject.ContractAddressValue}&LastTransferredAtValue=${filterObject.LastTransferredAtValue}&TypeValue=${filterObject.TypeValue}&BalanceValue=${filterObject.BalanceValue}&BalanceSortBy=${filterObject.BalanceSortBy}&BalanceOperator=${filterObject.BalanceOperator}&Balance24hValue=${filterObject.Balance24hValue}&Balance24hSortBy=${filterObject.Balance24hSortBy}&Balance24hOperator=${filterObject.Balance24hOperator}&QuoteRateValue=${filterObject.QuoteRateValue}&QuoteRateSortBy=${filterObject.QuoteRateSortBy}&QuoteRateOperator=${filterObject.QuoteRateOperator}&QuoteRate24hValue=${filterObject.QuoteRate24hValue}&QuoteRate24hSortBy=${filterObject.QuoteRate24hSortBy}&QuoteRate24hOperator=${filterObject.QuoteRate24hOperator}&QuoteValue=${filterObject.QuoteValue}&QuoteSortBy=${filterObject.QuoteSortBy}&QuoteOperator=${filterObject.QuoteOperator}&Quote24hValue=${filterObject.Quote24hValue}&Quote24hSortBy=${filterObject.Quote24hSortBy}&Quote24hOperator=${filterObject.Quote24hOperator}`)
         fetch(`http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=${filterObject.AddressValue}&ContractDecimalValue=${filterObject.ContractDecimalValue}&ContractDecimalSortBy=${filterObject.ContractDecimalSortBy}&ContractNameValue=${filterObject.ContractNameValue}&ContractTickerSymbolValue=${filterObject.ContractTickerSymbolValue}&ContractAddressValue=${filterObject.ContractAddressValue}&LastTransferredAtValue=${filterObject.LastTransferredAtValue}&TypeValue=${filterObject.TypeValue}&BalanceValue=${filterObject.BalanceValue}&BalanceSortBy=${filterObject.BalanceSortBy}&BalanceOperator=${filterObject.BalanceOperator}&Balance24hValue=${filterObject.Balance24hValue}&Balance24hSortBy=${filterObject.Balance24hSortBy}&Balance24hOperator=${filterObject.Balance24hOperator}&QuoteRateValue=${filterObject.QuoteRateValue}&QuoteRateSortBy=${filterObject.QuoteRateSortBy}&QuoteRateOperator=${filterObject.QuoteRateOperator}&QuoteRate24hValue=${filterObject.QuoteRate24hValue}&QuoteRate24hSortBy=${filterObject.QuoteRate24hSortBy}&QuoteRate24hOperator=${filterObject.QuoteRate24hOperator}&QuoteValue=${filterObject.QuoteValue}&QuoteSortBy=${filterObject.QuoteSortBy}&QuoteOperator=${filterObject.QuoteOperator}&Quote24hValue=${filterObject.Quote24hValue}&Quote24hSortBy=${filterObject.Quote24hSortBy}&Quote24hOperator=${filterObject.Quote24hOperator}`, {
             method: 'GET',
             headers: {
@@ -104,6 +106,7 @@ function AllBalances() {
                 setpreviousPage(data.previous)
                 setallData(data.count)
                 console.log(data)
+                setIsLoading(false)
             })
         console.log(filterObject)
     }
@@ -123,6 +126,7 @@ function AllBalances() {
                     setnextPage(data.next)
                     setpreviousPage(data.previous)
                     setallData(data.count)
+                    setIsLoading(false)
                     console.log(data)
                 })
         }
@@ -131,6 +135,7 @@ function AllBalances() {
     }, [])
     async function removeFilters(e) {
         e.preventDefault()
+        setIsLoading(true)
         await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
             method: 'GET',
             headers: {
@@ -144,12 +149,14 @@ function AllBalances() {
                 setnextPage(data.next)
                 setpreviousPage(data.previous)
                 setallData(data.count)
+                setIsLoading(false)
                 console.log(data)
             })
     }
     const startRangeeeee = 1
     async function previousPage(e) {
         e.preventDefault()
+        setIsLoading(true)
         await fetch(`${previousPageUrl}`, {
             method: 'GET',
             headers: {
@@ -163,11 +170,13 @@ function AllBalances() {
                 setnextPage(data.next)
                 setpreviousPage(data.previous)
                 setallData(data.count)
+                setIsLoading(false)
                 console.log(data)
             })
     }
     async function nextPage(e) {
         e.preventDefault()
+        setIsLoading(true)
         await fetch(`${nextPageUrl}`, {
             method: 'GET',
             headers: {
@@ -181,6 +190,7 @@ function AllBalances() {
                 setnextPage(data.next)
                 setpreviousPage(data.previous)
                 setallData(data.count)
+                setIsLoading(false)
                 console.log(data)
                 setQuoteRateOperator("")
             })
@@ -874,6 +884,7 @@ function AllBalances() {
                                         </th>
                                     </tr>
                                 </thead>
+                                {!IsLoading ?
                                 <tbody>
                                     <tr ref={Filters}>
                                         <td className="Address">
@@ -1446,7 +1457,8 @@ function AllBalances() {
                                     }
 
 
-                                </tbody>
+                                </tbody> : <tbody style={{ textAlign:"center"}}><td></td><td></td><Spinner animation="border" style={{ margin:"10px"}}/></tbody>
+                            }
                             </Table>
                             <CardFooter>
                                 <Row>
