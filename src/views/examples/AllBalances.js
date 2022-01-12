@@ -24,6 +24,7 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import React, { useState, useEffect, useRef } from 'react'
+import { useLocation } from "react-router-dom";
 import "../../assets/css/CustomCss.css"
 
 
@@ -31,6 +32,7 @@ import "../../assets/css/CustomCss.css"
 
 
 function AllBalances() {
+    let { search } = useLocation()
     const [csvItems, setcsvItems] = useState([""])
     const [ContractDecimalSortBy, setContractDecimalSortBySortBy] = useState("none")
     const [BalanceSortBy, setBalanceSortBy] = useState("none")
@@ -113,27 +115,53 @@ function AllBalances() {
         console.log(filterObject)
     }
 
-    useEffect(() => {
-        async function getData() {
-            await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + sessionStorage.getItem('token')
-                },
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setcsvItems(data.results)
-                    setnextPage(data.next)
-                    setpreviousPage(data.previous)
-                    setallData(data.count)
-                    setIsLoading(false)
-                    console.log(data)
-                })
-        }
-        getData()
+    
 
+    useEffect(() => {
+        const query = new URLSearchParams(search);
+        const wallet = query.get('wallet')
+        if (!wallet){
+            async function getData() {
+                await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Token ' + sessionStorage.getItem('token')
+                    },
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        setcsvItems(data.results)
+                        setnextPage(data.next)
+                        setpreviousPage(data.previous)
+                        setallData(data.count)
+                        setIsLoading(false)
+                        console.log(data)
+                    })
+            }
+            getData()
+        }
+        else{
+            async function getData() {
+                await fetch(`http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=${wallet}&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Token ' + sessionStorage.getItem('token')
+                    },
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        setcsvItems(data.results)
+                        setnextPage(data.next)
+                        setpreviousPage(data.previous)
+                        setallData(data.count)
+                        setIsLoading(false)
+                        console.log(data)
+                    })
+            }
+            getData()
+        }
     }, [])
     async function removeFilters(e) {
         e.preventDefault()

@@ -1071,8 +1071,7 @@ const Tables = () => {
                         <td className="Balance">
                           <Button
                             color="primary"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            href={`/admin/balances/?wallet=${e.address}`}
                             size="sm"
                           >
                             Show Balance
