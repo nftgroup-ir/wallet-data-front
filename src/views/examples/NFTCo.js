@@ -77,9 +77,9 @@ const NFTCo = () => {
       .then(data => {
         setcsvItems(data.results)
         setIsLoading(false)
-        // setnextPage(data.next)
-        // setpreviousPage(data.previous)
-        // setallData(data.count)
+        setnextPage(data.next)
+        setpreviousPage(data.previous)
+        setallData(data.count)
       })
     console.log(filterObject)
   }
@@ -132,47 +132,53 @@ const NFTCo = () => {
         .then(data => {
             setcsvItems(data.results)
             setIsLoading(false)
-              // setnextPage(data.next)
-              // setpreviousPage(data.previous)
-              // setallData(data.count)
-              // console.log(data)
+            setnextPage(data.next)
+            setpreviousPage(data.previous)
+            setallData(data.count)
+            console.log(data)
         })
 }
 
   const startRangeeeee = 1
   async function previousPage(e) {
     e.preventDefault()
-    // await fetch(`${previousPageUrl}`, {
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': 'Token ' + sessionStorage.getItem('token')
-    //   },
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     setcsvItems(data.results)
-    //     setnextPage(data.next)
-    //     setpreviousPage(data.previous)
-    //     console.log(data)
-    //   })
+    if (previousPageUrl) {
+    setIsLoading(true)
+    await fetch(`${previousPageUrl}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + sessionStorage.getItem('token')
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setcsvItems(data.results)
+        setIsLoading(false)
+        setnextPage(data.next)
+        setpreviousPage(data.previous)
+        console.log(data)
+      })
+    }
   }
   async function nextPage(e) {
     e.preventDefault()
-    // await fetch(`${nextPageUrl}`, {
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': 'Token ' + sessionStorage.getItem('token')
-    //   },
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     setcsvItems(data.results)
-    //     setnextPage(data.next)
-    //     setpreviousPage(data.previous)
-    //     console.log(data)
-    //   })
+    setIsLoading(true)
+    await fetch(`${nextPageUrl}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + sessionStorage.getItem('token')
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setcsvItems(data.results)
+        setIsLoading(false)
+        setnextPage(data.next)
+        setpreviousPage(data.previous)
+        console.log(data)
+      })
   }
 
   function handleColumn(e) {
