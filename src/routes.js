@@ -26,6 +26,8 @@ import AllBalances from "views/examples/AllBalances";
 import Charts from "views/examples/Charts";
 import NFTCo from "views/examples/NFTCo";
 import TransactionTracker from "views/examples/TransactionTracker"
+import TokenCo from "views/examples/TokenCo"
+
 
 var routes = [{
         path: "/walletdata",
@@ -74,6 +76,13 @@ var routes = [{
         name: "Balances",
         // icon: "ni ni-money-coins",
         component: AllBalances,
+        layout: "/admin",
+    },
+    {
+        path: "/tokencompany",
+        name: "Token company",
+        // icon: "ni ni-money-coins",
+        component: TokenCo,
         layout: "/admin",
     },
     {
