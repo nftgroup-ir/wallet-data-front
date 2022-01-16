@@ -112,7 +112,7 @@ const SpecialWallets = (props) => {
   }
   useEffect(() => {
     async function getData() {
-      await fetch('http://65.108.59.117:7001/api/csv/?NFTCount=&TxCount=&BalanceValue=&BalanceSortBy=none&NFTSortBy=none&TxSortBy=none&special=true', {
+      await fetch('http://65.108.59.117:7001/api/csv/?NFTCount=&TxCount=&BalanceValue=&BalanceSortBy=none&NFTSortBy=none&TxSortBy=DESC&special=true', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

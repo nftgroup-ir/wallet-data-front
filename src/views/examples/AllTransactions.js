@@ -185,7 +185,7 @@ function AllTransactions() {
 
     useEffect(() => {
         async function getData() {
-            await fetch('http://65.108.59.117:7001/api/csv/transaction/?HashValue=&NonceValue=&FromValue=&ToValue=&ValueValue=&GasValue=&GasPriceValue=&GasPriceSortBy=&InputValue=&RCGUValue=&RGUValue=&BlockHashValue=&RCUValue=&RRValue=&RSValue=&TimeValue=&BlockNumberValue=&BlockHashValue=&RCGUSortBy=&RGUSortBy=&TxIndexValue=&NonceSortBy=&ValueSortBy=&GasSortBy=&NonceOperator=&ValueOperator=&GasOperator=&BlockHashValue=&GasPriceOperator=&RCGUOperator=&RGUOperator=', {
+            await fetch('http://65.108.59.117:7001/api/csv/transaction/?HashValue=&NonceValue=&FromValue=&ToValue=&ValueValue=&GasValue=&GasPriceValue=&GasPriceSortBy=&InputValue=&RCGUValue=&RGUValue=&BlockHashValue=&RCUValue=&RRValue=&RSValue=&TimeValue=&BlockNumberValue=&BlockHashValue=&RCGUSortBy=&RGUSortBy=&TxIndexValue=&NonceSortBy=&ValueSortBy=ASC&GasSortBy=&NonceOperator=&ValueOperator=&GasOperator=&BlockHashValue=&GasPriceOperator=&RCGUOperator=&RGUOperator=', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -285,6 +285,24 @@ function AllTransactions() {
         //        x[i].style.display = "none"
         //    }
     }
+
+     //Function for k,m,... for numbers
+     function nFormatter(num, digits) {
+        const lookup = [
+          { value: 1, symbol: "" },
+          { value: 1e3, symbol: "k" },
+          { value: 1e6, symbol: "M" },
+          { value: 1e9, symbol: "B" },
+          { value: 1e12, symbol: "T" },
+          { value: 1e15, symbol: "P" },
+          { value: 1e18, symbol: "E" }
+        ];
+        const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+        var item = lookup.slice().reverse().find(function(item) {
+          return num >= item.value;
+        });
+        return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+      }
 
 
 
@@ -1791,7 +1809,7 @@ function AllTransactions() {
                                                     {e.hash}
                                                 </td>
                                                 <td  className="Nonc deactive-table">
-                                                    {e.nonc}
+                                                    {e.nonc < 1000 && e.nonc? Number(e.nonc).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.nonc , 1)}
                                                 </td>
                                                 <td  className="TransactionIndex deactive-table">
                                                     {e.transaction_index}
@@ -1804,23 +1822,23 @@ function AllTransactions() {
                                                 </td>
                                                 <td className="Value">
                                                     {/* <TxData props={e.address} id={e.id} /> */}
-                                                    {e.value}
+                                                    {e.value < 1000 && e.value? Number(e.value).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.value , 1)}
                                                 </td>
                                                 <td  className="Gas deactive-table">
-                                                    {e.gas}
+                                                    {e.gas < 1000 && e.gas? Number(e.gas).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.gas , 1)}
                                                 </td>
                                                 <td className="GasPrice">
                                                     {/* <NftData props={e.address} id={e.id} /> */}
-                                                    {e.gas_price}
+                                                    {e.gas_price < 1000 && e.gas_price? Number(e.gas_price).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.gas_price , 1)}
                                                 </td>
                                                 <td  className="Input deactive-table">
                                                     {e.input}
                                                 </td>
                                                 <td  className="ReceiptCumulativeGasUsed deactive-table">
-                                                    {e.receipt_cumulative_gas_used}
+                                                    {e.receipt_cumulative_gas_used < 1000 && e.receipt_cumulative_gas_used? Number(e.receipt_cumulative_gas_used).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.receipt_cumulative_gas_used , 1)}
                                                 </td>
                                                 <td  className="ReceiptGasUsed deactive-table">
-                                                    {e.receipt_gas_used}
+                                                    {e.receipt_gas_used < 1000 && e.receipt_gas_used? Number(e.receipt_gas_used).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.receipt_gas_used , 1)}
                                                 </td>
                                                 <td  className="ReceiptContractAddress deactive-table">
                                                     {e.receipt_contract_address}

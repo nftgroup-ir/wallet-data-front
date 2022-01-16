@@ -113,7 +113,7 @@ const Tables = () => {
   }
   useEffect(() => {
     async function getData() {
-      await fetch('http://65.108.59.117:7001/api/csv/?NFTCount=&TxCount=&BalanceValue=&BalanceSortBy=none&NFTSortBy=none&TxSortBy=none', {
+      await fetch('http://65.108.59.117:7001/api/csv/?NFTCount=&TxCount=&BalanceValue=&BalanceSortBy=none&NFTSortBy=none&TxSortBy=DESC', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

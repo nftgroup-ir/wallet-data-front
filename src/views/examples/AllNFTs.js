@@ -113,7 +113,7 @@ function AllNFTs() {
 
     useEffect(() => {
         async function getData() {
-            await fetch('http://65.108.59.117:7001/api/csv/nft/?NameValue=&AmountValue=&FrozenValue=&SymbolValue=&SyncingValue=&IsValidValue=&MetadataValue=&TokenIdValue=&TokenUriValue=&BlockNumberValue=&ContractTypeValue=&TokenAddressValue=&BlockNumberMintedValue=&OwnerOfValue=&TokenIdSortBy=&BlockNumberMintedSortBy=&AmountSortBy=&IsValidSortBy=&SyncingSortBy=&FrozenSortBy=&BlockNumberSortBy=&TokenIdOperator=&BlockNumberMintedOperator=&AmountOperator=&TagsValue=', {
+            await fetch('http://65.108.59.117:7001/api/csv/nft/?NameValue=&AmountValue=&FrozenValue=&SymbolValue=&SyncingValue=&IsValidValue=&MetadataValue=&TokenIdValue=&TokenUriValue=&BlockNumberValue=&ContractTypeValue=&TokenAddressValue=&BlockNumberMintedValue=&OwnerOfValue=&TokenIdSortBy=&BlockNumberMintedSortBy=&AmountSortBy=&IsValidSortBy=DESC&SyncingSortBy=&FrozenSortBy=&BlockNumberSortBy=&TokenIdOperator=&BlockNumberMintedOperator=&AmountOperator=&TagsValue=', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

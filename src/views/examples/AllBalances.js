@@ -122,7 +122,7 @@ function AllBalances() {
         const wallet = query.get('wallet')
         if (!wallet){
             async function getData() {
-                await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
+                await fetch('http://65.108.59.117:7001/api/csv/balancedata/?AddressValue=&ContractDecimalValue=&ContractDecimalSortBy=&ContractNameValue=&ContractTickerSymbolValue=&ContractAddressValue=&LastTransferredAtValue=&TypeValue=cryptocurrency&BalanceValue=&BalanceSortBy=DESC&BalanceOperator=&Balance24hValue=&Balance24hSortBy=&Balance24hOperator=&QuoteRateValue=&QuoteRateSortBy=&QuoteRateOperator=&QuoteRate24hValue=&QuoteRate24hSortBy=&QuoteRate24hOperator=&QuoteValue=&QuoteSortBy=&QuoteOperator=&Quote24hValue=&Quote24hSortBy=&Quote24hOperator=', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -258,6 +258,25 @@ function AllBalances() {
                 setFilters()
             })
     }
+
+    //Function for k,m,... for numbers
+    function nFormatter(num, digits) {
+        const lookup = [
+          { value: 1, symbol: "" },
+          { value: 1e3, symbol: "k" },
+          { value: 1e6, symbol: "M" },
+          { value: 1e9, symbol: "B" },
+          { value: 1e12, symbol: "T" },
+          { value: 1e15, symbol: "P" },
+          { value: 1e18, symbol: "E" }
+        ];
+        const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+        var item = lookup.slice().reverse().find(function(item) {
+          return num >= item.value;
+        });
+        return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+      }
+      
 
 
 
@@ -1444,22 +1463,23 @@ function AllBalances() {
                                                     {e.type}
                                                 </td>
                                                 <td className="Balance">
-                                                    {(e.balance / Math.pow(10, e.contract_decimals))}
+                                                    {(e.balance / Math.pow(10, e.contract_decimals)) < 1000 && e.balance? (e.balance / Math.pow(10, e.contract_decimals)).toLocaleString(undefined, {maximumFractionDigits:2}): nFormatter((e.balance / Math.pow(10, e.contract_decimals)) , 1)}
+                                                    {/*.toLocaleString(undefined, {maximumFractionDigits:2})} => for commas */}
                                                 </td>
                                                 <td className="Balance24h deactive-table">
-                                                    {(e.balance_24h / Math.pow(10, e.contract_decimals))}
+                                                    {(e.balance_24h / Math.pow(10, e.contract_decimals)) < 1000 && e.balance_24h? (e.balance_24h / Math.pow(10, e.contract_decimals)) : nFormatter((e.balance / Math.pow(10, e.contract_decimals)) , 1)}
                                                 </td>
                                                 <td className="QuoteRate">
-                                                    {e.quote_rate}
+                                                    {e.quote_rate < 1000 && e.quote_rate? Number(e.quote_rate).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.quote_rate , 1)}
                                                 </td>
                                                 <td className="QuoteRate24h deactive-table">
-                                                    {e.quote_rate_24h}
+                                                    {e.quote_rate_24h < 1000 && e.quote_rate_24h? Number(e.quote_rate_24h).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.quote_rate_24h , 1)}
                                                 </td>
                                                 <td className="Quote">
-                                                    {e.quote}
+                                                    {e.quote < 1000 && e.quote? Number(e.quote).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.quote , 1)}
                                                 </td>
                                                 <td className="Quote24h deactive-table">
-                                                    {e.quote_24h}
+                                                    {e.quote_24h < 1000 && e.quote_24h? Number(e.quote_24h).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.quote_24h , 1)}
                                                 </td>
                                                 <td>
                                                     <UncontrolledDropdown>
