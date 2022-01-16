@@ -51,7 +51,7 @@ const Login = () => {
   const history = useHistory()
 
   function handleChange(token){
-    fetch('http://127.0.0.1:8000/api/v1/users/auth/captchVerify/', {
+    fetch('http://65.108.59.117:7001/api/v1/users/auth/captchVerify/', {
          method: 'POST',
          body: JSON.stringify({ 'captcha_value': token }),
          headers: { 'Content-Type': 'application/json' }
