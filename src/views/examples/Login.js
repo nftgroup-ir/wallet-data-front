@@ -72,24 +72,6 @@ const Login = () => {
 
   async function onSubmit(e) {
     e.preventDefault();
-    // const captcha = {
-    //   secret: "6LcFmBQeAAAAAHsoXFfXbicFHU_uCN2YXb0gMies",
-    //   response: capToken
-    // }
-    // await fetch(`http://127.0.0.1:8000/api/v1/users/auth/captchVerify/` , {
-    //   method: 'POST',
-    //   headers: {
-    //       'Content-Type': 'application/json',
-    //   },
-    //   body:JSON.stringify({
-    //     'g-recaptcha-response': captcha.response
-    //   })
-    // })
-    //   .then(res=>res.json)
-    //   .then(data =>{
-    //     console.log(data)
-    //   })
-    
   
     const user = {
       email: userName,

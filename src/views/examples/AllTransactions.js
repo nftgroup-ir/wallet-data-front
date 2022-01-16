@@ -25,6 +25,8 @@ import {
 import Header from "components/Headers/Header.js";
 import React, { useState, useEffect, useRef } from 'react'
 import "../../assets/css/CustomCss.css"
+import ReactTooltip from 'react-tooltip';
+
 
 
 
@@ -1808,8 +1810,12 @@ function AllTransactions() {
                                                 <td  className="Hash">
                                                     {e.hash}
                                                 </td>
-                                                <td  className="Nonc deactive-table">
+                                                <td  
+                                                className="Nonc deactive-table"
+                                                data-tip={`Nonce = ${e.nonc?e.nonc.toLocaleString():0}`}
+                                                >
                                                     {e.nonc < 1000 && e.nonc? Number(e.nonc).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.nonc , 1)}
+                                                    <ReactTooltip />
                                                 </td>
                                                 <td  className="TransactionIndex deactive-table">
                                                     {e.transaction_index}
@@ -1820,25 +1826,45 @@ function AllTransactions() {
                                                 <td className="To">
                                                     {e.to_address}
                                                 </td>
-                                                <td className="Value">
+                                                <td 
+                                                className="Value"
+                                                data-tip={`Value = ${e.value?e.value.toLocaleString():0}`}
+                                                >
                                                     {/* <TxData props={e.address} id={e.id} /> */}
                                                     {e.value < 1000 && e.value? Number(e.value).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.value , 1)}
+                                                    <ReactTooltip />
                                                 </td>
-                                                <td  className="Gas deactive-table">
+                                                <td  
+                                                className="Gas deactive-table"
+                                                data-tip={`Gas = ${e.gas?e.gas.toLocaleString():0}`}
+                                                >
                                                     {e.gas < 1000 && e.gas? Number(e.gas).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.gas , 1)}
+                                                    <ReactTooltip />
                                                 </td>
-                                                <td className="GasPrice">
+                                                <td 
+                                                className="GasPrice"
+                                                data-tip={`GasPrice = ${e.gas_price?e.gas_price.toLocaleString():0}`}
+                                                >
                                                     {/* <NftData props={e.address} id={e.id} /> */}
                                                     {e.gas_price < 1000 && e.gas_price? Number(e.gas_price).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.gas_price , 1)}
+                                                    <ReactTooltip />
                                                 </td>
                                                 <td  className="Input deactive-table">
                                                     {e.input}
                                                 </td>
-                                                <td  className="ReceiptCumulativeGasUsed deactive-table">
+                                                <td  
+                                                className="ReceiptCumulativeGasUsed deactive-table"
+                                                data-tip={`ReceiptCumulativeGasUsed = ${e.receipt_cumulative_gas_used?e.receipt_cumulative_gas_used.toLocaleString():0}`}
+                                                >
                                                     {e.receipt_cumulative_gas_used < 1000 && e.receipt_cumulative_gas_used? Number(e.receipt_cumulative_gas_used).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.receipt_cumulative_gas_used , 1)}
+                                                    <ReactTooltip />
                                                 </td>
-                                                <td  className="ReceiptGasUsed deactive-table">
+                                                <td  
+                                                className="ReceiptGasUsed deactive-table"
+                                                data-tip={`ReceiptGasUsed = ${e.receipt_gas_used?e.receipt_gas_used.toLocaleString():0}`}
+                                                >
                                                     {e.receipt_gas_used < 1000 && e.receipt_gas_used? Number(e.receipt_gas_used).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.receipt_gas_used , 1)}
+                                                    <ReactTooltip />
                                                 </td>
                                                 <td  className="ReceiptContractAddress deactive-table">
                                                     {e.receipt_contract_address}

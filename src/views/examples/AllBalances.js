@@ -12,6 +12,7 @@ import {
     DropdownToggle,
     Pagination,
     Col,
+    Tooltip,
     Button,
     PaginationItem,
     PaginationLink,
@@ -26,6 +27,8 @@ import Header from "components/Headers/Header.js";
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from "react-router-dom";
 import "../../assets/css/CustomCss.css"
+import ReactTooltip from 'react-tooltip';
+
 
 
 
@@ -33,6 +36,7 @@ import "../../assets/css/CustomCss.css"
 
 function AllBalances() {
     let { search } = useLocation()
+    const [tooltipOpen, setTooltipOpen] = useState(false);
     const [csvItems, setcsvItems] = useState([""])
     const [ContractDecimalSortBy, setContractDecimalSortBySortBy] = useState("none")
     const [BalanceSortBy, setBalanceSortBy] = useState("none")
@@ -1459,27 +1463,49 @@ function AllBalances() {
                                                     {e.last_transferred_at}
                                                 </td>
                                                 <td className="Type deactive-table">
-                                                    {/* <NftData props={e.address} id={e.id} /> */}
                                                     {e.type}
                                                 </td>
-                                                <td className="Balance">
+                                                <td 
+                                                className="Balance" 
+                                                data-tip={`balance = ${(e.balance / Math.pow(10, e.contract_decimals)).toLocaleString()}`}
+                                                >
                                                     {(e.balance / Math.pow(10, e.contract_decimals)) < 1000 && e.balance? (e.balance / Math.pow(10, e.contract_decimals)).toLocaleString(undefined, {maximumFractionDigits:2}): nFormatter((e.balance / Math.pow(10, e.contract_decimals)) , 1)}
-                                                    {/*.toLocaleString(undefined, {maximumFractionDigits:2})} => for commas */}
+                                                    <ReactTooltip />
                                                 </td>
-                                                <td className="Balance24h deactive-table">
+                                                <td
+                                                className="Balance24h deactive-table"
+                                                data-tip={`balance_24h = ${(e.balance_24h / Math.pow(10, e.contract_decimals)).toLocaleString()}`}
+                                                >
                                                     {(e.balance_24h / Math.pow(10, e.contract_decimals)) < 1000 && e.balance_24h? (e.balance_24h / Math.pow(10, e.contract_decimals)) : nFormatter((e.balance / Math.pow(10, e.contract_decimals)) , 1)}
+                                                    <ReactTooltip />
                                                 </td>
-                                                <td className="QuoteRate">
+                                                <td 
+                                                className="QuoteRate" 
+                                                data-tip={`QuoteRate = ${e.quote_rate?e.quote_rate.toLocaleString():0}`}
+                                                >
                                                     {e.quote_rate < 1000 && e.quote_rate? Number(e.quote_rate).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.quote_rate , 1)}
+                                                    <ReactTooltip />
                                                 </td>
-                                                <td className="QuoteRate24h deactive-table">
+                                                <td 
+                                                className="QuoteRate24h deactive-table"
+                                                data-tip={`QuoteRate_24h = ${e.quote_rate_24h?e.quote_rate_24h.toLocaleString():0}`}
+                                                >
                                                     {e.quote_rate_24h < 1000 && e.quote_rate_24h? Number(e.quote_rate_24h).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.quote_rate_24h , 1)}
+                                                    <ReactTooltip />
                                                 </td>
-                                                <td className="Quote">
+                                                <td 
+                                                className="Quote"
+                                                data-tip={`Quote = ${e.quote?e.quote.toLocaleString():0}`}
+                                                >
                                                     {e.quote < 1000 && e.quote? Number(e.quote).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.quote , 1)}
+                                                    <ReactTooltip />
                                                 </td>
-                                                <td className="Quote24h deactive-table">
+                                                <td 
+                                                className="Quote24h deactive-table"
+                                                data-tip={`Quote24h = ${e.quote_24h?e.quote_24h.toLocaleString(): 0}`}
+                                                >
                                                     {e.quote_24h < 1000 && e.quote_24h? Number(e.quote_24h).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.quote_24h , 1)}
+                                                    <ReactTooltip />
                                                 </td>
                                                 <td>
                                                     <UncontrolledDropdown>
