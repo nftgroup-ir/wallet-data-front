@@ -31,10 +31,13 @@ import {
 } from "reactstrap";
 import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
+import ReCaptchaV2 from 'react-google-recaptcha'
 
 
 
 const Login = () => {
+
+  const REACT_APP_SITE_KEY = "6LcFmBQeAAAAAGR86tDLuxEgQCxEBB2UThOLBblH"
 
   const errStyle = {
     textAlign: "center",
@@ -44,17 +47,55 @@ const Login = () => {
 
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
+  const [CaptchaSuccess, setCaptchaSuccess] = useState(null)
   const history = useHistory()
 
+  function handleChange(token){
+    fetch('http://127.0.0.1:8000/api/v1/users/auth/captchVerify/', {
+         method: 'POST',
+         body: JSON.stringify({ 'captcha_value': token }),
+         headers: { 'Content-Type': 'application/json' }
+       })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data.captcha.success)
+          setCaptchaSuccess(data.captcha.success)
+        }) 
 
 
-  const onSubmit = e => {
+  }
+  function handleExpire(){
+    setCaptchaSuccess(false)
+  }
+
+
+
+  async function onSubmit(e) {
     e.preventDefault();
+    // const captcha = {
+    //   secret: "6LcFmBQeAAAAAHsoXFfXbicFHU_uCN2YXb0gMies",
+    //   response: capToken
+    // }
+    // await fetch(`http://127.0.0.1:8000/api/v1/users/auth/captchVerify/` , {
+    //   method: 'POST',
+    //   headers: {
+    //       'Content-Type': 'application/json',
+    //   },
+    //   body:JSON.stringify({
+    //     'g-recaptcha-response': captcha.response
+    //   })
+    // })
+    //   .then(res=>res.json)
+    //   .then(data =>{
+    //     console.log(data)
+    //   })
+    
+  
     const user = {
       email: userName,
       password: password
     };
-
+    if(CaptchaSuccess === true){
     fetch('http://65.108.59.117:7001/api/v1/users/auth/login/', {
       method: 'POST',
       headers: {
@@ -84,12 +125,15 @@ const Login = () => {
       .catch(error => {
         setUserName('')
         setPassword('')
-        console.log(error + "111")
+        console.log(error)
         // Window.sessionStorage.clear()
         document.getElementById('errorrr').innerHTML = '!!!'
 
       })
-
+    }
+    else{
+      document.getElementById('errorrr').innerHTML = 'Captcha Error'
+    }
 
 
   }
@@ -137,6 +181,13 @@ const Login = () => {
                     onChange={e => setPassword(e.target.value)}
                   />
                 </InputGroup>
+                <div style={{ marginTop: "10px" }}>
+                <ReCaptchaV2
+                 sitekey={REACT_APP_SITE_KEY} 
+                 onChange={handleChange}
+                 onExpired={handleExpire}
+                />
+                </div>
                 <p id="errorrr" style={errStyle}></p>
               </FormGroup>
               {/* <div className="custom-control custom-control-alternative custom-checkbox">
