@@ -75,7 +75,7 @@ function LineChart() {
             
             function generateData() {
               value = Math.round((Math.random() * 10 - 5) + value);
-              am5.time.add(date, "day", 1);
+              am5.time.add(date, "day", 4);
               return {
                 date: date.getTime(),
                 value: value

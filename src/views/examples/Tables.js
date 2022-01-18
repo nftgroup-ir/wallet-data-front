@@ -1052,7 +1052,9 @@ const Tables = () => {
                     csvItems.map(e => (
                       <tr>
                         <td className="Address">
-                          {e.address}
+                          <a href={`/admin/walletprofile/?wallet=${e.address}`} style={{ color: '#525f7f'}}>
+                            {e.address}
+                          </a>
                         </td>
                         {/* <td className="Email"> 
                           {e.name}

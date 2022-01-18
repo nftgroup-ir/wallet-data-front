@@ -22,6 +22,7 @@ import { Container } from "reactstrap";
 // core components
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
+import WalletProfile from "views/examples/WalletProfile";
 
 import routes from "routes.js";
 
@@ -106,6 +107,10 @@ const Admin = (props) => {
         /> */}
         <Switch>
           {getRoutes(routes)}
+          <Route 
+            path="/admin/walletprofile"
+            component={WalletProfile}
+          />
           <Redirect from="*" to="/admin/index" />
         </Switch>
         <Container fluid>
