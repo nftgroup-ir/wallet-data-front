@@ -25,12 +25,14 @@ import {
 import Header from "components/Headers/Header.js";
 import React, { useState, useEffect, useRef } from 'react'
 import "../../assets/css/CustomCss.css"
+import { useLocation } from "react-router-dom";
 
 
 
 
 
 function AllNFTs() {
+    let { search } = useLocation()
     const [csvItems, setcsvItems] = useState([""])
     const [TokenIdSortBy, settokenIdSortBy] = useState("none")
     const [BlockNumberMintedSortBy, setblockNumberMintedSortBy] = useState("none")
@@ -112,6 +114,9 @@ function AllNFTs() {
     }
 
     useEffect(() => {
+        const query = new URLSearchParams(search);
+        const wallet = query.get('wallet')
+        if (!wallet){
         async function getData() {
             await fetch('http://65.108.59.117:7001/api/csv/nft/?NameValue=&AmountValue=&FrozenValue=&SymbolValue=&SyncingValue=&IsValidValue=&MetadataValue=&TokenIdValue=&TokenUriValue=&BlockNumberValue=&ContractTypeValue=&TokenAddressValue=&BlockNumberMintedValue=&OwnerOfValue=&TokenIdSortBy=&BlockNumberMintedSortBy=&AmountSortBy=&IsValidSortBy=DESC&SyncingSortBy=&FrozenSortBy=&BlockNumberSortBy=&TokenIdOperator=&BlockNumberMintedOperator=&AmountOperator=&TagsValue=', {
                 method: 'GET',
@@ -131,6 +136,28 @@ function AllNFTs() {
                 })
         }
         getData()
+    }
+    else{
+        async function getData() {
+            await fetch(`http://65.108.59.117:7001/api/csv/nft/?NameValue=&AmountValue=&FrozenValue=&SymbolValue=&SyncingValue=&IsValidValue=&MetadataValue=&TokenIdValue=&TokenUriValue=&BlockNumberValue=&ContractTypeValue=&TokenAddressValue=&BlockNumberMintedValue=&OwnerOfValue=${wallet}&TokenIdSortBy=&BlockNumberMintedSortBy=&AmountSortBy=&IsValidSortBy=DESC&SyncingSortBy=&FrozenSortBy=&BlockNumberSortBy=&TokenIdOperator=&BlockNumberMintedOperator=&AmountOperator=&TagsValue=`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 'Authorization': 'Token ' + sessionStorage.getItem('token')
+                },
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setcsvItems(data.results)
+                    setnextPage(data.next)
+                    setpreviousPage(data.previous)
+                    setallData(data.count)
+                    console.log(data)
+                    setIsLoading(false)
+                })
+        }
+        getData()
+    }
     }, [])
 
     async function removeFilters(e) {

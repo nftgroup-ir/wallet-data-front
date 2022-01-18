@@ -1467,45 +1467,45 @@ function AllBalances() {
                                                 </td>
                                                 <td 
                                                 className="Balance" 
-                                                data-tip={`balance = ${(e.balance / Math.pow(10, e.contract_decimals)).toLocaleString()}`}
+                                                // data-tip={`balance = ${(e.balance / Math.pow(10, e.contract_decimals)).toLocaleString()}`}
                                                 >
                                                     {(e.balance / Math.pow(10, e.contract_decimals)) < 1000 && e.balance? (e.balance / Math.pow(10, e.contract_decimals)).toLocaleString(undefined, {maximumFractionDigits:2}): nFormatter((e.balance / Math.pow(10, e.contract_decimals)) , 1)}
-                                                    <ReactTooltip />
+                                                    {/* <ReactTooltip /> */}
                                                 </td>
                                                 <td
                                                 className="Balance24h deactive-table"
-                                                data-tip={`balance_24h = ${(e.balance_24h / Math.pow(10, e.contract_decimals)).toLocaleString()}`}
+                                                // data-tip={`balance_24h = ${(e.balance_24h / Math.pow(10, e.contract_decimals)).toLocaleString()}`}
                                                 >
                                                     {(e.balance_24h / Math.pow(10, e.contract_decimals)) < 1000 && e.balance_24h? (e.balance_24h / Math.pow(10, e.contract_decimals)) : nFormatter((e.balance / Math.pow(10, e.contract_decimals)) , 1)}
-                                                    <ReactTooltip />
+                                                    {/* <ReactTooltip /> */}
                                                 </td>
                                                 <td 
                                                 className="QuoteRate" 
-                                                data-tip={`QuoteRate = ${e.quote_rate?e.quote_rate.toLocaleString():0}`}
+                                                // data-tip={`QuoteRate = ${e.quote_rate?e.quote_rate.toLocaleString():0}`}
                                                 >
                                                     {e.quote_rate < 1000 && e.quote_rate? Number(e.quote_rate).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.quote_rate , 1)}
-                                                    <ReactTooltip />
+                                                    {/* <ReactTooltip /> */}
                                                 </td>
                                                 <td 
                                                 className="QuoteRate24h deactive-table"
-                                                data-tip={`QuoteRate_24h = ${e.quote_rate_24h?e.quote_rate_24h.toLocaleString():0}`}
+                                                // data-tip={`QuoteRate_24h = ${e.quote_rate_24h?e.quote_rate_24h.toLocaleString():0}`}
                                                 >
                                                     {e.quote_rate_24h < 1000 && e.quote_rate_24h? Number(e.quote_rate_24h).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.quote_rate_24h , 1)}
-                                                    <ReactTooltip />
+                                                    {/* <ReactTooltip /> */}
                                                 </td>
                                                 <td 
                                                 className="Quote"
-                                                data-tip={`Quote = ${e.quote?e.quote.toLocaleString():0}`}
+                                                // data-tip={`Quote = ${e.quote?e.quote.toLocaleString():0}`}
                                                 >
                                                     {e.quote < 1000 && e.quote? Number(e.quote).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.quote , 1)}
-                                                    <ReactTooltip />
+                                                    {/* <ReactTooltip /> */}
                                                 </td>
                                                 <td 
                                                 className="Quote24h deactive-table"
-                                                data-tip={`Quote24h = ${e.quote_24h?e.quote_24h.toLocaleString(): 0}`}
+                                                // data-tip={`Quote24h = ${e.quote_24h?e.quote_24h.toLocaleString(): 0}`}
                                                 >
                                                     {e.quote_24h < 1000 && e.quote_24h? Number(e.quote_24h).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.quote_24h , 1)}
-                                                    <ReactTooltip />
+                                                    {/* <ReactTooltip /> */}
                                                 </td>
                                                 <td>
                                                     <UncontrolledDropdown>

@@ -68,6 +68,11 @@ function LastNFTs(props) {
                                     <Col xs="8">
                                         <h3 className="text-black mb-0">NFTs</h3>
                                     </Col>
+                                    <Col xs='4' style={{ textAlign: 'right'}}>
+                                        <a href={`/admin/NFTs/?wallet=${wallet}`}>
+                                            Show all...
+                                        </a>
+                                    </Col>
                                 </Row>
                             </CardHeader>
                             <Table className="align-items-center table-flush" responsive>

@@ -23,9 +23,11 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef  } from 'react'
 import "../../assets/css/CustomCss.css"
 import ReactTooltip from 'react-tooltip';
+import { useLocation } from "react-router-dom";
+
 
 
 
@@ -33,6 +35,7 @@ import ReactTooltip from 'react-tooltip';
 
 
 function AllTransactions() {
+    let { search } = useLocation()
     const [csvItems, setcsvItems] = useState([""])
     const [NonceSortBy, setNonceSortBy] = useState("none")
     const [ValueSortBy, setValueSortBy] = useState("none")
@@ -121,25 +124,51 @@ function AllTransactions() {
     }
 
     useEffect(() => {
-        async function getData() {
-            await fetch('http://65.108.59.117:7001/api/csv/transaction/?HashValue=&NonceValue=&FromValue=&ToValue=&ValueValue=&GasValue=&GasPriceValue=&GasPriceSortBy=&InputValue=&RCGUValue=&RGUValue=&BlockHashValue=&RCUValue=&RRValue=&RSValue=&TimeValue=&BlockNumberValue=&BlockHashValue=&RCGUSortBy=&RGUSortBy=&TxIndexValue=&NonceSortBy=&ValueSortBy=ASC&GasSortBy=&NonceOperator=&ValueOperator=&GasOperator=&BlockHashValue=&GasPriceOperator=&RCGUOperator=&RGUOperator=', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + sessionStorage.getItem('token')
-                },
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setcsvItems(data.results)
-                    setnextPage(data.next)
-                    setpreviousPage(data.previous)
-                    setallData(data.count)
-                    console.log(data)
-                    setIsLoading(false)
+        const query = new URLSearchParams(search);
+        const wallet = query.get('wallet')
+        if (!wallet){
+            async function getData() {
+                await fetch('http://65.108.59.117:7001/api/csv/transaction/?HashValue=&NonceValue=&FromValue=&ToValue=&ValueValue=&GasValue=&GasPriceValue=&GasPriceSortBy=&InputValue=&RCGUValue=&RGUValue=&BlockHashValue=&RCUValue=&RRValue=&RSValue=&TimeValue=&BlockNumberValue=&BlockHashValue=&RCGUSortBy=&RGUSortBy=&TxIndexValue=&NonceSortBy=&ValueSortBy=ASC&GasSortBy=&NonceOperator=&ValueOperator=&GasOperator=&BlockHashValue=&GasPriceOperator=&RCGUOperator=&RGUOperator=', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Token ' + sessionStorage.getItem('token')
+                    },
                 })
+                    .then(res => res.json())
+                    .then(data => {
+                        setcsvItems(data.results)
+                        setnextPage(data.next)
+                        setpreviousPage(data.previous)
+                        setallData(data.count)
+                        console.log(data)
+                        setIsLoading(false)
+                    })
+            }
+            getData()
         }
-        getData()
+        else{
+            async function getData() {
+                await fetch(`http://65.108.59.117:7001/api/csv/alltransactions/?wallet=${wallet}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Token ' + sessionStorage.getItem('token')
+                    },
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        setcsvItems(data)
+                        // setnextPage(data.next)
+                        // setpreviousPage(data.previous)
+                        setallData(data.length)
+                        console.log(data)
+                        setIsLoading(false)
+                        // setIsLoading(false)
+                    })
+            }
+            getData()
+        }
 
     }, [])
 
@@ -1747,10 +1776,10 @@ function AllTransactions() {
                                                 </td>
                                                 <td  
                                                 className="Nonc deactive-table"
-                                                data-tip={`Nonce = ${e.nonc?e.nonc.toLocaleString():0}`}
+                                                // data-tip={`Nonce = ${e.nonc?e.nonc.toLocaleString():0}`}
                                                 >
                                                     {e.nonc < 1000 && e.nonc? Number(e.nonc).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.nonc , 1)}
-                                                    <ReactTooltip />
+                                                    {/* <ReactTooltip /> */}
                                                 </td>
                                                 <td  className="TransactionIndex deactive-table">
                                                     {e.transaction_index}
@@ -1763,43 +1792,43 @@ function AllTransactions() {
                                                 </td>
                                                 <td 
                                                 className="Value"
-                                                data-tip={`Value = ${e.value?e.value.toLocaleString():0}`}
+                                                // data-tip={`Value = ${e.value?e.value.toLocaleString():0}`}
                                                 >
                                                     {/* <TxData props={e.address} id={e.id} /> */}
                                                     {e.value < 1000 && e.value? Number(e.value).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.value , 1)}
-                                                    <ReactTooltip />
+                                                    {/* <ReactTooltip /> */}
                                                 </td>
                                                 <td  
                                                 className="Gas deactive-table"
-                                                data-tip={`Gas = ${e.gas?e.gas.toLocaleString():0}`}
+                                                // data-tip={`Gas = ${e.gas?e.gas.toLocaleString():0}`}
                                                 >
                                                     {e.gas < 1000 && e.gas? Number(e.gas).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.gas , 1)}
-                                                    <ReactTooltip />
+                                                    {/* <ReactTooltip /> */}
                                                 </td>
                                                 <td 
                                                 className="GasPrice"
-                                                data-tip={`GasPrice = ${e.gas_price?e.gas_price.toLocaleString():0}`}
+                                                // data-tip={`GasPrice = ${e.gas_price?e.gas_price.toLocaleString():0}`}
                                                 >
                                                     {/* <NftData props={e.address} id={e.id} /> */}
                                                     {e.gas_price < 1000 && e.gas_price? Number(e.gas_price).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.gas_price , 1)}
-                                                    <ReactTooltip />
+                                                    {/* <ReactTooltip /> */}
                                                 </td>
                                                 <td  className="Input deactive-table">
                                                     {e.input}
                                                 </td>
                                                 <td  
                                                 className="ReceiptCumulativeGasUsed deactive-table"
-                                                data-tip={`ReceiptCumulativeGasUsed = ${e.receipt_cumulative_gas_used?e.receipt_cumulative_gas_used.toLocaleString():0}`}
+                                                // data-tip={`ReceiptCumulativeGasUsed = ${e.receipt_cumulative_gas_used?e.receipt_cumulative_gas_used.toLocaleString():0}`}
                                                 >
                                                     {e.receipt_cumulative_gas_used < 1000 && e.receipt_cumulative_gas_used? Number(e.receipt_cumulative_gas_used).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.receipt_cumulative_gas_used , 1)}
-                                                    <ReactTooltip />
+                                                    {/* <ReactTooltip /> */}
                                                 </td>
                                                 <td  
                                                 className="ReceiptGasUsed deactive-table"
-                                                data-tip={`ReceiptGasUsed = ${e.receipt_gas_used?e.receipt_gas_used.toLocaleString():0}`}
+                                                // data-tip={`ReceiptGasUsed = ${e.receipt_gas_used?e.receipt_gas_used.toLocaleString():0}`}
                                                 >
                                                     {e.receipt_gas_used < 1000 && e.receipt_gas_used? Number(e.receipt_gas_used).toLocaleString(undefined, {maximumFractionDigits:4}) : nFormatter(e.receipt_gas_used , 1)}
-                                                    <ReactTooltip />
+                                                    {/* <ReactTooltip /> */}
                                                 </td>
                                                 <td  className="ReceiptContractAddress deactive-table">
                                                     {e.receipt_contract_address}

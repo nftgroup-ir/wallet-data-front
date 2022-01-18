@@ -95,6 +95,11 @@ function ImportantBalances(props) {
                                     <Col xs="8">
                                         <h3 className="text-black mb-0">Balances</h3>
                                     </Col>
+                                    <Col xs='4' style={{ textAlign: 'right'}}>
+                                        <a href={`/admin/balances/?wallet=${wallet}`}>
+                                            Show all...
+                                        </a>
+                                    </Col>
                                 </Row>
                             </CardHeader>
                             <Table className="align-items-center table-flush" responsive>
