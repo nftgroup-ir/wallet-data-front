@@ -4,34 +4,26 @@ import * as am5xy from "@amcharts/amcharts5/xy";
 
 
 function LineChart() {
-  const [txData, settxData] = useState([
-    { date: 1640995200 , total: 23453534 },
-    { date: 1641081600 , total: 53454353 },
-    { date: 1641168000 , total: 83454351 },
-    { date: 1641254400 , total: 13234355 },
-    { date: 1641340800 , total: 16765783 },
-    { date: 1641427200 , total: 18346534 },
-    { date: 1641513600 , total: 19346634 },
-    { date: 1641600000 , total: 22346356 },
-  ])
+  const [txData, settxData] = useState(null)
+  
 
-    // useEffect(() => {
-    //   async function getData(){
-    //     await fetch('http://65.108.59.117:7001/api/csv/chart/?address=0xFbDe24Ac8A2051d874a70CB18344dda8F2b54E33&Type=Transaction&fromdate=2016-01-01&todate=2016-01-03&TimeBase=day' , {
-    //       method: 'GET',
-    //       headers: {
-    //           'Content-Type': 'application/json',
-    //       },
-    //     })
-    //       .then(res => res.json())
-    //       .then (data => {
-    //         console.log(data)
-    //         settxData(data.result)
-    //       })
-    //   }
+    useEffect(() => {
+      async function getData(){
+        await fetch('http://65.108.59.117:7001/api/csv/chart/?address=0x5AA3393e361C2EB342408559309b3e873CD876d6&Type=Transaction&fromdate=2022-01-01&todate=2022-01-20&TimeBase=day' , {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+        })
+          .then(res => res.json())
+          .then (data => {
+            console.log(data.result)
+            settxData(data.result)
+          })
+      }
 
-    //   getData()
-    // }, [])
+      getData()
+    }, [])
 
 
     useEffect(() => {
@@ -114,7 +106,7 @@ function LineChart() {
               name: "Series",
               xAxis: xAxis,
               yAxis: yAxis,
-              valueYField: "value",
+              valueYField: "total",
               valueXField: "date",
               tooltip: am5.Tooltip.new(root, {
                 labelText: "{valueY}"
@@ -130,12 +122,11 @@ function LineChart() {
             
             
             // Set data
-            var data = generateDatas(1200);
-            console.log(data)
-            console.log(typeof(txData[1].date))
+            // var data = generateDatas(1200);
+            var data = txData
             console.log(txData)
             series.data.setAll(data);
-            // xAxis.data.setAll(txData);
+            xAxis.data.setAll(data);
             
             
             // Make stuff animate on load

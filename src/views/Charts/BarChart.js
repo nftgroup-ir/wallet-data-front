@@ -119,7 +119,6 @@ function BarChart() {
             chart.set("scrollbarX", am5.Scrollbar.new(root, {
                 orientation: "horizontal"
             }));
-            console.log(typeof(balanceData[0].balance))
             xAxis.data.setAll(balanceData);
             series.data.setAll(balanceData);
             
